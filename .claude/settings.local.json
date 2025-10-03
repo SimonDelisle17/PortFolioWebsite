@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Read(//c/Users/Big Boss/Documents/github/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
