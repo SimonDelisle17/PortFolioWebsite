@@ -4,7 +4,8 @@
       "Bash(npm create:*)",
       "Bash(npm install)",
       "Bash(npm install:*)",
-      "Read(//c/Users/Big Boss/Documents/github/**)"
+      "Read(//c/Users/Big Boss/Documents/github/**)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []
