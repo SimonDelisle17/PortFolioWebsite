@@ -44,9 +44,9 @@ const About = () => {
             applications</strong> to <strong>enterprise ERP integrations</strong>.
           </Typography>
 
-          <Grid container spacing={3} sx={{ mb: 4 }}>
+          <Grid container spacing={3} sx={{ mb: 4, justifyContent: 'center' }}>
             {stats.map((stat, index) => (
-              <Grid item xs={6} md={3} key={index}>
+              <Grid item xs={6} sm={3} md={3} key={index}>
                 <Card sx={{ textAlign: 'center' }}>
                   <CardContent>
                     <Typography variant="h4" color="primary" gutterBottom>

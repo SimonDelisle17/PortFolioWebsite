@@ -62,23 +62,12 @@ const Hero = () => {
                 Full Stack Developer
               </Typography>
 
-              <Button variant="contained" size="large" sx={{ mb: 4 }}>
-                Hire me
-              </Button>
-
-              <Box sx={{ display: 'flex', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                 <IconButton
-                  sx={{
-                    bgcolor: 'background.paper',
-                    '&:hover': {
-                      background: 'linear-gradient(135deg, #00d4ff, #ffc107)',
-                      transform: 'translateY(-5px)',
-                    },
-                  }}
-                >
-                  <GitHub />
-                </IconButton>
-                <IconButton
+                  component="a"
+                  href="https://www.linkedin.com/in/simon-d2088/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   sx={{
                     bgcolor: 'background.paper',
                     '&:hover': {
@@ -88,17 +77,6 @@ const Hero = () => {
                   }}
                 >
                   <LinkedIn />
-                </IconButton>
-                <IconButton
-                  sx={{
-                    bgcolor: 'background.paper',
-                    '&:hover': {
-                      background: 'linear-gradient(135deg, #00d4ff, #ffc107)',
-                      transform: 'translateY(-5px)',
-                    },
-                  }}
-                >
-                  <Twitter />
                 </IconButton>
               </Box>
             </motion.div>
