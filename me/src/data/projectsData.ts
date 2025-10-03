@@ -1,4 +1,5 @@
 import { Project, ProjectCategory } from '../types/project';
+import TOWImage from '../assets/TOW.png';
 
 export const projectsData: Project[] = [
   {
@@ -22,13 +23,13 @@ export const projectsData: Project[] = [
       database: ['MySQL (Primary)', 'MySQL (Telemetry)', 'Redis'],
       security: ['JWE Encryption', 'Ed25519 Signatures', 'AES-GCM', 'Argon2', 'HMAC'],
       integrations: ['HERE Maps API', 'Microsoft Graph API', 'Azure AD', 'Office 365'],
-      deployment: ['Docker', 'Microservices (Port 8000, 8001)']
+      deployment: ['Docker', 'Kubernetes', 'Microservices']
     },
     metrics: {
       linesOfCode: '300,000+',
       pythonFiles: '21,780+',
       databases: '2 (Primary + Telemetry)',
-      ports: '8000 (Main), 8001 (Geo Service)'
+      microservices: '2 Services'
     },
     architecture: 'Microservices with dedicated geo-processing service, dual-database for performance scaling',
     liveUrl: null
@@ -137,7 +138,7 @@ export const projectsData: Project[] = [
     category: 'fullstack',
     tags: ['FastAPI', 'Flutter', 'React', 'TypeScript', 'Firebase', 'MySQL'],
     shortDescription: 'Complete Towing Business Management Ecosystem',
-    icon: '🚛',
+    icon: TOWImage,
     impact: 'Multi-platform business management solution',
     detailedDescription: 'Full-stack towing management platform with mobile app, web portal, and backend API supporting complete business digitization.',
     features: [

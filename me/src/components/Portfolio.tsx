@@ -103,9 +103,14 @@ const Portfolio = () => {
                       height: '70px',
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                     }}
                   >
-                    {project.icon}
+                    {project.icon.startsWith('http') || project.icon.includes('.png') || project.icon.includes('.jpg') || project.icon.includes('.svg') ? (
+                      <img src={project.icon} alt={project.title} style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
+                    ) : (
+                      project.icon
+                    )}
                   </Box>
 
                   {/* Title */}
@@ -121,6 +126,7 @@ const Portfolio = () => {
                       WebkitBoxOrient: 'vertical',
                       fontSize: '1.35rem',
                       lineHeight: 1.4,
+                      textAlign: 'center',
                     }}
                   >
                     {project.title}

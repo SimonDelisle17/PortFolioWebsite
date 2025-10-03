@@ -71,9 +71,13 @@ const ProjectDetailPage = () => {
           </Button>
 
           <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography variant="h1" sx={{ fontSize: '4rem', mb: 2 }}>
-              {project.icon}
-            </Typography>
+            <Box sx={{ fontSize: '4rem', mb: 2, display: 'flex', justifyContent: 'center' }}>
+              {project.icon.startsWith('http') || project.icon.includes('.png') || project.icon.includes('.jpg') || project.icon.includes('.svg') ? (
+                <img src={project.icon} alt={project.title} style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+              ) : (
+                project.icon
+              )}
+            </Box>
             <Typography variant="h2" gutterBottom>
               {project.title}
             </Typography>
@@ -162,29 +166,78 @@ const ProjectDetailPage = () => {
         >
           <Card sx={{ mb: 4 }}>
             <CardContent sx={{ p: 4 }}>
-              <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 4 }}>
                 <Code color="primary" />
                 Technology Stack
               </Typography>
-              <Grid container spacing={3} sx={{ mt: 1 }}>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    sm: 'repeat(2, 1fr)',
+                    md: 'repeat(4, 1fr)',
+                  },
+                  gap: 3,
+                }}
+              >
                 {Object.entries(project.technologies).map(([category, techs], index) => (
-                  <Grid item xs={12} md={6} key={index}>
-                    <Typography variant="h6" color="secondary" gutterBottom>
-                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                  <Box
+                    key={index}
+                    sx={{
+                      p: 3,
+                      bgcolor: 'background.default',
+                      borderRadius: 2,
+                      border: '2px solid',
+                      borderColor: 'primary.main',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      minHeight: '250px',
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      color="secondary.main"
+                      sx={{
+                        fontWeight: 700,
+                        mb: 2,
+                        fontSize: '1rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        height: '30px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      {category.charAt(0).toUpperCase() + category.slice(1).replace(/([A-Z])/g, ' $1')}
                     </Typography>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: 1 }}>
                       {techs.map((tech, techIndex) => (
-                        <Chip
+                        <Box
                           key={techIndex}
-                          label={tech}
-                          size="small"
-                          sx={{ bgcolor: 'background.default' }}
-                        />
+                          sx={{
+                            px: 2,
+                            py: 1.5,
+                            bgcolor: 'background.paper',
+                            borderRadius: 1,
+                            border: '1px solid',
+                            borderColor: 'primary.dark',
+                            fontSize: '0.9rem',
+                            fontWeight: 500,
+                            textAlign: 'center',
+                            minHeight: '40px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          {tech}
+                        </Box>
                       ))}
                     </Box>
-                  </Grid>
+                  </Box>
                 ))}
-              </Grid>
+              </Box>
             </CardContent>
           </Card>
         </motion.div>
