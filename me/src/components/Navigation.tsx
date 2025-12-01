@@ -14,6 +14,8 @@ import {
   Container,
   Typography,
   Avatar,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -22,6 +24,7 @@ import { RootState } from '../store/store';
 
 const Navigation = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const dispatch = useDispatch();
   const activeSection = useSelector((state: RootState) => state.navigation.activeSection);
 
@@ -30,8 +33,6 @@ const Navigation = () => {
     { id: 'about', label: 'ABOUT' },
     { id: 'resume', label: 'RESUME' },
     { id: 'portfolio', label: 'PORTFOLIO' },
-    { id: 'blog', label: 'BLOG' },
-    { id: 'contact', label: 'CONTACT' },
   ];
 
   const handleNavClick = (sectionId: string) => {
@@ -41,6 +42,15 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleContactClick = () => {
+    navigator.clipboard.writeText('simon.delisle2025@gmail.com');
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   const drawer = (
@@ -134,11 +144,16 @@ const Navigation = () => {
             <Button
               variant="outlined"
               startIcon={<PhoneIcon />}
+              onClick={handleContactClick}
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 borderRadius: '25px',
                 borderColor: 'primary.main',
                 color: 'primary.main',
+                '&:hover': {
+                  borderColor: 'primary.light',
+                  bgcolor: 'rgba(0, 212, 255, 0.1)',
+                },
               }}
             >
               Contact Me
@@ -173,6 +188,18 @@ const Navigation = () => {
 
       {/* Toolbar Spacer */}
       <Toolbar />
+
+      {/* Email Copied Notification */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+          Email copied to clipboard!
+        </Alert>
+      </Snackbar>
     </>
   );
 };

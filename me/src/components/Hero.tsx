@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { Box, Container, Typography, Button, IconButton, Grid } from '@mui/material';
-import { GitHub, LinkedIn, Twitter } from '@mui/icons-material';
+import { Box, Container, Typography, IconButton, Grid } from '@mui/material';
+import { LinkedIn } from '@mui/icons-material';
 
 const Hero = () => {
   return (
@@ -26,7 +26,7 @@ const Hero = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -76,13 +76,13 @@ const Hero = () => {
                     },
                   }}
                 >
-                  <LinkedIn />
+                  <LinkedIn sx={{ fontSize: 48 }} />
                 </IconButton>
               </Box>
             </motion.div>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
