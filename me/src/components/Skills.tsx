@@ -183,12 +183,18 @@ const Skills = () => {
                     <Chip
                       key={i}
                       label={lang}
-                      color="secondary"
                       sx={{
                         minWidth: '120px',
                         fontSize: '0.9rem',
                         fontWeight: 600,
-                        height: '36px'
+                        height: '36px',
+                        bgcolor: 'rgba(255, 255, 255, 0.05)',
+                        color: 'text.secondary',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        '&:hover': {
+                          bgcolor: 'rgba(255, 255, 255, 0.08)',
+                          border: '1px solid rgba(212, 175, 55, 0.3)',
+                        }
                       }}
                     />
                   ))}
@@ -212,12 +218,18 @@ const Skills = () => {
                     <Chip
                       key={i}
                       label={fw}
-                      color="secondary"
                       sx={{
                         minWidth: '120px',
                         fontSize: '0.9rem',
                         fontWeight: 600,
-                        height: '36px'
+                        height: '36px',
+                        bgcolor: 'rgba(255, 255, 255, 0.05)',
+                        color: 'text.secondary',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        '&:hover': {
+                          bgcolor: 'rgba(255, 255, 255, 0.08)',
+                          border: '1px solid rgba(212, 175, 55, 0.3)',
+                        }
                       }}
                     />
                   ))}

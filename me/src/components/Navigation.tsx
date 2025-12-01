@@ -30,9 +30,9 @@ const Navigation = () => {
 
   const navItems = [
     { id: 'home', label: 'HOME' },
-    { id: 'about', label: 'ABOUT' },
-    { id: 'resume', label: 'RESUME' },
     { id: 'portfolio', label: 'PORTFOLIO' },
+    { id: 'resume', label: 'RESUME' },
+    { id: 'about', label: 'ABOUT' },
   ];
 
   const handleNavClick = (sectionId: string) => {

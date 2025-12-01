@@ -9,9 +9,9 @@ const HomePage = () => {
   return (
     <Box>
       <Hero />
-      <About />
-      <Skills />
       <Portfolio />
+      <Skills />
+      <About />
       <Footer />
     </Box>
   );
