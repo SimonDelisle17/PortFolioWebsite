@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Box, Container, Typography, Button, Card, CardContent, Chip } from '@mui/material';
+import { Box, Container, Typography, Button, CardContent, Chip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { projectsData } from '../data/projectsData';
 import { projectsDataFr } from '../data/projectsData.fr';
 import { ProjectCategory } from '../types/project';
 import { useTranslation } from 'react-i18next';
+import TiltCard from './TiltCard';
 
 const Portfolio = () => {
   const { t, i18n } = useTranslation();
@@ -92,21 +93,7 @@ const Portfolio = () => {
               whileHover={{ y: -8 }}
               style={{ width: '100%' }}
             >
-              <Card
-                onClick={() => handleProjectClick(project.id)}
-                sx={{
-                  height: '500px',
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    borderColor: 'primary.main',
-                    boxShadow: '0 8px 24px rgba(0, 212, 255, 0.25)',
-                  },
-                }}
-              >
+              <TiltCard onClick={() => handleProjectClick(project.id)}>
                 <CardContent
                   sx={{
                     p: 3,
@@ -247,7 +234,7 @@ const Portfolio = () => {
                     </Button>
                   </Box>
                 </CardContent>
-              </Card>
+              </TiltCard>
             </motion.div>
           ))}
         </Box>

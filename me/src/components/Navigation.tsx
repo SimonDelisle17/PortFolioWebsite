@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import {
   AppBar,
   Toolbar,
@@ -28,8 +29,17 @@ const Navigation = () => {
   const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
   const activeSection = useSelector((state: RootState) => state.navigation.activeSection);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { id: 'home', label: t('nav.home').toUpperCase() },
@@ -80,26 +90,45 @@ const Navigation = () => {
   return (
     <>
       <AppBar
+        component={motion.div}
         position="fixed"
         sx={{
-          bgcolor: 'rgba(10, 15, 30, 0.95)',
-          backdropFilter: 'blur(10px)',
-          borderBottom: '1px solid rgba(0, 212, 255, 0.1)',
+          bgcolor: scrolled ? 'rgba(10, 15, 30, 0.98)' : 'rgba(10, 15, 30, 0.8)',
+          backdropFilter: scrolled ? 'blur(20px)' : 'blur(10px)',
+          borderBottom: scrolled
+            ? '1px solid rgba(0, 212, 255, 0.2)'
+            : '1px solid rgba(0, 212, 255, 0.05)',
+          boxShadow: scrolled
+            ? '0 8px 32px rgba(0, 0, 0, 0.3)'
+            : 'none',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Logo */}
-            <Avatar
-              sx={{
-                mr: 2,
-                background: 'linear-gradient(135deg, #00d4ff, #ffc107)',
-                color: 'background.default',
-                fontWeight: 700,
-              }}
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              SD
-            </Avatar>
+              <Avatar
+                sx={{
+                  mr: 2,
+                  background: 'linear-gradient(135deg, #00d4ff, #ffc107)',
+                  color: 'background.default',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 16px rgba(0, 212, 255, 0.3)',
+                  transition: 'box-shadow 0.3s ease',
+                  '&:hover': {
+                    boxShadow: '0 8px 24px rgba(0, 212, 255, 0.5)',
+                  },
+                }}
+                onClick={() => handleNavClick('home')}
+              >
+                SD
+              </Avatar>
+            </motion.div>
             <Typography
               variant="h6"
               component="div"

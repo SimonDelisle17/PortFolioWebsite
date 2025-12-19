@@ -38,7 +38,7 @@ export const fr = {
   },
   portfolio: {
     title: 'PORTFOLIO',
-    subtitle: "Chaque projet que vous voyez ici a été conçu, développé et déployé par moi de A à Z. Ce ne sont pas que des contributions—ce sont des solutions complètes que j'ai conçues pour résoudre de véritables défis commerciaux.",
+    subtitle: "Chaque projet que vous voyez ici a été conçu, développé et déployé par moi. Ce ne sont pas que des contributions—ce sont des solutions complètes que j'ai conçues pour résoudre de véritables défis commerciaux.",
     filters: {
       all: 'Tous les Projets',
       backend: 'Backend',

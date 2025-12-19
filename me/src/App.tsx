@@ -6,11 +6,16 @@ import { theme } from './theme/theme';
 import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
+import LoadingScreen from './components/LoadingScreen';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 function App() {
+  useSmoothScroll();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <LoadingScreen />
       <Router>
         <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
           <Navigation />
