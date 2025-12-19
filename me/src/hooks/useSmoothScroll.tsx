@@ -1,9 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Lenis from '@studio-freight/lenis';
 
+let lenisInstance: Lenis | null = null;
+
 export const useSmoothScroll = () => {
+  const rafRef = useRef<number>();
+
   useEffect(() => {
-    const lenis = new Lenis({
+    lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
@@ -16,14 +20,22 @@ export const useSmoothScroll = () => {
     });
 
     function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      lenisInstance?.raf(time);
+      rafRef.current = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafRef.current = requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+      lenisInstance?.destroy();
+      lenisInstance = null;
     };
   }, []);
+
+  return lenisInstance;
 };
+
+export const getLenisInstance = () => lenisInstance;

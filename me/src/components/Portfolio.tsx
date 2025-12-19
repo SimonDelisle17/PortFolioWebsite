@@ -32,7 +32,6 @@ const Portfolio = () => {
 
   const handleProjectClick = (id: number) => {
     navigate(`/project/${id}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

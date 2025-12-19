@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -7,7 +7,23 @@ import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import LoadingScreen from './components/LoadingScreen';
-import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { useSmoothScroll, getLenisInstance } from './hooks/useSmoothScroll';
+import { useEffect } from 'react';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const lenis = getLenisInstance();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   useSmoothScroll();
@@ -17,6 +33,7 @@ function App() {
       <CssBaseline />
       <LoadingScreen />
       <Router>
+        <ScrollToTop />
         <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
           <Navigation />
           <Routes>
