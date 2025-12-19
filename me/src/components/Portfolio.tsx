@@ -35,7 +35,23 @@ const Portfolio = () => {
         <Typography variant="h2" align="center" gutterBottom>
           PORTFOLIO
         </Typography>
-        <Box sx={{ width: 80, height: 4, bgcolor: 'primary.main', mx: 'auto', mb: 6 }} />
+        <Box sx={{ width: 80, height: 4, bgcolor: 'primary.main', mx: 'auto', mb: 3 }} />
+
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{
+            mb: 6,
+            color: 'text.secondary',
+            fontWeight: 400,
+            maxWidth: '800px',
+            mx: 'auto',
+            lineHeight: 1.6
+          }}
+        >
+          Every project you see here was architected, developed, and deployed by me from the ground up.
+          These aren't just contributions—they're complete solutions I've engineered to solve real business challenges.
+        </Typography>
 
         {/* Filters */}
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center', mb: 6 }}>
