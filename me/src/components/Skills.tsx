@@ -13,8 +13,8 @@ const Skills = () => {
       title: 'Senior Full Stack Developer / Flutter Developer / AI Engineer',
       company: 'Pièces Auto Super',
       period: '2024 - Present',
-      highlight: 'Built enterprise logistics ecosystem with 300K+ lines of code, AI integration, and real-time mobile solutions',
-      tech: ['Flutter', 'Dart', 'Python', 'FastAPI', 'React', 'TypeScript', 'MySQL', 'Redis', 'Docker', 'Kubernetes', 'HERE SDK', 'OpenAI', 'Azure', 'Socket.IO'],
+      highlight: 'Built enterprise logistics ecosystem with 600K+ lines of code, WebSocket real-time systems (90% API optimization), AI integration, 6 Flutter mobile apps, and enterprise security solutions',
+      tech: ['Flutter', 'Dart', 'Python', 'FastAPI', 'React', 'TypeScript', 'NestJS', 'Angular', 'MySQL', 'Redis', 'Docker', 'Kubernetes', 'HERE SDK', 'OpenAI', 'Azure', 'Socket.IO', 'WebSocket', 'Google ML Kit', 'Spring Boot'],
     },
     {
       title: 'Full Stack Web Developer',
@@ -38,8 +38,8 @@ const Skills = () => {
   ];
 
   const frameworks = [
-    'FastAPI', 'SQLAlchemy', 'Flutter', 'React', 'Vue.js', 'Angular', 'Adonis',
-    '.NET Core 7', 'Vite', 'Bootstrap', 'Shopify', 'Docker', 'Node.js'
+    'FastAPI', 'SQLAlchemy', 'Flutter', 'React', 'NestJS', 'Angular', 'Spring Boot',
+    '.NET Core 7', 'Vite', 'Express', 'Strapi', 'Docker', 'Kubernetes', 'Node.js'
   ];
 
   return (

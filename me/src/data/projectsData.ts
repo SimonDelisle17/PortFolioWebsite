@@ -6,48 +6,55 @@ export const projectsData: Project[] = [
     id: 1,
     title: 'Super API Ecosystem',
     category: 'backend',
-    tags: ['FastAPI', 'Python', 'MySQL', 'Redis', 'Docker', 'JWE', 'HERE Maps'],
+    tags: ['FastAPI', 'Python', 'MySQL', 'Redis', 'Docker', 'JWE', 'HERE Maps', 'WebSocket'],
     shortDescription: 'Enterprise-Grade Logistics & Delivery Management Platform with 300,000+ lines of code',
     icon: '🚚',
-    impact: 'Complete logistics ecosystem serving multiple business units',
-    detailedDescription: 'Comprehensive backend platform serving the entire PA Super logistics ecosystem with dual-database architecture, microservices, and enterprise security.',
+    impact: 'Complete logistics ecosystem serving multiple business units with 90% API optimization',
+    detailedDescription: 'Comprehensive backend platform serving the entire PA Super logistics ecosystem with dual-database architecture, microservices, real-time WebSocket communication, and enterprise security.',
     features: [
       'SuperDeliver: Route optimization, GPS tracking, delivery confirmation with photos/signatures',
       'SuperLocator: Warehouse inventory management, barcode scanning, pick-list optimization',
       'SuperTransfer: Inter-store transfer automation with intelligent routing',
       'SuperStatement: Automated client billing with Office 365 integration',
-      'SuperDispatch: Real-time operational dashboard with driver tracking'
+      'SuperDispatch: Real-time operational dashboard with driver tracking',
+      'WebSocket Real-Time Updates: Eliminated 8,640 API calls per user per day (90% reduction)',
+      'Order Cancellation System V2: Complete lifecycle management with reason tracking',
+      'Delivery Analytics: Average delivery time calculation with caching'
     ],
     technologies: {
       backend: ['Python 3.12', 'FastAPI', 'SQLAlchemy 2.0', 'Async/Await'],
       database: ['MySQL (Primary)', 'MySQL (Telemetry)', 'Redis'],
       security: ['JWE Encryption', 'Ed25519 Signatures', 'AES-GCM', 'Argon2', 'HMAC'],
       integrations: ['HERE Maps API', 'Microsoft Graph API', 'Azure AD', 'Office 365'],
+      realtime: ['WebSocket Manager', 'Socket.IO'],
       deployment: ['Docker', 'Kubernetes', 'Microservices']
     },
     metrics: {
       linesOfCode: '300,000+',
       pythonFiles: '21,780+',
       databases: '2 (Primary + Telemetry)',
-      microservices: '2 Services'
+      microservices: '2 Services',
+      apiOptimization: '90% reduction in picker API calls'
     },
-    architecture: 'Microservices with dedicated geo-processing service, dual-database for performance scaling',
+    architecture: 'Microservices with dedicated geo-processing service, dual-database for performance scaling, WebSocket for real-time updates',
     liveUrl: null
   },
   {
     id: 2,
-    title: 'SuperApp v2.0',
+    title: 'SuperApp v4.2.0',
     category: 'mobile',
-    tags: ['Flutter', 'Dart', 'HERE Maps', 'Socket.IO', 'SQLite', 'Provider'],
+    tags: ['Flutter', 'Dart', 'HERE Maps', 'WebSocket', 'SQLite', 'Provider', 'Socket.IO'],
     shortDescription: 'Dual-Mode Mobile Platform for Delivery & Warehouse Management',
     icon: '📱',
-    impact: 'Cross-platform enterprise mobile application',
-    detailedDescription: 'Production-ready Flutter application serving both delivery drivers and warehouse workers with dual-mode architecture and native hardware integration.',
+    impact: 'Cross-platform enterprise mobile application with real-time updates',
+    detailedDescription: 'Production-ready Flutter application serving both delivery drivers and warehouse workers with dual-mode architecture, native hardware integration, and real-time WebSocket communication.',
     features: [
       'SuperDeliver Mode: Route optimization with HERE Maps, real-time GPS tracking',
       'Delivery proof: Photo capture, digital signatures, barcode scanning',
       'SuperPicker/Locator Mode: Warehouse inventory tracking and management',
-      'Real-time WebSocket communication with backend systems',
+      'Real-time WebSocket connection for live reservation updates',
+      'Items update instantly when other pickers reserve/unreserve',
+      'Order Cancellation Flow: Cancel orders directly from the app with reason tracking',
       'Offline-first architecture with SQLite local storage',
       'Audio feedback system with Text-to-Speech'
     ],
@@ -55,21 +62,160 @@ export const projectsData: Project[] = [
       mobile: ['Flutter 3.3.1+', 'Dart'],
       stateManagement: ['Provider Pattern', 'BLoC Pattern'],
       hardware: ['Camera', 'GPS (Geolocator)', 'Barcode Scanner', 'Audio (TTS)'],
-      realtime: ['Socket.IO Client', 'WebSocket'],
-      storage: ['SQLite', 'Flutter Secure Storage'],
+      realtime: ['Socket.IO Client', 'WebSocket Channel'],
+      storage: ['SQLite (sqflite)', 'Flutter Secure Storage'],
       maps: ['HERE Maps SDK']
     },
     metrics: {
-      version: '4.0.2+42',
-      dartFiles: '199',
+      version: '4.2.0+420',
+      dartFiles: '250+',
       dependencies: '51',
-      platforms: 'iOS, Android, Web, Desktop'
+      platforms: 'iOS, Android, Web, Desktop',
+      userExperience: 'Instant updates (vs 10 second polling)'
     },
-    architecture: 'Dual-mode architecture with role-based authentication, offline-first design with sync',
+    architecture: 'Dual-mode architecture with role-based authentication, offline-first design with sync, WebSocket real-time communication',
     liveUrl: null
   },
   {
     id: 3,
+    title: 'SuperBuyer v2.0',
+    category: 'fullstack',
+    tags: ['NestJS', 'Angular 20', 'TypeScript', 'MySQL', 'TypeORM', 'JWT', 'AWS S3'],
+    shortDescription: 'Full-Stack Buyer Management & Product Sourcing Platform',
+    icon: '🛒',
+    impact: 'Modern monorepo architecture for advanced buyer management',
+    detailedDescription: 'Full-stack TypeScript application featuring NestJS 11 backend and Angular 20 frontend for advanced buyer management and product sourcing with environment-aware serving capabilities.',
+    features: [
+      'Buyer Management System for product sourcing operations',
+      'Monorepo Architecture - Single codebase for backend and frontend',
+      'JWT Authentication with Argon2 password hashing',
+      'AWS S3 Integration for file storage and presigned URLs',
+      'Excel/CSV Processing for bulk data operations',
+      'Scheduled Tasks with node-cron',
+      'PM2 Process Management for production deployment',
+      'Hot Reload Development with concurrent processes'
+    ],
+    technologies: {
+      backend: ['NestJS 11', 'TypeScript 5.7', 'TypeORM'],
+      frontend: ['Angular 20', 'TypeScript'],
+      database: ['MySQL', 'TypeORM'],
+      security: ['JWT', 'Argon2', 'Cookie Parser'],
+      cloud: ['AWS S3', 'S3 Presigner'],
+      tools: ['PM2', 'Concurrently', 'SWC', 'ESLint', 'Prettier']
+    },
+    metrics: {
+      version: '2.0.0',
+      architecture: 'Monorepo',
+      deployment: 'PM2 Production'
+    },
+    architecture: 'Monorepo with environment-aware serving - Development redirects to Angular dev server, Production serves built files',
+    liveUrl: null
+  },
+  {
+    id: 4,
+    title: 'Epicor Services',
+    category: 'backend',
+    tags: ['Java', 'Spring Boot', 'Epicor SDK', 'PEDS API', 'Swagger', 'Docker'],
+    shortDescription: 'Enterprise Integration Hub with 44 API Endpoints',
+    icon: '🏢',
+    impact: 'Complete Epicor AConneX SDK & PEDS Cloud API integration',
+    detailedDescription: 'Spring Boot application providing comprehensive integration with Epicor AConneX SDK and PEDS Cloud API for parts ordering, vehicle lookups, and inventory management.',
+    features: [
+      '14 AConneX Endpoints: Part queries, stock inquiry, orders, returns, partner management',
+      '30 PEDS Endpoints: YMME lookups, part catalog, buyer assist, interchange',
+      'Interactive Swagger UI documentation',
+      'VIN Decoder - Decode any 17-character VIN',
+      'Stock Inquiry - Real-time availability at partner locations',
+      'Part Interchange - Find equivalent parts across manufacturers',
+      'YMME Vehicle Lookup - Year/Make/Model/Engine sequential lookup',
+      'Buyer Assist - Vehicle fitment information for parts'
+    ],
+    technologies: {
+      language: ['Java 8'],
+      framework: ['Spring Boot', 'Maven'],
+      security: ['API Key Authentication', 'JWT'],
+      integration: ['Epicor AConneX SDK', 'PEDS Cloud API'],
+      documentation: ['Swagger UI', 'OpenAPI 3.0'],
+      deployment: ['Docker', 'Docker Compose', 'Make']
+    },
+    metrics: {
+      totalEndpoints: '44 (14 AConneX + 30 PEDS)',
+      testCoverage: '35.3% passing',
+      documentation: 'Interactive Swagger UI'
+    },
+    architecture: 'Spring Boot microservice with dual API integration (AConneX + PEDS) and comprehensive Swagger documentation',
+    liveUrl: null
+  },
+  {
+    id: 5,
+    title: 'Gozer - Password Manager',
+    category: 'fullstack',
+    tags: ['React', 'Node.js', 'Express', 'SQLite', 'AES-256', '2FA', 'Tailwind'],
+    shortDescription: 'Enterprise Password & Access Management System',
+    icon: '🔐',
+    impact: 'Secure centralized access management with 2FA and audit trails',
+    detailedDescription: 'Enterprise-grade password and access management system with multi-role support, end-to-end encryption, 2FA authentication, IP whitelisting, and comprehensive audit logging.',
+    features: [
+      'Secure Authentication: 2FA with TOTP, IP whitelist, timed sessions',
+      'Multi-Role Management: Commis, IT, Developer, Administrator',
+      'Website Credentials: Secure storage with AES-256 encryption',
+      'IT Infrastructure: PC, TPE, network configuration management',
+      'Developer Access: API keys, SSH access, .env file management',
+      'Shared Documents: Google Docs/Sheets, PDF document links',
+      'Audit Trail: Complete logging of all user actions',
+      'Modern Dark UI: Professional interface with Tailwind CSS'
+    ],
+    technologies: {
+      frontend: ['React 18', 'TypeScript', 'Tailwind CSS', 'Vite'],
+      backend: ['Node.js', 'Express'],
+      database: ['SQLite with encryption'],
+      security: ['AES-256 Encryption', 'bcryptjs', 'speakeasy (2FA)', 'JWT'],
+      features: ['IP Whitelisting', 'Session Management', 'Audit Logging']
+    },
+    metrics: {
+      version: '1.0.0',
+      roles: '4 (Commis, IT, Dev, Admin)',
+      security: 'End-to-end encryption'
+    },
+    architecture: 'React SPA with Express API, SQLite database with encryption, role-based access control',
+    liveUrl: null
+  },
+  {
+    id: 6,
+    title: 'SuperVin - VIN Scanner',
+    category: 'mobile',
+    tags: ['Flutter', 'Dart', 'Google ML Kit', 'Barcode', 'OCR', 'BLoC'],
+    shortDescription: 'AI-Powered VIN Recognition Mobile App',
+    icon: '🚗',
+    impact: 'Fast and accurate VIN scanning with ML Kit',
+    detailedDescription: 'Flutter mobile application for vehicle identification using Google ML Kit for barcode scanning and OCR text recognition to decode VIN numbers.',
+    features: [
+      'VIN Barcode Scanning using Google ML Kit',
+      'VIN OCR Recognition with text recognition',
+      'Camera Integration for real-time scanning',
+      'Image Picker for manual photo selection',
+      'Secure Storage for tokens and credentials',
+      'BLoC State Management for clean architecture',
+      'Cross-platform support (iOS/Android)'
+    ],
+    technologies: {
+      mobile: ['Flutter', 'Dart'],
+      ai: ['Google ML Kit Barcode Scanning', 'Google ML Kit Text Recognition'],
+      stateManagement: ['Flutter BLoC 8.1.3', 'Equatable'],
+      hardware: ['Camera', 'Image Picker'],
+      security: ['Flutter Secure Storage'],
+      permissions: ['Permission Handler']
+    },
+    metrics: {
+      version: '1.0.0+1',
+      mlFeatures: '2 (Barcode + OCR)',
+      platforms: 'iOS, Android'
+    },
+    architecture: 'BLoC pattern with Google ML Kit integration for real-time VIN recognition',
+    liveUrl: null
+  },
+  {
+    id: 7,
     title: 'AI Phone Assistant',
     category: 'ai',
     tags: ['OpenAI', 'Azure', 'Deepgram', 'Twilio', 'FastAPI', 'MinIO'],
@@ -102,7 +248,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 4,
+    id: 8,
     title: 'SuperParser API',
     category: 'backend',
     tags: ['FastAPI', 'Pandas', 'SQLAlchemy', 'HMAC', 'Cryptography'],
@@ -133,7 +279,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 5,
+    id: 9,
     title: 'APDQ Towing Management',
     category: 'fullstack',
     tags: ['FastAPI', 'Flutter', 'React', 'TypeScript', 'Firebase', 'MySQL'],
@@ -165,7 +311,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 6,
+    id: 10,
     title: 'Kubernetes DevOps (gamcar-argo-cd)',
     category: 'devops',
     tags: ['Kubernetes', 'Helm', 'ArgoCD', 'Docker', 'nginx', 'Prometheus'],
@@ -196,21 +342,24 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 7,
+    id: 11,
     title: 'SuperDispatch Dashboard',
     category: 'frontend',
-    tags: ['React', 'TypeScript', 'Material-UI', 'Socket.IO', 'Redux'],
-    shortDescription: 'Real-time Operations Dashboard',
+    tags: ['React', 'TypeScript', 'Material-UI', 'Socket.IO', 'Redux', 'Recharts'],
+    shortDescription: 'Real-time Operations Dashboard with Analytics',
     icon: '🎛️',
-    impact: 'Real-time driver tracking and analytics',
-    detailedDescription: 'Modern React dashboard for real-time logistics operations management with live tracking, inventory control, and business analytics.',
+    impact: 'Real-time driver tracking, analytics, and maintenance management',
+    detailedDescription: 'Modern React dashboard for real-time logistics operations management with live tracking, inventory control, business analytics, and maintenance scheduling.',
     features: [
       'Real-time driver route visualization with live maps',
+      'Canceled Orders View with pagination and filtering',
+      'Maintenance Dashboard with visual status indicators',
+      'Delivery Analytics with average time metrics',
       'Inventory management interface',
       'User administration with role-based permissions',
       'Invoice management and billing',
-      'Statistics and performance analytics with charts',
-      'WebSocket real-time updates'
+      'CSV Upload section with improved UX',
+      'Statistics and performance analytics with Recharts'
     ],
     technologies: {
       frontend: ['React 18.2.0', 'TypeScript', 'Material-UI 6.1.1'],
@@ -218,16 +367,18 @@ export const projectsData: Project[] = [
       realtime: ['Socket.IO Client'],
       visualization: ['Recharts'],
       http: ['Axios'],
-      routing: ['React Router DOM 6.26.2']
+      routing: ['React Router DOM 6.26.2'],
+      utils: ['date-fns', 'dayjs', 'PapaParse']
     },
     metrics: {
-      environments: '3 (Local, Dev, Production)'
+      environments: '3 (Local, Dev, Production)',
+      features: 'Canceled Orders, Maintenance Dashboard, Delivery Analytics'
     },
-    architecture: 'Real-time dashboard with WebSocket connections and role-based access control',
+    architecture: 'Real-time dashboard with WebSocket connections, role-based access control, and enhanced analytics',
     liveUrl: 'https://dispatch.pasuper.xyz'
   },
   {
-    id: 8,
+    id: 12,
     title: 'SuperTelemetry',
     category: 'fullstack',
     tags: ['Node.js', 'Socket.IO', 'Redis', 'AngularJS', 'Leaflet'],
@@ -258,7 +409,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 9,
+    id: 13,
     title: 'SuperCron Automation',
     category: 'backend',
     tags: ['Python', 'FastAPI', 'APScheduler', 'Epicor', 'Email'],
@@ -287,7 +438,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 10,
+    id: 14,
     title: 'SuperODBC Data Bridge',
     category: 'backend',
     tags: ['Python', 'ODBC', 'Encryption', 'PM2', 'FastAPI'],
@@ -316,7 +467,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 11,
+    id: 15,
     title: 'PA Super Backend (Strapi)',
     category: 'backend',
     tags: ['Strapi', 'Node.js', 'GraphQL', 'Elasticsearch', 'MySQL'],
@@ -348,38 +499,7 @@ export const projectsData: Project[] = [
     liveUrl: null
   },
   {
-    id: 12,
-    title: 'Epicor Web Service',
-    category: 'backend',
-    tags: ['Java', 'Spring Boot', 'JWT', 'Epicor', 'Maven'],
-    shortDescription: 'ERP Integration Web Services',
-    icon: '🏢',
-    impact: 'Enterprise ERP system integration',
-    detailedDescription: 'Java Spring Boot application providing RESTful web services for Epicor ERP system integration with JWT authentication.',
-    features: [
-      'RESTful web services for Epicor ERP',
-      'JWT-based authentication and security',
-      'Spring Security integration',
-      'Epicor SDK integration',
-      'JAXB/JAXWS web service support',
-      'Docker deployment support'
-    ],
-    technologies: {
-      language: ['Java 8'],
-      framework: ['Spring Boot 2.7.17'],
-      security: ['Spring Security', 'JWT (jjwt 0.9.1)'],
-      erp: ['Epicor SDK'],
-      build: ['Maven'],
-      deployment: ['Docker', 'WAR packaging']
-    },
-    metrics: {
-      packaging: 'WAR deployment'
-    },
-    architecture: 'Spring Boot microservice with Epicor ERP integration and JWT security',
-    liveUrl: null
-  },
-  {
-    id: 13,
+    id: 16,
     title: 'SuperInventaire',
     category: 'mobile',
     tags: ['Flutter', 'BLoC', 'Barcode', 'HTTP'],
@@ -404,13 +524,13 @@ export const projectsData: Project[] = [
       i18n: ['Intl']
     },
     metrics: {
-      version: '1.1.1+11'
+      version: '3.0.2+302'
     },
     architecture: 'BLoC architecture with barcode integration and local storage',
     liveUrl: null
   },
   {
-    id: 14,
+    id: 17,
     title: 'SuperTransfer',
     category: 'mobile',
     tags: ['Flutter', 'BLoC', 'HTTP', 'Testing'],
@@ -435,13 +555,13 @@ export const projectsData: Project[] = [
       utils: ['Package Info Plus']
     },
     metrics: {
-      version: '2.0.3+23'
+      version: '3.0.0+30'
     },
     architecture: 'BLoC architecture with comprehensive unit testing',
     liveUrl: null
   },
   {
-    id: 15,
+    id: 18,
     title: 'Who Got The Biggest',
     category: 'fullstack',
     tags: ['Angular', 'NestJS', 'Socket.IO', 'MySQL', 'TypeORM'],

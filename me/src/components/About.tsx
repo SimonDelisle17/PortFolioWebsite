@@ -8,10 +8,10 @@ const About = () => {
   const isInView = useInView(ref, { once: true });
 
   const stats = [
-    { value: '500,000+', label: 'Lines of Code' },
-    { value: '16+', label: 'Production Systems' },
+    { value: '600,000+', label: 'Lines of Code' },
+    { value: '20+', label: 'Production Systems' },
     { value: '8+', label: 'Languages Mastered' },
-    { value: '20+', label: 'Frameworks Deployed' },
+    { value: '25+', label: 'Frameworks Deployed' },
   ];
 
   return (
@@ -39,9 +39,9 @@ const About = () => {
           </Typography>
 
           <Typography variant="body1" sx={{ mb: 6, textAlign: 'center', maxWidth: '900px', mx: 'auto' }}>
-            With over <strong>500,000+ lines of production code</strong> across 16 enterprise systems,
+            With over <strong>600,000+ lines of production code</strong> across 20+ enterprise systems,
             I've demonstrated mastery across the entire technology stack from <strong>Flutter mobile
-            applications</strong> to <strong>enterprise ERP integrations</strong>.
+            applications</strong> to <strong>enterprise ERP integrations</strong> and <strong>AI-powered solutions</strong>.
           </Typography>
 
           <Grid container spacing={3} sx={{ mb: 4, justifyContent: 'center' }}>
