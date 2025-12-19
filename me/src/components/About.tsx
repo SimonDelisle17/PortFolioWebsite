@@ -2,16 +2,18 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   const stats = [
-    { value: '600,000+', label: 'Lines of Code' },
-    { value: '20+', label: 'Production Systems' },
-    { value: '8+', label: 'Languages Mastered' },
-    { value: '25+', label: 'Frameworks Deployed' },
+    { value: '600,000+', label: t('about.stats.loc') },
+    { value: '20+', label: t('about.stats.systems') },
+    { value: '8+', label: t('about.stats.languages') },
+    { value: '25+', label: t('about.stats.frameworks') },
   ];
 
   return (
@@ -23,25 +25,20 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <Typography variant="h2" align="center" gutterBottom>
-            ABOUT ME
+            {t('about.title')}
           </Typography>
           <Box sx={{ width: 80, height: 4, bgcolor: 'primary.main', mx: 'auto', mb: 6 }} />
 
           <Typography variant="h4" sx={{ color: 'primary.main', mb: 3, textAlign: 'center' }}>
-            Hi There! I'm Simon Delisle
+            {t('about.greeting')}
           </Typography>
 
           <Typography variant="body1" sx={{ mb: 3, textAlign: 'center', maxWidth: '900px', mx: 'auto' }}>
-            <strong>Enterprise Software Architect</strong> with proven expertise in building large-scale,
-            mission-critical systems. I have delivered a <strong>complete logistics ecosystem</strong> serving
-            multiple business units with <strong>real-time operations</strong>, <strong>AI integration</strong>,
-            and <strong>mobile-first solutions</strong>.
+            {t('about.description1')}
           </Typography>
 
           <Typography variant="body1" sx={{ mb: 6, textAlign: 'center', maxWidth: '900px', mx: 'auto' }}>
-            With over <strong>600,000+ lines of production code</strong> across 20+ enterprise systems,
-            I've demonstrated mastery across the entire technology stack from <strong>Flutter mobile
-            applications</strong> to <strong>enterprise ERP integrations</strong> and <strong>AI-powered solutions</strong>.
+            {t('about.description2')}
           </Typography>
 
           <Grid container spacing={3} sx={{ mb: 4, justifyContent: 'center' }}>

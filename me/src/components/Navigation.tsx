@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   AppBar,
   Toolbar,
@@ -21,18 +22,20 @@ import MenuIcon from '@mui/icons-material/Menu';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { setActiveSection } from '../store/slices/navigationSlice';
 import { RootState } from '../store/store';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navigation = () => {
+  const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const dispatch = useDispatch();
   const activeSection = useSelector((state: RootState) => state.navigation.activeSection);
 
   const navItems = [
-    { id: 'home', label: 'HOME' },
-    { id: 'portfolio', label: 'PORTFOLIO' },
-    { id: 'resume', label: 'RESUME' },
-    { id: 'about', label: 'ABOUT' },
+    { id: 'home', label: t('nav.home').toUpperCase() },
+    { id: 'portfolio', label: t('nav.portfolio').toUpperCase() },
+    { id: 'about', label: t('nav.about').toUpperCase() },
+    { id: 'skills', label: t('nav.skills').toUpperCase() },
   ];
 
   const handleNavClick = (sectionId: string) => {
@@ -138,6 +141,11 @@ const Navigation = () => {
                   {item.label}
                 </Button>
               ))}
+            </Box>
+
+            {/* Language Switcher */}
+            <Box sx={{ display: { xs: 'none', md: 'block' }, mr: 2 }}>
+              <LanguageSwitcher />
             </Box>
 
             {/* Contact Button */}

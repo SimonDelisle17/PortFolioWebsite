@@ -4,25 +4,30 @@ import { motion } from 'framer-motion';
 import { Box, Container, Typography, Button, Card, CardContent, Chip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { projectsData } from '../data/projectsData';
+import { projectsDataFr } from '../data/projectsData.fr';
 import { ProjectCategory } from '../types/project';
+import { useTranslation } from 'react-i18next';
 
 const Portfolio = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>('all');
 
   const filters: { id: ProjectCategory; label: string }[] = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'mobile', label: 'Mobile' },
-    { id: 'ai', label: 'AI/ML' },
-    { id: 'fullstack', label: 'Full Stack' },
-    { id: 'devops', label: 'DevOps' },
+    { id: 'all', label: t('portfolio.filters.all') },
+    { id: 'backend', label: t('portfolio.filters.backend') },
+    { id: 'frontend', label: t('portfolio.filters.frontend') },
+    { id: 'mobile', label: t('portfolio.filters.mobile') },
+    { id: 'ai', label: t('portfolio.filters.ai') },
+    { id: 'fullstack', label: t('portfolio.filters.fullstack') },
+    { id: 'devops', label: t('portfolio.filters.devops') },
   ];
 
+  const currentProjects = i18n.language === 'fr' ? projectsDataFr : projectsData;
+
   const filteredProjects = activeFilter === 'all'
-    ? projectsData
-    : projectsData.filter(project => project.category === activeFilter);
+    ? currentProjects
+    : currentProjects.filter(project => project.category === activeFilter);
 
   const handleProjectClick = (id: number) => {
     navigate(`/project/${id}`);
@@ -33,7 +38,7 @@ const Portfolio = () => {
     <Box id="portfolio" sx={{ py: 10, bgcolor: 'background.paper' }}>
       <Container maxWidth="lg">
         <Typography variant="h2" align="center" gutterBottom>
-          PORTFOLIO
+          {t('portfolio.title')}
         </Typography>
         <Box sx={{ width: 80, height: 4, bgcolor: 'primary.main', mx: 'auto', mb: 3 }} />
 
@@ -49,8 +54,7 @@ const Portfolio = () => {
             lineHeight: 1.6
           }}
         >
-          Every project you see here was architected, developed, and deployed by me from the ground up.
-          These aren't just contributions—they're complete solutions I've engineered to solve real business challenges.
+          {t('portfolio.subtitle')}
         </Typography>
 
         {/* Filters */}
@@ -239,7 +243,7 @@ const Portfolio = () => {
                         borderRadius: '8px',
                       }}
                     >
-                      View Details
+                      {t('portfolio.viewDetails')}
                     </Button>
                   </Box>
                 </CardContent>

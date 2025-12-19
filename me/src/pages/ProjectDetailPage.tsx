@@ -25,11 +25,17 @@ import {
   Speed,
 } from '@mui/icons-material';
 import { getProjectById } from '../data/projectsData';
+import { projectsDataFr } from '../data/projectsData.fr';
+import { useTranslation } from 'react-i18next';
 
 const ProjectDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const project = getProjectById(id || '');
+  const { t, i18n } = useTranslation();
+
+  const project = i18n.language === 'fr'
+    ? projectsDataFr.find(p => p.id === parseInt(id || ''))
+    : getProjectById(id || '');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,7 +45,7 @@ const ProjectDetailPage = () => {
     return (
       <Container sx={{ py: 10, textAlign: 'center' }}>
         <Typography variant="h3" gutterBottom>
-          Project Not Found
+          {t('projectDetail.backToPortfolio')}
         </Typography>
         <Button
           variant="contained"
@@ -47,7 +53,7 @@ const ProjectDetailPage = () => {
           onClick={() => navigate('/')}
           sx={{ mt: 3 }}
         >
-          Back to Portfolio
+          {t('projectDetail.backToPortfolio')}
         </Button>
       </Container>
     );
@@ -67,7 +73,7 @@ const ProjectDetailPage = () => {
             onClick={() => navigate('/')}
             sx={{ mb: 4, color: 'primary.main' }}
           >
-            Back to Portfolio
+            {t('projectDetail.backToPortfolio')}
           </Button>
 
           <Box sx={{ textAlign: 'center', mb: 6 }}>
@@ -104,7 +110,7 @@ const ProjectDetailPage = () => {
                 target="_blank"
                 sx={{ mt: 3 }}
               >
-                View Live Project
+                {t('projectDetail.visitWebsite')}
               </Button>
             )}
           </Box>
@@ -120,13 +126,13 @@ const ProjectDetailPage = () => {
             <CardContent sx={{ p: 4 }}>
               <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Architecture color="primary" />
-                Project Overview
+                {t('projectDetail.overview')}
               </Typography>
               <Typography variant="body1" paragraph>
                 {project.detailedDescription}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                <strong>Architecture:</strong> {project.architecture}
+                <strong>{t('projectDetail.architecture')}:</strong> {project.architecture}
               </Typography>
             </CardContent>
           </Card>
@@ -142,7 +148,7 @@ const ProjectDetailPage = () => {
             <CardContent sx={{ p: 4 }}>
               <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <CheckCircle color="primary" />
-                Key Features
+                {t('projectDetail.features')}
               </Typography>
               <List>
                 {project.features.map((feature, index) => (
@@ -168,7 +174,7 @@ const ProjectDetailPage = () => {
             <CardContent sx={{ p: 4 }}>
               <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 4 }}>
                 <Code color="primary" />
-                Technology Stack
+                {t('projectDetail.technologies')}
               </Typography>
               <Box
                 sx={{
@@ -252,7 +258,7 @@ const ProjectDetailPage = () => {
             <CardContent sx={{ p: 4 }}>
               <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Speed color="primary" />
-                Project Metrics
+                {t('projectDetail.metrics')}
               </Typography>
               <Grid container spacing={3} sx={{ mt: 1 }}>
                 {Object.entries(project.metrics).map(([key, value], index) => (

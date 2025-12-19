@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, IconButton, Grid } from '@mui/material';
 import { LinkedIn } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       id="home"
@@ -36,7 +39,7 @@ const Hero = () => {
                 variant="h6"
                 sx={{ color: 'secondary.main', mb: 2, fontWeight: 500 }}
               >
-                Hello, I'm
+                {t('hero.greeting')}
               </Typography>
 
               <Typography
@@ -57,9 +60,9 @@ const Hero = () => {
               </Typography>
 
               <Typography variant="h5" sx={{ color: 'text.secondary', mb: 4 }}>
-                Software Engineer / AI Engineer
+                {t('hero.title1')}
                 <br />
-                Full Stack Developer
+                {t('hero.title2')}
               </Typography>
 
               <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>

@@ -3,8 +3,10 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Box, Container, Typography, Card, CardContent, Chip } from '@mui/material';
 import { WorkHistory } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const Skills = () => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -51,7 +53,7 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
         >
           <Typography variant="h2" align="center" gutterBottom>
-            RESUME
+            {t('resume.title')}
           </Typography>
           <Box sx={{ width: 80, height: 4, bgcolor: 'primary.main', mx: 'auto', mb: 6 }} />
 
@@ -68,7 +70,7 @@ const Skills = () => {
               }}
             >
               <WorkHistory color="primary" />
-              Work Experience
+              {t('resume.workExperience')}
             </Typography>
 
             {experiences.map((exp, index) => (
@@ -152,7 +154,7 @@ const Skills = () => {
             <Card sx={{ mb: 4 }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" gutterBottom sx={{ fontWeight: 700, mb: 3, textAlign: 'center' }}>
-                  Programming Languages
+                  {t('resume.languages')}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, justifyContent: 'center' }}>
                   {languages.map((lang, i) => (
@@ -187,7 +189,7 @@ const Skills = () => {
             <Card sx={{ mb: 4 }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" gutterBottom sx={{ fontWeight: 700, mb: 3, textAlign: 'center' }}>
-                  Frameworks & Tools
+                  {t('resume.frameworks')}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, justifyContent: 'center' }}>
                   {frameworks.map((fw, i) => (
