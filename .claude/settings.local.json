@@ -9,7 +9,8 @@
       "Bash(npm run build:*)",
       "Bash(git push:*)",
       "Bash(dir:*)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(cd:*)"
     ],
     "deny": [],
     "ask": []
