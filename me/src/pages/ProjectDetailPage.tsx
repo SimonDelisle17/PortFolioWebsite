@@ -14,7 +14,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from '@mui/material';
 import {
   ArrowBack,
@@ -23,6 +22,8 @@ import {
   Architecture,
   Code,
   Speed,
+  ReportProblem,
+  Lightbulb,
 } from '@mui/icons-material';
 import { getProjectById } from '../data/projectsData';
 import { projectsDataFr } from '../data/projectsData.fr';
@@ -64,9 +65,9 @@ const ProjectDetailPage = () => {
       <Container maxWidth="lg">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <Button
             startIcon={<ArrowBack />}
@@ -116,11 +117,32 @@ const ProjectDetailPage = () => {
           </Box>
         </motion.div>
 
+        {/* The Problem */}
+        {project.problem && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+          >
+            <Card sx={{ mb: 4 }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <ReportProblem color="secondary" />
+                  {t('projectDetail.theProblem')}
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                  {project.problem}
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+
         {/* Description */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
         >
           <Card sx={{ mb: 4 }}>
             <CardContent sx={{ p: 4 }}>
@@ -140,9 +162,9 @@ const ProjectDetailPage = () => {
 
         {/* Features */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
         >
           <Card sx={{ mb: 4 }}>
             <CardContent sx={{ p: 4 }}>
@@ -166,9 +188,9 @@ const ProjectDetailPage = () => {
 
         {/* Technologies */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
         >
           <Card sx={{ mb: 4 }}>
             <CardContent sx={{ p: 4 }}>
@@ -250,11 +272,11 @@ const ProjectDetailPage = () => {
 
         {/* Metrics */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Card>
+          <Card sx={{ mb: 4 }}>
             <CardContent sx={{ p: 4 }}>
               <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Speed color="primary" />
@@ -288,6 +310,27 @@ const ProjectDetailPage = () => {
           </Card>
         </motion.div>
 
+        {/* What I Learned */}
+        {project.lesson && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            <Card sx={{ mb: 4 }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Lightbulb color="secondary" />
+                  {t('projectDetail.whatILearned')}
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                  {project.lesson}
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+
         {/* Back Button */}
         <Box sx={{ textAlign: 'center', mt: 6 }}>
           <Button
@@ -296,7 +339,7 @@ const ProjectDetailPage = () => {
             startIcon={<ArrowBack />}
             onClick={() => navigate('/')}
           >
-            Back to Portfolio
+            {t('projectDetail.backToPortfolio')}
           </Button>
         </Box>
       </Container>

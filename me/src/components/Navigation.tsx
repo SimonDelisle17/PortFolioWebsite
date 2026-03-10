@@ -15,11 +15,9 @@ import {
   Button,
   Container,
   Typography,
-  Snackbar,
-  Alert,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import PhoneIcon from '@mui/icons-material/Phone';
+import { Email } from '@mui/icons-material';
 import { setActiveSection } from '../store/slices/navigationSlice';
 import { RootState } from '../store/store';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -28,7 +26,6 @@ import logo from '../assets/logo.png';
 const Navigation = () => {
   const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
   const activeSection = useSelector((state: RootState) => state.navigation.activeSection);
@@ -46,6 +43,7 @@ const Navigation = () => {
     { id: 'portfolio', label: t('nav.portfolio').toUpperCase() },
     { id: 'about', label: t('nav.about').toUpperCase() },
     { id: 'skills', label: t('nav.skills').toUpperCase() },
+    { id: 'contact', label: t('nav.contact').toUpperCase() },
   ];
 
   const handleNavClick = (sectionId: string) => {
@@ -55,15 +53,6 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const handleContactClick = () => {
-    navigator.clipboard.writeText('simon.delisle2025@gmail.com');
-    setSnackbarOpen(true);
-  };
-
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
   };
 
   const drawer = (
@@ -107,10 +96,7 @@ const Navigation = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Box
                 component="img"
                 src={logo}
@@ -177,11 +163,11 @@ const Navigation = () => {
               <LanguageSwitcher />
             </Box>
 
-            {/* Contact Button */}
+            {/* Contact Button — scrolls to contact section */}
             <Button
               variant="outlined"
-              startIcon={<PhoneIcon />}
-              onClick={handleContactClick}
+              startIcon={<Email />}
+              onClick={() => handleNavClick('contact')}
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 borderRadius: '25px',
@@ -193,7 +179,7 @@ const Navigation = () => {
                 },
               }}
             >
-              Contact Me
+              {t('nav.contact')}
             </Button>
 
             {/* Mobile Menu Icon */}
@@ -225,18 +211,6 @@ const Navigation = () => {
 
       {/* Toolbar Spacer */}
       <Toolbar />
-
-      {/* Email Copied Notification */}
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
-          Email copied to clipboard!
-        </Alert>
-      </Snackbar>
     </>
   );
 };

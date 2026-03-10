@@ -34,7 +34,10 @@ export const projectsDataFr: Project[] = [
       architecture: 'Microservices bi-base de données'
     },
     architecture: 'Microservices avec service de géotraitement dédié et double base de données pour mise à l\'échelle',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: "L'entreprise gérait sa logistique entre plusieurs magasins avec des feuilles de calcul et des appels téléphoniques. Les chauffeurs n'avaient pas d'optimisation d'itinéraires et les répartiteurs n'avaient aucune visibilité.",
+    lesson: "Construire un système de cette taille m'a appris que les décisions d'architecture prises la première semaine définissent votre vie pour les deux prochaines années."
   },
   {
     id: 2,
@@ -68,7 +71,10 @@ export const projectsDataFr: Project[] = [
       architecture: 'Bi-mode avec support hors ligne'
     },
     architecture: 'Architecture bi-mode avec authentification basée sur les rôles et conception offline-first',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: "Les chauffeurs et travailleurs d'entrepôt avaient besoin d'une seule app fonctionnant sur le terrain — avec une connectivité intermittente, des scanners de codes-barres et le GPS — sans perdre de données.",
+    lesson: "L'offline-first n'est pas une réflexion après coup. J'ai reconstruit la couche de synchronisation trois fois avant de trouver la bonne approche."
   },
   {
     id: 3,
@@ -197,7 +203,10 @@ export const projectsDataFr: Project[] = [
       langues: 'Multilingue (FR/EN)'
     },
     architecture: 'Architecture multi-cloud avec pipeline de traitement asynchrone',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: "Les appels clients restaient sans réponse après les heures de bureau. L'entreprise avait besoin d'un support téléphonique 24/7 en français et en anglais sans embaucher une équipe de nuit.",
+    lesson: "Intégrer plusieurs services IA dans un pipeline en temps réel m'a appris l'importance cruciale des budgets de latence. Chaque 100ms de délai rend la conversation artificielle."
   },
   {
     id: 7,
@@ -258,7 +267,10 @@ export const projectsDataFr: Project[] = [
       couverture: 'Workflow commercial complet'
     },
     architecture: 'Architecture trois tiers avec synchronisation multi-plateformes',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: "Une entreprise de remorquage gérait ses répartitions par radio et formulaires papier. Ils avaient besoin d'un système numérique pour suivre les travaux, chauffeurs et factures en temps réel.",
+    lesson: "C'était mon premier projet construisant un écosystème complet (mobile + web + API) à partir de zéro. Ça m'a appris à penser en systèmes plutôt qu'en fonctionnalités."
   },
   {
     id: 9,
@@ -455,6 +467,151 @@ export const projectsDataFr: Project[] = [
       version: 'v3.0'
     },
     architecture: 'Architecture BLoC avec tests complets',
+    liveUrl: null
+  },
+  {
+    id: 16,
+    title: 'Close to the Pin',
+    category: 'fullstack',
+    tags: ['Flutter', 'Node.js', 'Express', 'MongoDB', 'JWT', 'BLoC'],
+    shortDescription: 'Application Mobile de Compétition de Golf avec Backend',
+    icon: '⛳',
+    impact: 'Solution numérique pour gérer les compétitions de golf closest-to-the-pin',
+    detailedDescription: 'Projet personnel full-stack avec application mobile Flutter et backend Node.js pour gérer les compétitions de golf "closest to the pin" avec authentification utilisateur et scoring.',
+    features: [
+      'Inscription et authentification sécurisée des utilisateurs',
+      'Création et gestion de parties',
+      'Scoring des joueurs et suivi du classement',
+      'Gestion de session basée sur JWT',
+      'Hachage sécurisé des mots de passe avec Argon2',
+      'API RESTful avec surveillance de santé',
+      'Validation des entrées et gestion des erreurs'
+    ],
+    technologies: {
+      mobile: ['Flutter 3.4+', 'Dart'],
+      'gestion d\'état': ['Flutter BLoC'],
+      backend: ['Node.js', 'Express 5'],
+      'base de données': ['MongoDB', 'Mongoose'],
+      sécurité: ['JWT', 'Argon2', 'CORS'],
+      stockage: ['Stockage Sécurisé', 'Préférences Partagées']
+    },
+    metrics: {
+      pile: 'Flutter + Node.js + MongoDB',
+      type: 'Projet Personnel',
+      plateformes: 'iOS, Android'
+    },
+    architecture: 'Full-stack avec frontend Flutter BLoC et API RESTful Express avec persistance MongoDB',
+    liveUrl: null
+  },
+  {
+    id: 17,
+    title: 'Plateforme de Gestion de Cours',
+    category: 'fullstack',
+    tags: ['Next.js', 'React', 'Strapi', 'TypeScript', 'Tailwind CSS', 'shadcn/ui'],
+    shortDescription: 'Système Moderne de Gestion d\'Apprentissage Full-Stack',
+    icon: '🎓',
+    impact: 'Gestion complète de cours avec module de suivi d\'inventaire',
+    detailedDescription: 'Système de gestion d\'apprentissage full-stack construit avec Next.js 15 et Strapi 5, avec patterns React modernes, composants serveur et module intégré de gestion d\'inventaire.',
+    features: [
+      'Gestion de contenu de cours avec Strapi CMS',
+      'Interface moderne avec shadcn/ui et composants Radix',
+      'Tableaux de données avec TanStack React Table',
+      'Tableau de bord analytique avec visualisation Recharts',
+      'Gestion de formulaires avec React Hook Form et validation Zod',
+      'Module de gestion d\'inventaire (frontend + backend)',
+      'Design responsive avec Tailwind CSS 4'
+    ],
+    technologies: {
+      frontend: ['Next.js 15', 'React 19', 'TypeScript'],
+      style: ['Tailwind CSS 4', 'shadcn/ui', 'Radix UI'],
+      backend: ['Strapi 5', 'SQLite'],
+      outils: ['TanStack React Table', 'Recharts', 'React Hook Form', 'Zod']
+    },
+    metrics: {
+      pile: 'Next.js 15 + Strapi 5',
+      type: 'Projet Personnel',
+      architecture: 'App Router avec Composants Serveur'
+    },
+    architecture: 'Next.js App Router avec React Server Components et backend headless CMS Strapi',
+    liveUrl: null
+  },
+  {
+    id: 18,
+    title: 'PaSUPER Frontend',
+    category: 'frontend',
+    tags: ['Angular', 'TypeScript', 'GraphQL', 'SSR', 'Redis', 'Moneris', 'YMME'],
+    shortDescription: 'Plateforme E-Commerce Automobile B2C/B2B — 5M+ Produits',
+    icon: '🛍️',
+    impact: 'E-commerce d\'entreprise desservant 5M+ pièces automobiles avec cache 3 couches et chargements en moins d\'une seconde',
+    detailedDescription: 'Plateforme e-commerce Angular 13 à grande échelle propulsant pasuper.com avec 188 composants, 55 services et 614 fichiers TypeScript. Cache 3 couches (mémoire frontend, cache Express SSR, Redis backend), compatibilité véhicule YMME avec décodage VIN, modes B2B/B2C doubles, paiements Moneris & PayPal, et Angular Universal SSR pour le SEO.',
+    features: [
+      'Compatibilité véhicule YMME (Année/Marque/Modèle/Moteur) avec décodage VIN et garage multi-véhicules',
+      'Questions de qualification PEDS pour correspondance précise des pièces sur 5M+ produits',
+      'Cache 3 couches : mémoire frontend, cache page Express SSR, Redis backend',
+      'Mode B2B/B2C double avec inscription entreprise, export panier et bascule confidentialité',
+      '3 méthodes de paiement : tokenisation hébergée Moneris, PayPal, facturation B2B',
+      'Suivi de livraison en temps réel via Socket.IO avec mises à jour statut commande',
+      'Angular Universal SSR avec balises méta dynamiques, Open Graph et génération sitemap',
+      'i18n complet (Français/Anglais) avec ngx-translate sur 188 composants'
+    ],
+    technologies: {
+      frontend: ['Angular 13', 'TypeScript', 'RxJS', 'NGRX'],
+      style: ['Bootstrap 4.6', 'Angular Material', 'SCSS'],
+      api: ['GraphQL', 'Apollo Angular', 'REST'],
+      paiements: ['Tokenisation Hébergée Moneris', 'PayPal', 'Facturation B2B'],
+      ssr: ['Angular Universal', 'Express SSR', 'Cache Page'],
+      'temps réel': ['Socket.IO'],
+      déploiement: ['Docker', 'Kubernetes', 'ArgoCD']
+    },
+    metrics: {
+      échelle: '614 fichiers TypeScript, 188 composants, 55 services',
+      produits: 'Catalogue 5M+ pièces automobiles',
+      cache: 'Architecture cache 3 couches',
+      paiements: 'Moneris + PayPal + facturation B2B'
+    },
+    architecture: 'Angular Universal SSR avec cache 3 couches, APIs GraphQL + REST, moteur de compatibilité véhicule YMME, et mode B2B/B2C double avec déploiement Kubernetes via ArgoCD',
+    liveUrl: 'https://pasuper.com',
+    featured: true,
+    problem: "L'entreprise avait besoin d'une plateforme e-commerce moderne capable de gérer 5M+ de pièces automobiles, des recherches de compatibilité véhicule, et des clients B2B et B2C — avec des chargements rapides malgré le catalogue massif.",
+    lesson: "La performance à grande échelle, c'est une question de stratégie de cache. Le cache à 3 couches a fait la différence entre des chargements de 5 secondes et de moins d'une seconde sur un catalogue de 5M de produits."
+  },
+  {
+    id: 19,
+    title: 'PaSUPER Backend E-Commerce',
+    category: 'backend',
+    tags: ['Strapi', 'Node.js', 'Elasticsearch', 'Redis', 'PEDS', 'Moneris', 'MySQL'],
+    shortDescription: 'Backend d\'Entreprise Propulsant 5M+ Pièces Automobiles',
+    icon: '🔧',
+    impact: 'Backend haute performance desservant 5M+ produits avec 25+ patterns de cache Redis et coalescence de requêtes',
+    detailedDescription: 'CMS headless Strapi 4 de niveau entreprise propulsant la plateforme e-commerce PaSUPER avec 41 types de contenu, Elasticsearch sur 4 indices avec réindexation complète toutes les 21 heures, 25+ patterns de clés de cache Redis (TTL de 2 min à 7 jours), intégration API PEDS traitant 500 pièces par lot en 4 flux parallèles, traitement des paiements Moneris, fulfillment ShipStation et double base de données MySQL.',
+    features: [
+      '41 types de contenu modélisant le domaine complet des pièces automobiles',
+      'Elasticsearch 8 avec 4 indices, champs search_as_you_type et autocomplétion <50ms',
+      '25+ patterns de clés de cache Redis avec TTL de 2 min à 7 jours et coalescence de requêtes',
+      'Intégration API PEDS : méga-classe de 3037 lignes, requêtes par lots (500/lot, 4 parallèles)',
+      'Cache 3 couches pièces véhicule : par page, résultats formatés, données PEDS brutes',
+      'Pré-chargement en arrière-plan des questions de qualification PEDS au chargement de page',
+      'Traitement paiements Moneris avec validation de reçus et support remboursement',
+      'Intégration XML ShipStation pour fulfillment automatisé et étiquettes d\'expédition',
+      'Double base de données MySQL (Strapi DB + superdb pour full_orders)',
+      'Réindexation complète Elasticsearch toutes les 21 heures avec swap sans interruption'
+    ],
+    technologies: {
+      backend: ['Strapi 4', 'Node.js 20', 'TypeScript', 'Koa'],
+      'base de données': ['MySQL (Double DB)', 'Elasticsearch 8', 'Redis 7'],
+      api: ['GraphQL', 'REST', 'Socket.IO'],
+      intégrations: ['Epicor ERP', 'API PEDS (Proxy Java)', 'Moneris', 'ShipStation', 'AWS SES'],
+      cloud: ['AWS S3', 'Azure Translation'],
+      déploiement: ['Docker', 'Kubernetes', 'Helm', 'ArgoCD']
+    },
+    metrics: {
+      échelle: '5M+ produits (Strapi DB + Epicor PEDS)',
+      typesContenu: '41 collections',
+      cache: '25+ patterns de cache Redis, coalescence de requêtes',
+      recherche: '4 indices Elasticsearch, autocomplétion <50ms',
+      réindexation: 'Réindexation complète toutes les 21 heures'
+    },
+    architecture: 'CMS Strapi 4 avec moteur de recherche Elasticsearch (4 indices), cache multi-couches Redis avec coalescence de requêtes, traitement parallèle par lots PEDS, double base de données MySQL et déploiement Kubernetes via ArgoCD',
     liveUrl: null
   },
 ];

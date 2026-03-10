@@ -34,7 +34,10 @@ export const projectsData: Project[] = [
       architecture: 'Dual-database microservices'
     },
     architecture: 'Microservices with dedicated geo-processing service and dual-database for performance scaling',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: 'The company was running logistics across multiple stores with spreadsheets and phone calls. Drivers had no route optimization, dispatchers had no visibility, and everything was manual.',
+    lesson: 'Building a system this large taught me that architecture decisions made in week one define your life for the next two years. Getting the dual-database split right early saved us from a painful migration later.'
   },
   {
     id: 2,
@@ -68,7 +71,10 @@ export const projectsData: Project[] = [
       architecture: 'Dual-mode with offline support'
     },
     architecture: 'Dual-mode architecture with role-based authentication and offline-first design',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: 'Delivery drivers and warehouse workers needed a single app that worked in the field — with spotty connectivity, barcode scanners, and GPS — without losing data.',
+    lesson: 'Offline-first is not an afterthought. I rebuilt the sync layer three times before getting it right. The key was treating the server as the source of truth but letting the app work independently.'
   },
   {
     id: 3,
@@ -197,7 +203,10 @@ export const projectsData: Project[] = [
       languages: 'Multi-language (FR/EN)'
     },
     architecture: 'Multi-cloud architecture with async processing pipeline',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: 'Customer calls were going unanswered after hours. The company needed 24/7 phone support in both French and English without hiring a night shift.',
+    lesson: 'Integrating multiple AI services (speech-to-text, LLM, text-to-speech) into a real-time pipeline taught me how critical latency budgets are. Every 100ms of delay makes the conversation feel unnatural.'
   },
   {
     id: 7,
@@ -258,7 +267,10 @@ export const projectsData: Project[] = [
       coverage: 'Complete business workflow'
     },
     architecture: 'Three-tier architecture with multi-platform synchronization',
-    liveUrl: null
+    liveUrl: null,
+    featured: true,
+    problem: 'A towing company was managing dispatches via radio and paper forms. They needed a digital system that could track jobs, drivers, and invoices in real-time.',
+    lesson: 'This was my first project building an entire ecosystem (mobile + web + API) from scratch. It taught me how to think in systems instead of features.'
   },
   {
     id: 9,
@@ -574,7 +586,10 @@ export const projectsData: Project[] = [
       payments: 'Moneris + PayPal + B2B billing'
     },
     architecture: 'Angular Universal SSR with 3-layer caching, GraphQL + REST APIs, YMME vehicle fitment engine, and dual B2B/B2C mode with Kubernetes deployment via ArgoCD',
-    liveUrl: 'https://pasuper.com'
+    liveUrl: 'https://pasuper.com',
+    featured: true,
+    problem: 'The company needed a modern e-commerce platform that could handle 5M+ automotive parts, vehicle fitment lookups, and both B2B and B2C customers — with fast page loads despite the massive catalog.',
+    lesson: 'Performance at scale is all about caching strategy. The 3-layer cache (frontend, SSR, Redis) was the difference between 5-second and sub-second page loads on a 5M product catalog.'
   },
   {
     id: 19,

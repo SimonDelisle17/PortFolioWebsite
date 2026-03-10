@@ -108,9 +108,9 @@ export const theme = createTheme({
           backdropFilter: 'blur(10px)',
           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
-            borderColor: 'rgba(0, 212, 255, 0.3)',
-            transform: 'translateY(-8px)',
-            boxShadow: '0 20px 60px rgba(0, 212, 255, 0.25)',
+            borderColor: 'rgba(0, 212, 255, 0.2)',
+            transform: 'translateY(-4px)',
+            boxShadow: '0 12px 40px rgba(0, 212, 255, 0.1)',
           },
         },
       },

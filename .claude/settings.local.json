@@ -10,7 +10,12 @@
       "Bash(git push:*)",
       "Bash(dir:*)",
       "Bash(copy:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(del \"c:\\\\Users\\\\Big Boss\\\\Documents\\\\github\\\\perso\\\\PortFolioWebsite\\\\me\\\\src\\\\components\\\\CustomCursor.tsx\")",
+      "Bash(del \"c:\\\\Users\\\\Big Boss\\\\Documents\\\\github\\\\perso\\\\PortFolioWebsite\\\\me\\\\src\\\\components\\\\Blog.tsx\")",
+      "Bash(del \"c:\\\\Users\\\\Big Boss\\\\Documents\\\\github\\\\perso\\\\PortFolioWebsite\\\\me\\\\src\\\\store\\\\slices\\\\themeSlice.ts\")",
+      "Bash(npm ls:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []

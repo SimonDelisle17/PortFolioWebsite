@@ -1,51 +1,29 @@
 import { useCallback } from 'react';
 import Particles from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import type { Container, Engine } from '@tsparticles/engine';
+import type { Engine } from '@tsparticles/engine';
 
 const ParticleBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    console.log('Particles loaded', container);
-  }, []);
-
   return (
     <Particles
       id="tsparticles"
       init={particlesInit}
-      loaded={particlesLoaded}
       options={{
         background: {
           color: {
             value: 'transparent',
           },
         },
-        fpsLimit: 120,
+        fpsLimit: 60,
         interactivity: {
           events: {
-            onClick: {
-              enable: true,
-              mode: 'push',
-            },
-            onHover: {
-              enable: true,
-              mode: 'repulse',
-            },
-            resize: {
-              enable: true,
-            },
-          },
-          modes: {
-            push: {
-              quantity: 4,
-            },
-            repulse: {
-              distance: 100,
-              duration: 0.4,
-            },
+            onClick: { enable: false },
+            onHover: { enable: false },
+            resize: { enable: true },
           },
         },
         particles: {
@@ -56,7 +34,7 @@ const ParticleBackground = () => {
             color: '#00d4ff',
             distance: 150,
             enable: true,
-            opacity: 0.2,
+            opacity: 0.08,
             width: 1,
           },
           move: {
@@ -66,7 +44,7 @@ const ParticleBackground = () => {
               default: 'bounce',
             },
             random: false,
-            speed: 1,
+            speed: 0.5,
             straight: false,
           },
           number: {
@@ -75,16 +53,16 @@ const ParticleBackground = () => {
               height: 800,
               width: 800,
             },
-            value: 80,
+            value: 25,
           },
           opacity: {
-            value: 0.3,
+            value: 0.12,
           },
           shape: {
             type: 'circle',
           },
           size: {
-            value: { min: 1, max: 3 },
+            value: { min: 1, max: 2 },
           },
         },
         detectRetina: true,

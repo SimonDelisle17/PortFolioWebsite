@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +19,7 @@ const About = () => {
     <Box id="about" ref={ref} sx={{ py: 10, bgcolor: 'background.paper' }}>
       <Container maxWidth="lg">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
@@ -33,27 +32,39 @@ const About = () => {
             {t('about.greeting')}
           </Typography>
 
-          <Typography variant="body1" sx={{ mb: 3, textAlign: 'center', maxWidth: '900px', mx: 'auto' }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 3, textAlign: 'center', maxWidth: '800px', mx: 'auto', color: 'text.secondary' }}
+          >
             {t('about.description1')}
           </Typography>
 
-          <Typography variant="body1" sx={{ mb: 6, textAlign: 'center', maxWidth: '900px', mx: 'auto' }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 6, textAlign: 'center', maxWidth: '800px', mx: 'auto', color: 'text.secondary' }}
+          >
             {t('about.description2')}
           </Typography>
 
           <Grid container spacing={3} sx={{ mb: 4, justifyContent: 'center' }}>
             {stats.map((stat, index) => (
               <Grid item xs={6} sm={3} md={3} key={index}>
-                <Card sx={{ textAlign: 'center' }}>
-                  <CardContent>
-                    <Typography variant="h4" color="primary" gutterBottom>
-                      {stat.value}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {stat.label}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                >
+                  <Card sx={{ textAlign: 'center' }}>
+                    <CardContent>
+                      <Typography variant="h4" color="primary" gutterBottom>
+                        {stat.value}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {stat.label}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </Grid>
             ))}
           </Grid>

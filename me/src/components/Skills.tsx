@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Box, Container, Typography, Card, CardContent, Chip } from '@mui/material';
 import { WorkHistory } from '@mui/icons-material';
@@ -13,17 +12,17 @@ const Skills = () => {
   const experiences = [
     {
       title: 'Senior Full Stack Developer / Flutter Developer / AI Engineer',
-      company: 'Pièces Auto Super',
+      company: 'Pi\u00E8ces Auto Super',
       period: '2024 - Present',
       highlight: 'Built enterprise logistics ecosystem with 600K+ lines of code, WebSocket real-time systems (90% API optimization), AI integration, 6 Flutter mobile apps, and enterprise security solutions',
-      tech: ['Flutter', 'Dart', 'Python', 'FastAPI', 'React', 'TypeScript', 'NestJS', 'Angular', 'MySQL', 'Redis', 'Docker', 'Kubernetes', 'HERE SDK', 'OpenAI', 'Azure', 'Socket.IO', 'WebSocket', 'Google ML Kit', 'Spring Boot'],
+      tech: ['Flutter', 'Python', 'FastAPI', 'React', 'TypeScript', 'NestJS', 'Angular', 'MySQL', 'Redis', 'Docker', 'Kubernetes'],
     },
     {
       title: 'Full Stack Web Developer',
       company: 'Blue Badger',
       period: '2021 - 2024',
       highlight: 'Developed Shopify e-commerce solutions for major brands with focus on performance and accessibility',
-      tech: ['React', 'Liquid', 'Node.js', 'Ruby', '.NET', 'MySQL', 'HTML', 'CSS', 'Sass', 'JavaScript', 'Shopify'],
+      tech: ['React', 'Node.js', 'Liquid', '.NET', 'MySQL', 'Shopify'],
     },
     {
       title: 'Hybrid Mobile Developer',
@@ -34,21 +33,24 @@ const Skills = () => {
     },
   ];
 
-  const languages = [
-    'Python', 'TypeScript', 'JavaScript', 'Dart', 'HTML/CSS', 'Liquid', 'C#', 'Rust',
-    'Java', 'Kotlin', 'Swift', 'SQL/MySQL', 'Bash/Shell'
+  // Core stack — what Simon is strongest at and wants to be known for
+  const coreStack = [
+    'Python', 'TypeScript', 'Dart/Flutter', 'FastAPI', 'React', 'NestJS', 'Angular'
   ];
 
-  const frameworks = [
-    'FastAPI', 'SQLAlchemy', 'Flutter', 'React', 'NestJS', 'Angular', 'Spring Boot',
-    '.NET Core 7', 'Vite', 'Express', 'Strapi', 'Docker', 'Kubernetes', 'Node.js'
+  // Secondary skills
+  const alsoExperienced = [
+    'Java', 'Spring Boot', 'C#', '.NET', 'Rust', 'Kotlin', 'Swift',
+    'Node.js', 'Express', 'Strapi', 'Docker', 'Kubernetes',
+    'MySQL', 'Redis', 'Elasticsearch', 'MongoDB', 'SQLite',
+    'Socket.IO', 'GraphQL', 'Vite', 'Sass', 'Bash/Shell'
   ];
 
   return (
     <Box id="resume" ref={ref} sx={{ py: 10, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
@@ -61,13 +63,7 @@ const Skills = () => {
           <Box sx={{ mb: 6 }}>
             <Typography
               variant="h4"
-              sx={{
-                mb: 4,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1,
-                justifyContent: 'center',
-              }}
+              sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}
             >
               <WorkHistory color="primary" />
               {t('resume.workExperience')}
@@ -76,9 +72,9 @@ const Skills = () => {
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
+                transition={{ delay: index * 0.15, duration: 0.5 }}
               >
                 <Card
                   sx={{
@@ -99,7 +95,7 @@ const Skills = () => {
                   }}
                 >
                   <CardContent sx={{ p: 4 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2, flexWrap: 'wrap', gap: 1 }}>
                       <Box>
                         <Typography variant="h5" gutterBottom sx={{ fontWeight: 700, mb: 1 }}>
                           {exp.title}
@@ -110,11 +106,7 @@ const Skills = () => {
                       </Box>
                       <Chip
                         label={exp.period}
-                        sx={{
-                          bgcolor: 'primary.main',
-                          color: '#000',
-                          fontWeight: 600,
-                        }}
+                        sx={{ bgcolor: 'primary.main', color: '#000', fontWeight: 600 }}
                       />
                     </Box>
 
@@ -132,9 +124,7 @@ const Skills = () => {
                           sx={{
                             borderColor: 'primary.main',
                             color: 'text.secondary',
-                            '&:hover': {
-                              bgcolor: 'rgba(212, 175, 55, 0.1)',
-                            }
+                            '&:hover': { bgcolor: 'rgba(212, 175, 55, 0.1)' }
                           }}
                         />
                       ))}
@@ -145,34 +135,31 @@ const Skills = () => {
             ))}
           </Box>
 
-          {/* Technical Skills */}
+          {/* Core Stack */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 1, duration: 0.6 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
           >
             <Card sx={{ mb: 4 }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" gutterBottom sx={{ fontWeight: 700, mb: 3, textAlign: 'center' }}>
-                  {t('resume.languages')}
+                  {t('skills.coreStack')}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, justifyContent: 'center' }}>
-                  {languages.map((lang, i) => (
+                  {coreStack.map((tech, i) => (
                     <Chip
                       key={i}
-                      label={lang}
+                      label={tech}
                       sx={{
-                        minWidth: '120px',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        height: '36px',
-                        bgcolor: 'rgba(255, 255, 255, 0.05)',
-                        color: 'text.secondary',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        '&:hover': {
-                          bgcolor: 'rgba(255, 255, 255, 0.08)',
-                          border: '1px solid rgba(212, 175, 55, 0.3)',
-                        }
+                        minWidth: '130px',
+                        fontSize: '1rem',
+                        fontWeight: 700,
+                        height: '42px',
+                        bgcolor: 'rgba(0, 212, 255, 0.1)',
+                        color: 'primary.main',
+                        border: '1.5px solid',
+                        borderColor: 'primary.main',
                       }}
                     />
                   ))}
@@ -181,33 +168,30 @@ const Skills = () => {
             </Card>
           </motion.div>
 
+          {/* Also Experienced With */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
           >
             <Card sx={{ mb: 4 }}>
               <CardContent sx={{ p: 4 }}>
                 <Typography variant="h5" gutterBottom sx={{ fontWeight: 700, mb: 3, textAlign: 'center' }}>
-                  {t('resume.frameworks')}
+                  {t('skills.alsoExperienced')}
                 </Typography>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, justifyContent: 'center' }}>
-                  {frameworks.map((fw, i) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, justifyContent: 'center' }}>
+                  {alsoExperienced.map((tech, i) => (
                     <Chip
                       key={i}
-                      label={fw}
+                      label={tech}
+                      size="small"
                       sx={{
-                        minWidth: '120px',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        height: '36px',
+                        fontSize: '0.85rem',
+                        fontWeight: 500,
+                        height: '32px',
                         bgcolor: 'rgba(255, 255, 255, 0.05)',
                         color: 'text.secondary',
                         border: '1px solid rgba(255, 255, 255, 0.1)',
-                        '&:hover': {
-                          bgcolor: 'rgba(255, 255, 255, 0.08)',
-                          border: '1px solid rgba(212, 175, 55, 0.3)',
-                        }
                       }}
                     />
                   ))}
@@ -216,18 +200,18 @@ const Skills = () => {
             </Card>
           </motion.div>
 
-          {/* Languages */}
+          {/* Spoken Languages */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 1.4, duration: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
           >
-            <Box sx={{ textAlign: 'center', mt: 6 }}>
+            <Box sx={{ textAlign: 'center', mt: 4 }}>
               <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
-                Languages
+                {t('skills.spokenLanguages')}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                French (Native) • English (Fluent)
+                {t('skills.spokenLanguagesValue')}
               </Typography>
             </Box>
           </motion.div>

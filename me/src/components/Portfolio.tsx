@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Box, Container, Typography, Button, CardContent, Chip } from '@mui/material';
+import { Box, Container, Typography, Button, Card, CardContent, Chip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import StarIcon from '@mui/icons-material/Star';
 import { projectsData } from '../data/projectsData';
 import { projectsDataFr } from '../data/projectsData.fr';
 import { ProjectCategory } from '../types/project';
 import { useTranslation } from 'react-i18next';
-import TiltCard from './TiltCard';
 
 const Portfolio = () => {
   const { t, i18n } = useTranslation();
@@ -29,6 +29,13 @@ const Portfolio = () => {
   const filteredProjects = activeFilter === 'all'
     ? currentProjects
     : currentProjects.filter(project => project.category === activeFilter);
+
+  // Sort featured projects first
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
+  });
 
   const handleProjectClick = (id: number) => {
     navigate(`/project/${id}`);
@@ -71,7 +78,7 @@ const Portfolio = () => {
           ))}
         </Box>
 
-        {/* Projects Grid - COMPLETELY UNIFORM */}
+        {/* Projects Grid */}
         <Box
           sx={{
             display: 'grid',
@@ -83,16 +90,51 @@ const Portfolio = () => {
             gap: 4,
           }}
         >
-          {filteredProjects.map((project, index) => (
+          {sortedProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
-              whileHover={{ y: -8 }}
               style={{ width: '100%' }}
             >
-              <TiltCard onClick={() => handleProjectClick(project.id)}>
+              <Card
+                onClick={() => handleProjectClick(project.id)}
+                sx={{
+                  cursor: 'pointer',
+                  height: '100%',
+                  position: 'relative',
+                  ...(project.featured && {
+                    borderColor: 'secondary.main',
+                    borderWidth: '2px',
+                  }),
+                }}
+              >
+                {/* Featured badge */}
+                {project.featured && (
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: 12,
+                      right: 12,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 0.5,
+                      bgcolor: 'secondary.main',
+                      color: '#000',
+                      px: 1.5,
+                      py: 0.5,
+                      borderRadius: '12px',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      zIndex: 1,
+                    }}
+                  >
+                    <StarIcon sx={{ fontSize: 14 }} />
+                    {t('portfolio.featured')}
+                  </Box>
+                )}
+
                 <CardContent
                   sx={{
                     p: 3,
@@ -211,7 +253,7 @@ const Portfolio = () => {
                       fontSize: '0.9rem',
                     }}
                   >
-                    💡 {project.impact}
+                    {project.impact}
                   </Typography>
 
                   {/* Button - Pushed to bottom */}
@@ -233,7 +275,7 @@ const Portfolio = () => {
                     </Button>
                   </Box>
                 </CardContent>
-              </TiltCard>
+              </Card>
             </motion.div>
           ))}
         </Box>
