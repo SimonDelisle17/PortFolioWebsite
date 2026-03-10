@@ -543,69 +543,76 @@ export const projectsData: Project[] = [
     id: 18,
     title: 'PaSUPER Frontend',
     category: 'frontend',
-    tags: ['Angular', 'TypeScript', 'GraphQL', 'SSR', 'Socket.IO', 'Bootstrap'],
-    shortDescription: 'B2C/B2B Automotive Parts E-Commerce Platform',
+    tags: ['Angular', 'TypeScript', 'GraphQL', 'SSR', 'Redis', 'Moneris', 'YMME'],
+    shortDescription: 'B2C/B2B Automotive E-Commerce Platform — 5M+ Products',
     icon: '🛍️',
-    impact: 'Full-featured e-commerce platform for automotive parts',
-    detailedDescription: 'Large-scale Angular e-commerce platform for automotive parts with server-side rendering, real-time features, multi-language support, and payment processing.',
+    impact: 'Enterprise e-commerce serving 5M+ automotive parts with 3-layer caching and sub-second page loads',
+    detailedDescription: 'Large-scale Angular 13 e-commerce platform powering pasuper.com with 188 components, 55 services, and 614 TypeScript files. Features 3-layer caching (frontend in-memory, Express SSR cache, backend Redis), YMME vehicle fitment with VIN decoding, dual B2B/B2C modes, Moneris & PayPal payments, and Angular Universal SSR for SEO.',
     features: [
-      'Vehicle selection (Year/Make/Model/Engine) for part fitting',
-      'Real-time inventory via Epicor ERP integration',
-      'Multi-language support (French/English)',
-      'Payment processing with Moneris and PayPal',
-      'Server-side rendering for SEO optimization',
-      'Real-time notifications with Socket.IO',
-      'GraphQL API integration with Apollo'
+      'YMME vehicle fitment (Year/Make/Model/Engine) with VIN decoding and multi-car garage',
+      'PEDS qualifying questions for precise part matching across 5M+ products',
+      '3-layer caching: frontend in-memory, Express SSR page cache, backend Redis',
+      'Dual B2B/B2C mode with enterprise registration, cart export, and privacy toggle',
+      '3 payment methods: Moneris hosted tokenization, PayPal, B2B charge-to-account',
+      'Real-time delivery tracking via Socket.IO with order status updates',
+      'Angular Universal SSR with dynamic meta tags, Open Graph, and sitemap generation',
+      'Full i18n (French/English) with ngx-translate across 188 components'
     ],
     technologies: {
-      frontend: ['Angular 13', 'TypeScript', 'RxJS'],
-      styling: ['Bootstrap 4.6', 'Angular Material'],
-      api: ['GraphQL', 'Apollo Angular'],
+      frontend: ['Angular 13', 'TypeScript', 'RxJS', 'NGRX'],
+      styling: ['Bootstrap 4.6', 'Angular Material', 'SCSS'],
+      api: ['GraphQL', 'Apollo Angular', 'REST'],
+      payments: ['Moneris Hosted Tokenization', 'PayPal', 'B2B Charge-to-Account'],
+      ssr: ['Angular Universal', 'Express SSR', 'Page Caching'],
       realtime: ['Socket.IO'],
-      ssr: ['Angular Universal', 'Express SSR'],
-      i18n: ['@ngx-translate']
+      deployment: ['Docker', 'Kubernetes', 'ArgoCD']
     },
     metrics: {
-      scale: '613 TypeScript files, 184+ components',
-      services: '56 services',
-      runtime: 'Node.js 20 SSR'
+      scale: '614 TypeScript files, 188 components, 55 services',
+      products: '5M+ automotive parts catalog',
+      caching: '3-layer cache architecture',
+      payments: 'Moneris + PayPal + B2B billing'
     },
-    architecture: 'Angular Universal SSR with GraphQL API layer and real-time WebSocket updates',
+    architecture: 'Angular Universal SSR with 3-layer caching, GraphQL + REST APIs, YMME vehicle fitment engine, and dual B2B/B2C mode with Kubernetes deployment via ArgoCD',
     liveUrl: 'https://pasuper.com'
   },
   {
     id: 19,
     title: 'PaSUPER E-Commerce Backend',
     category: 'backend',
-    tags: ['Strapi', 'Node.js', 'TypeScript', 'Elasticsearch', 'Redis', 'GraphQL', 'MySQL'],
-    shortDescription: 'Enterprise Automotive E-Commerce Backend & CMS',
+    tags: ['Strapi', 'Node.js', 'Elasticsearch', 'Redis', 'PEDS', 'Moneris', 'MySQL'],
+    shortDescription: 'Enterprise Backend Powering 5M+ Automotive Parts',
     icon: '🔧',
-    impact: 'Complete e-commerce engine powering automotive parts sales with ERP integration',
-    detailedDescription: 'Enterprise-grade Strapi-based headless CMS and e-commerce backend for automotive parts, featuring Elasticsearch-powered search, Epicor ERP integration, vehicle fitment (YMME), payment processing, and order fulfillment.',
+    impact: 'High-performance backend serving 5M+ products with 25+ Redis cache patterns and request coalescing',
+    detailedDescription: 'Enterprise-grade Strapi 4 headless CMS powering the PaSUPER e-commerce platform with 41 content types, Elasticsearch across 4 indices with full re-index every 21 hours, 25+ Redis cache key patterns (TTLs from 2 min to 7 days), PEDS API integration processing 500 parts per chunk in 4 parallel streams, Moneris payment processing, ShipStation fulfillment, and dual MySQL databases.',
     features: [
-      'Product catalog with 40+ content types for automotive parts domain',
-      'Elasticsearch-powered search with fuzzy matching and <50ms typeahead',
-      'Vehicle fitment system (Year/Make/Model/Engine) with VIN decoder',
-      'Epicor ERP integration for real-time inventory and pricing',
-      'Moneris payment gateway processing',
-      'ShipStation integration for order fulfillment and shipping',
-      'Redis caching layer with optimized connection pooling',
-      'Multi-language support (French/English) for Canadian market'
+      '41 content types modeling the full automotive parts domain',
+      'Elasticsearch 8 with 4 indices, search_as_you_type fields, and <50ms typeahead',
+      '25+ Redis cache key patterns with TTLs from 2 min to 7 days and request coalescing',
+      'PEDS API integration: 3037-line mega-class, chunked requests (500/chunk, 4 parallel)',
+      '3-layer vehicle parts cache: per-page, formatted results, raw PEDS data',
+      'Background prefetching for PEDS qualifying questions on page load',
+      'Moneris payment processing with receipt validation and refund support',
+      'ShipStation XML integration for automated order fulfillment and shipping labels',
+      'Dual MySQL databases (Strapi DB + superdb for full_orders)',
+      'Full Elasticsearch re-index every 21 hours with zero-downtime swap'
     ],
     technologies: {
       backend: ['Strapi 4', 'Node.js 20', 'TypeScript', 'Koa'],
-      database: ['MySQL', 'Elasticsearch 8', 'Redis 7'],
+      database: ['MySQL (Dual DB)', 'Elasticsearch 8', 'Redis 7'],
       api: ['GraphQL', 'REST', 'Socket.IO'],
-      integrations: ['Epicor ERP', 'PEDS API', 'Moneris', 'ShipStation', 'AWS SES'],
+      integrations: ['Epicor ERP', 'PEDS API (Java Proxy)', 'Moneris', 'ShipStation', 'AWS SES'],
       cloud: ['AWS S3', 'Azure Translation'],
-      deployment: ['Docker', 'Kubernetes', 'Helm']
+      deployment: ['Docker', 'Kubernetes', 'Helm', 'ArgoCD']
     },
     metrics: {
-      contentTypes: '40+ collections',
-      search: '<50ms typeahead with Elasticsearch',
-      scale: 'Thousands of SKUs with real-time ERP sync'
+      scale: '5M+ products (Strapi DB + Epicor PEDS)',
+      contentTypes: '41 collections',
+      caching: '25+ Redis cache patterns, request coalescing',
+      search: '4 Elasticsearch indices, <50ms typeahead',
+      reindex: 'Full re-index every 21 hours'
     },
-    architecture: 'Layered Strapi CMS with Elasticsearch search engine, Redis caching, and multi-service ERP integration',
+    architecture: 'Strapi 4 CMS with Elasticsearch search engine (4 indices), Redis multi-layer caching with request coalescing, PEDS chunked parallel processing, dual MySQL databases, and Kubernetes deployment via ArgoCD',
     liveUrl: null
   },
 ];
