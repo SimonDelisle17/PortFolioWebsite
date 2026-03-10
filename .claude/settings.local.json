@@ -7,7 +7,9 @@
       "Read(//c/Users/Big Boss/Documents/github/**)",
       "Bash(npm run dev:*)",
       "Bash(npm run build:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(dir:*)",
+      "Bash(copy:*)"
     ],
     "deny": [],
     "ask": []

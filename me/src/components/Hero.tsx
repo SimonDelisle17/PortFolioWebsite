@@ -4,6 +4,7 @@ import { LinkedIn } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useRef } from 'react';
 import ParticleBackground from './ParticleBackground';
+import logo from '../assets/logo.png';
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -250,31 +251,30 @@ const Hero = () => {
                       },
                     }}
                   >
-                    <Typography
-                      component={motion.div}
+                    <Box
+                      component={motion.img}
+                      src={logo}
+                      alt="SimonDev Inc"
                       animate={{
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                        filter: [
+                          'drop-shadow(0 0 20px rgba(0, 212, 255, 0.3))',
+                          'drop-shadow(0 0 40px rgba(0, 212, 255, 0.6))',
+                          'drop-shadow(0 0 20px rgba(0, 212, 255, 0.3))',
+                        ],
                       }}
                       transition={{
-                        duration: 5,
+                        duration: 3,
                         repeat: Infinity,
-                        ease: 'linear',
+                        ease: 'easeInOut',
                       }}
                       sx={{
-                        fontSize: '7rem',
-                        fontWeight: 900,
-                        background:
-                          'linear-gradient(135deg, #00d4ff 0%, #ffc107 50%, #00d4ff 100%)',
-                        backgroundSize: '200% auto',
-                        backgroundClip: 'text',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
+                        width: '70%',
+                        maxWidth: 350,
+                        height: 'auto',
                         position: 'relative',
                         zIndex: 1,
                       }}
-                    >
-                      SD
-                    </Typography>
+                    />
                   </Box>
                 </motion.div>
               </motion.div>

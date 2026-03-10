@@ -15,7 +15,6 @@ import {
   Button,
   Container,
   Typography,
-  Avatar,
   Snackbar,
   Alert,
 } from '@mui/material';
@@ -24,6 +23,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import { setActiveSection } from '../store/slices/navigationSlice';
 import { RootState } from '../store/store';
 import LanguageSwitcher from './LanguageSwitcher';
+import logo from '../assets/logo.png';
 
 const Navigation = () => {
   const { t } = useTranslation();
@@ -111,23 +111,23 @@ const Navigation = () => {
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Avatar
+              <Box
+                component="img"
+                src={logo}
+                alt="SimonDev Inc"
+                onClick={() => handleNavClick('home')}
                 sx={{
                   mr: 2,
-                  background: 'linear-gradient(135deg, #00d4ff, #ffc107)',
-                  color: 'background.default',
-                  fontWeight: 700,
+                  height: 45,
+                  width: 'auto',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 16px rgba(0, 212, 255, 0.3)',
-                  transition: 'box-shadow 0.3s ease',
+                  filter: 'drop-shadow(0 4px 16px rgba(0, 212, 255, 0.3))',
+                  transition: 'filter 0.3s ease',
                   '&:hover': {
-                    boxShadow: '0 8px 24px rgba(0, 212, 255, 0.5)',
+                    filter: 'drop-shadow(0 8px 24px rgba(0, 212, 255, 0.5))',
                   },
                 }}
-                onClick={() => handleNavClick('home')}
-              >
-                SD
-              </Avatar>
+              />
             </motion.div>
             <Typography
               variant="h6"
