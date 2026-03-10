@@ -409,52 +409,203 @@ export const projectsData: Project[] = [
     id: 14,
     title: 'SuperInventaire',
     category: 'mobile',
-    tags: ['Flutter', 'BLoC', 'Barcode', 'HTTP'],
-    shortDescription: 'Mobile Inventory Management',
+    tags: ['Flutter', 'BLoC', 'Barcode', 'Zebra DataWedge', 'HTTP'],
+    shortDescription: 'Enterprise Mobile Inventory Management',
     icon: '📦',
-    impact: 'Streamlined warehouse inventory operations',
-    detailedDescription: 'Flutter mobile application for warehouse inventory management with barcode scanning.',
+    impact: 'Streamlined warehouse inventory operations with Zebra device integration',
+    detailedDescription: 'Production-ready Flutter application for warehouse inventory management with enterprise barcode scanning, returns processing, and internal request workflows.',
     features: [
-      'Inventory tracking and counting',
-      'Barcode scanning for products',
-      'Real-time synchronization',
-      'User authentication',
-      'Multi-language support'
+      'Real-time inventory tracking and cycle counting',
+      'Zebra DataWedge barcode scanner integration with duplicate prevention',
+      'Returns processing (Retour) workflow',
+      'Internal request (IR) management with location scanning',
+      'Completed batches tracking with statistics dashboard',
+      'Multi-environment support (dev/prod)',
+      'First-time password change enforcement',
+      'Cross-platform support (iOS, Android, Web, Desktop)'
     ],
     technologies: {
-      mobile: ['Flutter', 'Dart'],
-      stateManagement: ['Flutter BLoC'],
-      hardware: ['Barcode Scanner']
+      mobile: ['Flutter 3.4+', 'Dart'],
+      stateManagement: ['Flutter BLoC', 'Equatable'],
+      hardware: ['Zebra DataWedge', 'Barcode Scanner'],
+      storage: ['Shared Preferences', 'Secure Storage'],
+      networking: ['HTTP Client']
     },
     metrics: {
-      version: 'v3.0'
+      version: 'v3.0.3',
+      screens: '9 screens',
+      platforms: 'iOS, Android, Web, Desktop'
     },
-    architecture: 'BLoC architecture with barcode integration',
+    architecture: 'BLoC architecture with repository pattern, Zebra device integration, and multi-environment configuration',
     liveUrl: null
   },
   {
     id: 15,
     title: 'SuperTransfer',
     category: 'mobile',
-    tags: ['Flutter', 'BLoC', 'HTTP'],
-    shortDescription: 'Store Transfer Management',
+    tags: ['Flutter', 'BLoC', 'HTTP', 'Logistics'],
+    shortDescription: 'Inter-Store Transfer & Logistics Management',
     icon: '🔄',
-    impact: 'Automated inter-store transfer operations',
-    detailedDescription: 'Flutter application for managing product transfers between store locations.',
+    impact: 'Automated inter-store transfer operations with full lifecycle tracking',
+    detailedDescription: 'Flutter application for managing product transfers between store locations with multi-transfer operations, proxy store management, and transfer run tracking.',
     features: [
-      'Transfer management between stores',
-      'Real-time synchronization',
-      'Version tracking',
-      'Comprehensive testing'
+      'Transfer creation and lifecycle management between stores',
+      'Multi-transfer bulk operations',
+      'Proxy store management for intermediate storage',
+      'Transfer run tracking with detailed summaries',
+      'Incoming and outgoing transfer views',
+      'Multi-environment support (dev/prod)',
+      'First-time password change enforcement',
+      'Comprehensive BLoC testing suite'
     ],
     technologies: {
-      mobile: ['Flutter', 'Dart'],
-      stateManagement: ['Flutter BLoC']
+      mobile: ['Flutter 3.4+', 'Dart'],
+      stateManagement: ['Flutter BLoC', 'Equatable'],
+      storage: ['Shared Preferences'],
+      networking: ['HTTP Client'],
+      testing: ['bloc_test', 'flutter_test']
     },
     metrics: {
-      version: 'v3.0'
+      version: 'v2.0.3',
+      screens: '8 screens',
+      platforms: 'iOS, Android, Web, Desktop'
     },
-    architecture: 'BLoC architecture with comprehensive testing',
+    architecture: 'BLoC architecture with repository pattern, comprehensive testing, and multi-environment configuration',
+    liveUrl: null
+  },
+  {
+    id: 16,
+    title: 'Close to the Pin',
+    category: 'fullstack',
+    tags: ['Flutter', 'Node.js', 'Express', 'MongoDB', 'JWT', 'BLoC'],
+    shortDescription: 'Golf Competition Mobile App with Backend',
+    icon: '⛳',
+    impact: 'Digital solution for managing golf closest-to-the-pin competitions',
+    detailedDescription: 'Full-stack personal project featuring a Flutter mobile app with Node.js backend for managing golf "closest to the pin" competitions with user authentication and scoring.',
+    features: [
+      'User registration and secure authentication',
+      'Game creation and management',
+      'Player scoring and leaderboard tracking',
+      'JWT-based session management',
+      'Secure password hashing with Argon2',
+      'RESTful API with health monitoring',
+      'Input validation and error handling'
+    ],
+    technologies: {
+      mobile: ['Flutter 3.4+', 'Dart'],
+      stateManagement: ['Flutter BLoC'],
+      backend: ['Node.js', 'Express 5'],
+      database: ['MongoDB', 'Mongoose'],
+      security: ['JWT', 'Argon2', 'CORS'],
+      storage: ['Secure Storage', 'Shared Preferences']
+    },
+    metrics: {
+      stack: 'Flutter + Node.js + MongoDB',
+      type: 'Personal Project',
+      platforms: 'iOS, Android'
+    },
+    architecture: 'Full-stack with Flutter BLoC frontend and Express RESTful API with MongoDB persistence',
+    liveUrl: null
+  },
+  {
+    id: 17,
+    title: 'Course Management Platform',
+    category: 'fullstack',
+    tags: ['Next.js', 'React', 'Strapi', 'TypeScript', 'Tailwind CSS', 'shadcn/ui'],
+    shortDescription: 'Modern Full-Stack Learning Management System',
+    icon: '🎓',
+    impact: 'Complete course management with inventory tracking module',
+    detailedDescription: 'Full-stack learning management system built with Next.js 15 and Strapi 5, featuring modern React patterns, server components, and an integrated inventory management module.',
+    features: [
+      'Course content management with Strapi CMS',
+      'Modern UI with shadcn/ui and Radix components',
+      'Data tables with TanStack React Table',
+      'Analytics dashboard with Recharts visualization',
+      'Form handling with React Hook Form and Zod validation',
+      'Inventory management module (frontend + backend)',
+      'Responsive design with Tailwind CSS 4'
+    ],
+    technologies: {
+      frontend: ['Next.js 15', 'React 19', 'TypeScript'],
+      styling: ['Tailwind CSS 4', 'shadcn/ui', 'Radix UI'],
+      backend: ['Strapi 5', 'SQLite'],
+      tools: ['TanStack React Table', 'Recharts', 'React Hook Form', 'Zod']
+    },
+    metrics: {
+      stack: 'Next.js 15 + Strapi 5',
+      type: 'Personal Project',
+      architecture: 'App Router with Server Components'
+    },
+    architecture: 'Next.js App Router with React Server Components and Strapi headless CMS backend',
+    liveUrl: null
+  },
+  {
+    id: 18,
+    title: 'PaSUPER Frontend',
+    category: 'frontend',
+    tags: ['Angular', 'TypeScript', 'GraphQL', 'SSR', 'Socket.IO', 'Bootstrap'],
+    shortDescription: 'B2C/B2B Automotive Parts E-Commerce Platform',
+    icon: '🛍️',
+    impact: 'Full-featured e-commerce platform for automotive parts',
+    detailedDescription: 'Large-scale Angular e-commerce platform for automotive parts with server-side rendering, real-time features, multi-language support, and payment processing.',
+    features: [
+      'Vehicle selection (Year/Make/Model/Engine) for part fitting',
+      'Real-time inventory via Epicor ERP integration',
+      'Multi-language support (French/English)',
+      'Payment processing with Moneris and PayPal',
+      'Server-side rendering for SEO optimization',
+      'Real-time notifications with Socket.IO',
+      'GraphQL API integration with Apollo'
+    ],
+    technologies: {
+      frontend: ['Angular 13', 'TypeScript', 'RxJS'],
+      styling: ['Bootstrap 4.6', 'Angular Material'],
+      api: ['GraphQL', 'Apollo Angular'],
+      realtime: ['Socket.IO'],
+      ssr: ['Angular Universal', 'Express SSR'],
+      i18n: ['@ngx-translate']
+    },
+    metrics: {
+      scale: '613 TypeScript files, 184+ components',
+      services: '56 services',
+      runtime: 'Node.js 20 SSR'
+    },
+    architecture: 'Angular Universal SSR with GraphQL API layer and real-time WebSocket updates',
+    liveUrl: 'https://pasuper.com'
+  },
+  {
+    id: 19,
+    title: 'PaSUPER E-Commerce Backend',
+    category: 'backend',
+    tags: ['Strapi', 'Node.js', 'TypeScript', 'Elasticsearch', 'Redis', 'GraphQL', 'MySQL'],
+    shortDescription: 'Enterprise Automotive E-Commerce Backend & CMS',
+    icon: '🔧',
+    impact: 'Complete e-commerce engine powering automotive parts sales with ERP integration',
+    detailedDescription: 'Enterprise-grade Strapi-based headless CMS and e-commerce backend for automotive parts, featuring Elasticsearch-powered search, Epicor ERP integration, vehicle fitment (YMME), payment processing, and order fulfillment.',
+    features: [
+      'Product catalog with 40+ content types for automotive parts domain',
+      'Elasticsearch-powered search with fuzzy matching and <50ms typeahead',
+      'Vehicle fitment system (Year/Make/Model/Engine) with VIN decoder',
+      'Epicor ERP integration for real-time inventory and pricing',
+      'Moneris payment gateway processing',
+      'ShipStation integration for order fulfillment and shipping',
+      'Redis caching layer with optimized connection pooling',
+      'Multi-language support (French/English) for Canadian market'
+    ],
+    technologies: {
+      backend: ['Strapi 4', 'Node.js 20', 'TypeScript', 'Koa'],
+      database: ['MySQL', 'Elasticsearch 8', 'Redis 7'],
+      api: ['GraphQL', 'REST', 'Socket.IO'],
+      integrations: ['Epicor ERP', 'PEDS API', 'Moneris', 'ShipStation', 'AWS SES'],
+      cloud: ['AWS S3', 'Azure Translation'],
+      deployment: ['Docker', 'Kubernetes', 'Helm']
+    },
+    metrics: {
+      contentTypes: '40+ collections',
+      search: '<50ms typeahead with Elasticsearch',
+      scale: 'Thousands of SKUs with real-time ERP sync'
+    },
+    architecture: 'Layered Strapi CMS with Elasticsearch search engine, Redis caching, and multi-service ERP integration',
     liveUrl: null
   },
 ];
