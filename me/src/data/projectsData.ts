@@ -170,34 +170,48 @@ export const projectsData: Project[] = [
   },
   {
     id: 6,
-    title: 'AI Phone Assistant',
+    title: 'PaSUPER AI — Voice & Chat',
     category: 'ai',
-    tags: ['OpenAI', 'Azure', 'Deepgram', 'Twilio', 'FastAPI'],
-    shortDescription: 'Multi-Language Conversational AI System',
+    tags: ['LangChain', 'OpenAI GPT-4o', 'FastAPI', 'Twilio', 'SSE Streaming', 'Gladia STT', 'AWS Polly', 'Kubernetes'],
+    shortDescription: 'Production Omnichannel AI — Real-Time Phone Calls & Streaming Chat for a 40K-Part Automotive Distributor',
     icon: '🤖',
-    impact: '24/7 intelligent customer support automation',
-    detailedDescription: 'AI-powered phone assistant with real-time translation, speech recognition, and natural language processing for automated customer support.',
+    impact: 'Dual-mode AI handling 24/7 inbound phone calls and live web chat in 3 languages, with real-time ERP parts lookup and ordering',
+    detailedDescription: 'Production-grade dual-mode AI system powering PaSUPER — a Canadian automotive parts distributor. The same LangChain + GPT-4o agent handles two channels: inbound Twilio phone calls with real-time speech processing, and an embeddable chat widget on the Angular storefront. Both channels share the same tools, memory, and ERP integrations — enabling a seamless omnichannel customer experience across phone and web.',
     features: [
-      'Multi-language support with real-time translation',
-      'Advanced voice recognition with multiple providers',
-      'Natural language understanding with GPT integration',
-      'Natural voice synthesis for responses',
-      'Intelligent voice activity detection',
-      'Dynamic audio processing pipeline'
+      'Voice AI: Twilio inbound calls → Silero VAD noise filtering → Gladia STT transcription → LangChain agent → AWS Polly TTS → streamed back to caller',
+      'Chat AI: Embeddable Angular widget → SSE token streaming (<200ms first token) → shared LangChain agent → real-time response',
+      'Shared LangChain agent with vehicle parts lookup (YMME) and order creation via Epicor ERP',
+      'Caller identification via Strapi CMS lookup — personalized experience per customer',
+      'Real-time call interruption: Silero VAD detects user speaking mid-response and stops playback',
+      'Human transfer with full transcript saved to S3 on handoff or failure',
+      'Chat session management: in-memory sessions (1h TTL), multi-turn memory, localStorage persistence across page refreshes',
+      'SSE streaming: tokens rendered character-by-character with typing indicator',
+      'Security: API key auth, per-IP rate limiting (30 msg/min), CORS origin whitelist',
+      '3 languages: French, English, Spanish — DTMF language menu on voice, i18n on chat',
+      'Kubernetes deployed via ArgoCD + Helm on OVH infrastructure'
     ],
     technologies: {
-      ai: ['OpenAI GPT', 'Azure Cognitive Services', 'Deepgram', 'AWS Polly'],
-      backend: ['Python', 'FastAPI'],
-      telephony: ['Twilio API', 'WebRTC'],
-      storage: ['MinIO S3'],
-      infrastructure: ['Docker']
+      ai: ['LangChain 0.3', 'OpenAI GPT-4o-mini', 'Silero VAD 5.1'],
+      speechRecognition: ['Gladia API (primary)', 'Deepgram SDK 3.10 (fallback)'],
+      speechSynthesis: ['AWS Polly (primary)', 'Azure Cognitive Services (fallback)'],
+      backend: ['Python 3.11', 'FastAPI 0.115', 'Uvicorn'],
+      telephony: ['Twilio 9.4', 'WebSocket Media Streams'],
+      integrations: ['Strapi CMS', 'Epicor ERP (Java proxy)', 'AWS S3 / MinIO'],
+      deployment: ['Docker', 'Kubernetes', 'Helm', 'ArgoCD']
     },
     metrics: {
-      availability: '24/7 operation',
-      languages: 'Multi-language (FR/EN)'
+      codebase: '40 Python files, 4,353 lines of source code',
+      firstToken: '<200ms first chat token via SSE',
+      languages: '3 languages: FR / EN / ES',
+      availability: '24/7 — stateless, scales horizontally on K8s',
+      channels: 'Voice (Twilio) + Web Chat (SSE) on single agent'
     },
-    architecture: 'Multi-cloud architecture with async processing pipeline',
-    liveUrl: null
+    architecture: 'Single FastAPI app with two pipelines (voice + chat) sharing one LangChain agent. Voice pipeline: Twilio WebSocket → Silero VAD → Gladia STT → agent → Polly TTS → Twilio. Chat pipeline: Angular widget → POST /chat/stream → SSE token stream → agent. Both pipelines call the same Epicor ERP tools for live parts data.',
+    liveUrl: null,
+    featured: true,
+    displayOrder: 0,
+    problem: 'The company was losing customers after hours — calls went unanswered, and the web store had no way to answer parts compatibility questions in real time. They needed one intelligent system that could handle both a phone call and a chat message, in French or English, and actually look up real parts data — not just give generic answers.',
+    lesson: 'Building two real-time AI pipelines that share the same agent taught me how much architecture decisions ripple outward. The SSE streaming approach for chat cut perceived latency from 3 seconds to under 200ms — not by making the AI faster, but by changing when we start sending bytes. On voice, every 100ms of pipeline latency makes the conversation feel robotic. Profiling each step (VAD → STT → LLM → TTS) was the only way to find where time was actually being lost.'
   },
   {
     id: 7,

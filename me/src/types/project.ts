@@ -16,6 +16,10 @@ export interface Project {
   };
   architecture: string;
   liveUrl: string | null;
+  featured?: boolean;
+  displayOrder?: number;
+  problem?: string;
+  lesson?: string;
 }
 
 export type ProjectCategory = 'all' | 'backend' | 'frontend' | 'mobile' | 'ai' | 'fullstack' | 'devops';
