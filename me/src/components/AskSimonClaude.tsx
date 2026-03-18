@@ -35,7 +35,7 @@ const MOCK_EN: Record<string, string> = {
   built: "19 production projects:\n• Super API — enterprise logistics backend (300K+ lines)\n• SuperApp — Flutter dual-mode for drivers & warehouse\n• PaSUPER AI — omnichannel AI: real phone calls + streaming chat in 3 languages\n• APDQ Towing — Flutter + FastAPI + React (3 stacks)\n• Kubernetes infra, parsers, cron systems, and more.",
   stack: "Core: Flutter/Dart, Python/FastAPI, Node.js/TypeScript, React, Angular.\nAI: LangChain, GPT-4o, Gladia STT, AWS Polly, SSE streaming.\nInfra: Kubernetes, Docker, ArgoCD, Redis, MySQL, Elasticsearch.",
   available: "I run SimonDev Inc and take on client projects. Reach me at info@simondelisle.dev or connect on LinkedIn.",
-  biggest: "PaSUPER AI — production omnichannel AI for a 40K-part automotive distributor. Real Twilio phone calls with voice recognition + web chat via SSE, in FR/EN/ES. Single LangChain agent, stateless, runs on Kubernetes.",
+  biggest: "PaSUPER AI — production omnichannel AI for a 5M-part automotive distributor. Real Twilio phone calls with voice recognition + web chat via SSE, in FR/EN/ES. Single LangChain agent, stateless, runs on Kubernetes.",
 };
 const MOCK_FR: Record<string, string> = {
   default: "Je suis Simon Delisle — ingénieur full-stack & IA, fondateur de SimonDev Inc. Je construis des logiciels de production pour des clients. Essayez une suggestion!",
@@ -43,7 +43,7 @@ const MOCK_FR: Record<string, string> = {
   built: "19 projets en production:\n• Super API — backend logistique (300K+ lignes)\n• SuperApp — Flutter double mode (chauffeurs & entrepôt)\n• PaSUPER IA — omnicanal: vrais appels + chat SSE en 3 langues\n• APDQ Remorquage — Flutter + FastAPI + React\n• Infra Kubernetes, parseurs, systèmes cron, et plus.",
   stack: "Cœur: Flutter/Dart, Python/FastAPI, Node.js/TypeScript, React, Angular.\nIA: LangChain, GPT-4o, Gladia STT, AWS Polly, streaming SSE.\nInfra: Kubernetes, Docker, ArgoCD, Redis, MySQL, Elasticsearch.",
   available: "Je gère SimonDev Inc et prends des projets clients. Écrivez-moi à info@simondelisle.dev ou sur LinkedIn.",
-  biggest: "PaSUPER IA — IA omnicanal pour un distributeur de 40K pièces. Vrais appels Twilio + chat SSE en FR/EN/ES. Agent LangChain unique, sans état, sur Kubernetes.",
+  biggest: "PaSUPER IA — IA omnicanal pour un distributeur de 5M pièces. Vrais appels Twilio + chat SSE en FR/EN/ES. Agent LangChain unique, sans état, sur Kubernetes.",
 };
 
 function getMock(query: string, isEn: boolean): string {

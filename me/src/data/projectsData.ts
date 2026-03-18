@@ -1,5 +1,5 @@
 import { Project, ProjectCategory } from '../types/project';
-import TOWImage from '../assets/TOW.png';
+import apdqLogo from '../assets/apdq.png';
 
 export const projectsData: Project[] = [
   {
@@ -192,7 +192,7 @@ export const projectsData: Project[] = [
     title: 'PaSUPER AI — Voice & Chat',
     category: 'ai',
     tags: ['LangChain', 'OpenAI GPT-4o', 'FastAPI', 'Twilio', 'SSE Streaming', 'Gladia STT', 'AWS Polly', 'Kubernetes'],
-    shortDescription: 'Production Omnichannel AI — Real-Time Phone Calls & Streaming Chat for a 40K-Part Automotive Distributor',
+    shortDescription: 'Production Omnichannel AI — Real-Time Phone Calls & Streaming Chat for a 5M-Part Automotive Distributor',
     icon: '🤖',
     impact: 'Dual-mode AI handling 24/7 inbound phone calls and live web chat in 3 languages, with real-time ERP parts lookup and ordering',
     detailedDescription: 'Production-grade dual-mode AI system powering PaSUPER — a Canadian automotive parts distributor. The same LangChain + GPT-4o agent handles two channels: inbound Twilio phone calls with real-time speech processing, and an embeddable chat widget on the Angular storefront. Both channels share the same tools, memory, and ERP integrations — enabling a seamless omnichannel customer experience across phone and web.',
@@ -270,40 +270,44 @@ export const projectsData: Project[] = [
   },
   {
     id: 8,
-    title: 'APDQ Towing Management',
+    title: 'APDQ — EV Safety Platform',
     category: 'fullstack',
-    tags: ['FastAPI', 'Flutter', 'React', 'TypeScript', 'Firebase', 'Celery', 'Redis', 'i18n'],
-    shortDescription: 'Three-Stack Towing Ecosystem: Flutter Mobile + FastAPI Backend + React Web Portal',
-    icon: TOWImage,
-    impact: 'Full digitization of a towing company\'s operations — three independent production stacks that communicate in real time',
-    detailedDescription: 'Built three completely separate production applications for APDQ towing operations. Stack 1: Flutter mobile app with Firebase real-time DB for driver dispatch and GPS tracking. Stack 2: FastAPI backend with Celery task queue + Redis for async job processing and heavy operations. Stack 3: React + TypeScript web portal with full i18n (French/English) for admin management. All three talk to the same MySQL database but serve completely different users.',
+    tags: ['FastAPI', 'Flutter', 'React', 'TypeScript', 'Firebase', 'Stripe', 'AWS S3', 'i18n'],
+    shortDescription: 'Electric Vehicle Safety Procedures for Towing Professionals — Three-Stack Platform',
+    icon: apdqLogo,
+    impact: 'Gives every towing professional in Québec instant access to EV deactivation and neutral engagement procedures for every electric vehicle model on the road',
+    detailedDescription: 'Built for the Association des Professionnels du Dépannage du Québec (APDQ). A three-stack platform that puts critical electric vehicle safety data into the hands of towing professionals. The Flutter app ("Remorqueur Branché") lets field workers search any EV by year/brand/model and instantly view deactivation procedures, neutral engagement steps, and timing data — all backed by PDF documentation. The FastAPI backend serves vehicle data from MySQL via async SQLAlchemy, stores procedure PDFs and vehicle images on S3, handles Stripe subscriptions for garages, and pushes notifications via Firebase. The React admin portal lets APDQ staff manage the entire EV database: upload procedure PDFs, add new models as manufacturers release them, manage garage subscriptions, and broadcast safety alerts to all towing professionals.',
     features: [
-      'Flutter mobile: real-time dispatch, GPS tracking, Firebase push notifications, offline support',
-      'FastAPI + Celery: async towing job processing, invoice generation, document handling',
-      'Redis task broker: job queuing for heavy background operations (PDF gen, email dispatch)',
-      'React admin portal: full French/English i18n with react-i18next, role-based access',
-      'Dispatch workflow: job creation → driver assignment → GPS tracking → completion → billing',
-      'Real-time GPS coordinates via Firebase Realtime Database (sub-second updates)',
-      'Document management: tow reports, damage assessments, client invoices',
-      'Multi-language support throughout all three stacks (FR/EN)'
+      'Flutter mobile ("Remorqueur Branché"): search EVs by year/brand/model, view deactivation + neutral PDFs, popular vehicles ranking, Firebase push notifications',
+      'EV safety database: every electric vehicle model with deactivation procedures, neutral engagement steps, delay timings (seconds), and vehicle identification images',
+      'PDF viewer: in-app viewing of neutral procedure and deactivation procedure documents — critical for field safety',
+      'FastAPI backend: async SQLAlchemy 2.0 + aiomysql, S3 file storage for PDFs/images, Stripe subscription management, Firebase FCM',
+      'React admin portal (MUI 6): full vehicle CRUD, PDF upload/update/delete, garage management, messaging system, subscription dashboard',
+      'Stripe integration: garage subscriptions with checkout sessions, webhook handling, billing portal, subscription status verification',
+      'Multi-tenant: Organizations → Garages → Remorqueurs hierarchy with role-based access (superadmin, admin, garage_admin, remorqueur)',
+      'Messaging system: admin-to-garage and garage-to-remorqueur broadcasts with read tracking and Firebase push delivery',
+      'Full i18n (FR/EN) across all three stacks — URL-based language routing on portal, in-app switching on mobile',
+      'Argon2 password hashing with pepper + JWT auth (24h expiry) across all clients'
     ],
     technologies: {
-      mobile: ['Flutter', 'Dart', 'Firebase Realtime DB', 'FCM Push Notifications'],
-      backend: ['FastAPI', 'Python', 'Celery', 'Redis'],
-      web: ['React', 'TypeScript', 'Material-UI', 'react-i18next'],
-      database: ['MySQL', 'Firebase'],
-      cloud: ['AWS S3', 'Azure', 'Google Cloud']
+      mobile: ['Flutter 3.4+', 'Dart', 'BLoC', 'Firebase (Analytics, Crashlytics, FCM)', 'flutter_pdfview'],
+      backend: ['FastAPI 0.110', 'Python', 'SQLAlchemy 2.0 (async)', 'aiomysql', 'Celery', 'Redis'],
+      web: ['React 18', 'TypeScript 5.6', 'MUI 6', 'Vite 6', 'i18next', 'react-router-dom 7'],
+      database: ['MySQL (async)', 'Redis'],
+      cloud: ['AWS S3 (PDFs + images)', 'Firebase Cloud Messaging'],
+      payments: ['Stripe (subscriptions, webhooks, billing portal)'],
+      security: ['Argon2 + pepper', 'JWT (HS256)', 'RBAC (4 roles)']
     },
     metrics: {
-      stacks: '3 independent production applications',
-      platforms: 'Mobile (iOS/Android) + Web Portal + REST API',
-      realtime: 'Sub-second GPS updates via Firebase',
-      i18n: 'Full French/English across all stacks'
+      stacks: '3 production stacks: Flutter mobile + FastAPI API + React portal',
+      coverage: 'Every electric vehicle model on the road with safety procedures',
+      payments: 'Stripe subscription management for garage access',
+      i18n: 'Full French/English across all three stacks'
     },
-    architecture: 'Three independent stacks sharing one MySQL database: Flutter+Firebase for mobile real-time, FastAPI+Celery+Redis for async backend processing, React+TS for web admin',
+    architecture: 'Three-stack platform sharing one async MySQL database: Flutter BLoC mobile app for field towing professionals, FastAPI backend with S3 file storage and Stripe billing, React+MUI admin portal for EV data management — all secured with Argon2+JWT auth',
     liveUrl: null,
-    problem: 'Three independent stacks (Flutter+Firebase, FastAPI+Celery+Redis, React+TypeScript) all writing to the same MySQL database with no shared migration tool. A schema change for the driver app\'s GPS table broke the admin dashboard\'s JOIN queries. Celery workers were silently retrying failed tow assignments, causing duplicate dispatches — two trucks showing up for the same call.',
-    lesson: 'Established a migration-first workflow: all schema changes go through Alembic, and both the React and Flutter apps pin to a specific API version. For Celery, switched from auto-retry to explicit acknowledgment — a tow task only marks complete after the driver app confirms via WebSocket. The strict API contract approach (OpenAPI spec as the shared artifact) let three stacks evolve independently without breaking each other.'
+    problem: 'Electric vehicles are fundamentally dangerous for towing professionals who don\'t know the exact shutdown sequence. Every EV brand has different deactivation steps, different neutral engagement procedures, and different delay timings — a wrong step on a Tesla vs. a BMW i4 can mean a high-voltage safety incident. APDQ needed a way to get this critical safety data to every remorqueur in Québec, searchable in the field, with procedure PDFs that work offline.',
+    lesson: 'The polymorphic user model (User → Garage | Remorqueur) with SQLAlchemy inheritance simplified the multi-tenant auth significantly — one JWT token, one auth middleware, role determined by user_type discriminator. The S3 file management for PDFs required cascade deletion logic: deleting a vehicle must also remove all associated neutral PDFs, deactivation PDFs, and images from S3 in a single transaction. Stripe webhook handling taught me to always verify webhook signatures and make handlers idempotent — duplicate webhook deliveries were creating double subscription records until I added session_id dedup.'
   },
   {
     id: 9,
@@ -488,7 +492,7 @@ export const projectsData: Project[] = [
     },
     architecture: 'PM2-managed dual-process Python service: fetch.py main loop + scheduler.py cron process, bridging Windows ODBC (Epicor) to MySQL via Pandas + Parquet, with FastAPI control API',
     liveUrl: null,
-    problem: 'Epicor\'s SQL Server is only accessible via Windows ODBC driver — no REST API, no replication, no change-data-capture. The pyodbc connection drops silently after 30 minutes of inactivity, and reconnection under PM2 process management on Windows creates orphaned database handles that lock tables. Downstream services (storefront, AI agent, parser) need fresh inventory data within 5 minutes, but a full table scan of 40K+ SKUs takes 12 minutes.',
+    problem: 'Epicor\'s SQL Server is only accessible via Windows ODBC driver — no REST API, no replication, no change-data-capture. The pyodbc connection drops silently after 30 minutes of inactivity, and reconnection under PM2 process management on Windows creates orphaned database handles that lock tables. Downstream services (storefront, AI agent, parser) need fresh inventory data within 5 minutes, but a full table scan of 5M+ SKUs takes 12 minutes.',
     lesson: 'Incremental sync via a modified_date column cut the 12-minute full scan to 45-second delta fetches. Parquet as the intermediate format (not CSV) preserves column types and handles NULL values without the parsing ambiguity. The PM2 recovery scripts weren\'t optional — on Windows, PM2 doesn\'t auto-restart after reboot unless you run pm2 save + pm2-startup manually. Wrote batch scripts that ops staff can double-click to restore the full pipeline without dev involvement.'
   },
   {

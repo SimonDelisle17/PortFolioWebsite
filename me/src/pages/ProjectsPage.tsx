@@ -9,6 +9,7 @@ import { projectsData } from '../data/projectsData';
 import { projectsDataFr } from '../data/projectsData.fr';
 import { ProjectCategory } from '../types/project';
 import TOWImage from '../assets/TOW.png';
+import apdqLogo from '../assets/apdq.png';
 
 const CATEGORIES: { id: ProjectCategory; en: string; fr: string }[] = [
   { id: 'all', en: 'All', fr: 'Tous' },
@@ -40,8 +41,9 @@ const ProjectsPage = () => {
   const flagship = filtered.find(p => p.displayOrder !== undefined);
   const regular = filtered.filter(p => p.displayOrder === undefined);
 
+  const isImageIcon = (icon: string) => icon === TOWImage || icon === apdqLogo || icon.includes('.png') || icon.includes('.jpg');
   const resolveIcon = (icon: string) => {
-    if (icon === TOWImage || icon.includes('.png') || icon.includes('.jpg')) return null;
+    if (isImageIcon(icon)) return null;
     return icon;
   };
 
@@ -135,7 +137,7 @@ const ProjectsPage = () => {
                 <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: { xs: 2, md: 4 }, flexWrap: 'wrap' }}>
                   <Box sx={{ flex: 1, minWidth: 0 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5, flexWrap: 'wrap' }}>
-                      <Box sx={{ fontSize: '1.8rem' }}>{flagship.icon}</Box>
+                      <Box sx={{ fontSize: '1.8rem' }}>{isImageIcon(flagship.icon) ? <Box component="img" src={flagship.icon} alt="" sx={{ width: 40, height: 40, objectFit: 'contain' }} /> : flagship.icon}</Box>
                       <Box sx={{ px: 1, py: 0.3, borderRadius: '4px', background: 'rgba(245,200,66,0.12)', border: '1px solid rgba(245,200,66,0.25)', fontSize: '0.65rem', fontWeight: 600, color: '#f5c842', letterSpacing: '0.05em', textTransform: 'uppercase', fontFamily: "'DM Sans', sans-serif" }}>
                         ⚡ {isEn ? 'Flagship' : 'Phare'}
                       </Box>
@@ -204,7 +206,9 @@ const ProjectsPage = () => {
                   >
                     {/* Icon + category */}
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                      <Box sx={{ fontSize: '1.6rem' }}>{emoji || '🔧'}</Box>
+                      <Box sx={{ fontSize: '1.6rem' }}>
+                        {emoji ? emoji : isImageIcon(project.icon) ? <Box component="img" src={project.icon} alt="" sx={{ width: 36, height: 36, objectFit: 'contain' }} /> : '🔧'}
+                      </Box>
                       <Box sx={{ px: 1, py: 0.25, borderRadius: '4px', background: `${catColor}18`, border: `1px solid ${catColor}30`, fontSize: '0.62rem', fontWeight: 600, color: catColor, letterSpacing: '0.05em', textTransform: 'uppercase', fontFamily: "'DM Sans', sans-serif" }}>
                         {project.category}
                       </Box>

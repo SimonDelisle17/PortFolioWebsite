@@ -19,7 +19,7 @@ const PHRASES_EN = [
   'writes K8s manifests at 2am.',
   'turns coffee into microservices.',
   'automates what others do by hand.',
-  'builds backends that handle 40K+ parts.',
+  'builds backends that handle 5M+ parts.',
   'makes phones answer themselves.',
   'ships 19 projects in 2 years.',
   'codes in the evening for fun.',
@@ -34,7 +34,7 @@ const PHRASES_FR = [
   "écrit des manifests K8s à 2h du matin.",
   "transforme le café en microservices.",
   "automatise ce que d'autres font à la main.",
-  "construit des backends pour 40K+ pièces.",
+  "construit des backends pour 5M+ pièces.",
   "fait répondre les téléphones tout seuls.",
   "livre 19 projets en 2 ans.",
   "code le soir pour le plaisir.",
@@ -782,8 +782,8 @@ const HomePage = () => {
                 </Typography>
                 <Typography sx={{ fontSize: '0.78rem', color: '#8c8272', lineHeight: 1.6, mb: 2 }}>
                   {isEn
-                    ? 'Omnichannel AI for a 40K-part auto distributor. Real phone calls + streaming chat, 3 languages.'
-                    : 'IA omnicanal pour un distributeur auto de 40K pièces. Appels réels + chat SSE, 3 langues.'}
+                    ? 'Omnichannel AI for a 5M-part auto distributor. Real phone calls + streaming chat, 3 languages.'
+                    : 'IA omnicanal pour un distributeur auto de 5M pièces. Appels réels + chat SSE, 3 langues.'}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.6 }}>
                   {['LangChain', 'GPT-4o', 'FastAPI', 'Twilio'].map((t) => (
@@ -803,15 +803,15 @@ const HomePage = () => {
                 </Box>
                 <Box component="img" src={apdqLogo} alt="APDQ" sx={{ width: 36, height: 36, objectFit: 'contain', display: 'block', mb: 0.5 }} />
                 <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '1.1rem', fontWeight: 600, color: '#f0ece4', lineHeight: 1.3, mb: 1 }}>
-                  {isEn ? 'APDQ — Towing Management' : 'APDQ — Gestion Remorquage'}
+                  {isEn ? 'APDQ — EV Safety Platform' : 'APDQ — Sécurité VÉ'}
                 </Typography>
                 <Typography sx={{ fontSize: '0.82rem', color: '#f5c842', lineHeight: 1.4, mb: 1, fontFamily: "'DM Sans', sans-serif", fontWeight: 500 }}>
                   Association des Professionnels du Dépannage du Québec
                 </Typography>
                 <Typography sx={{ fontSize: '0.78rem', color: '#8c8272', lineHeight: 1.6, mb: 2 }}>
                   {isEn
-                    ? 'Three-stack ecosystem: Flutter mobile + FastAPI backend + React portal. Real-time GPS dispatch.'
-                    : 'Écosystème trois stacks : Flutter mobile + FastAPI backend + portail React. Dispatch GPS temps réel.'}
+                    ? 'EV deactivation & neutral procedures for every electric vehicle. Flutter app + FastAPI + React portal.'
+                    : 'Procédures de désactivation et mise au neutre pour chaque VÉ. App Flutter + FastAPI + portail React.'}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.6 }}>
                   {['Flutter', 'FastAPI', 'React', 'Firebase'].map((t) => (

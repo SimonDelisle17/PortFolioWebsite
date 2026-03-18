@@ -1,5 +1,5 @@
 import { Project } from '../types/project';
-import TOWImage from '../assets/TOW.png';
+import apdqLogo from '../assets/apdq.png';
 
 export const projectsDataFr: Project[] = [
   {
@@ -192,7 +192,7 @@ export const projectsDataFr: Project[] = [
     title: 'PaSUPER IA — Voix & Chat',
     category: 'ai',
     tags: ['LangChain', 'OpenAI GPT-4o', 'FastAPI', 'Twilio', 'SSE Streaming', 'Gladia STT', 'AWS Polly', 'Kubernetes'],
-    shortDescription: 'IA Omnicanale en Production — Appels Téléphoniques & Chat Temps Réel pour un Distributeur Auto de 40K Pièces',
+    shortDescription: 'IA Omnicanale en Production — Appels Téléphoniques & Chat Temps Réel pour un Distributeur Auto de 5M Pièces',
     icon: '🤖',
     impact: 'IA bi-mode gérant les appels entrants 24/7 et le chat web en 3 langues, avec recherche de pièces ERP en temps réel',
     detailedDescription: 'Système IA bi-mode en production propulsant PaSUPER — un distributeur canadien de pièces automobiles. Le même agent LangChain + GPT-4o gère deux canaux : les appels Twilio entrants avec traitement vocal temps réel, et un widget de chat intégrable dans la boutique Angular. Les deux canaux partagent les mêmes outils, la même mémoire et les mêmes intégrations ERP — offrant une expérience omnicanale fluide entre téléphone et web.',
@@ -270,40 +270,44 @@ export const projectsDataFr: Project[] = [
   },
   {
     id: 8,
-    title: 'Gestion Remorquage APDQ',
+    title: 'APDQ — Plateforme Sécurité VÉ',
     category: 'fullstack',
-    tags: ['FastAPI', 'Flutter', 'React', 'TypeScript', 'Firebase', 'Celery', 'Redis', 'i18n'],
-    shortDescription: 'Écosystème Remorquage Trois Stacks : Flutter Mobile + Backend FastAPI + Portail React',
-    icon: TOWImage,
-    impact: 'Digitalisation complète des opérations d\'une entreprise de remorquage — trois stacks de production indépendants qui communiquent en temps réel',
-    detailedDescription: 'Trois applications de production complètement séparées construites pour les opérations APDQ. Stack 1 : app mobile Flutter avec Firebase Realtime DB pour dispatch chauffeur et suivi GPS. Stack 2 : backend FastAPI avec queue de tâches Celery + Redis pour traitement asynchrone. Stack 3 : portail web React + TypeScript avec i18n complet (français/anglais) pour gestion admin. Les trois parlent à la même base MySQL mais servent des utilisateurs complètement différents.',
+    tags: ['FastAPI', 'Flutter', 'React', 'TypeScript', 'Firebase', 'Stripe', 'AWS S3', 'i18n'],
+    shortDescription: 'Procédures de Sécurité Véhicules Électriques pour Professionnels du Remorquage — Plateforme Trois Stacks',
+    icon: apdqLogo,
+    impact: 'Donne à chaque professionnel du remorquage au Québec un accès instantané aux procédures de désactivation et de mise au neutre pour chaque modèle de véhicule électrique sur la route',
+    detailedDescription: 'Construit pour l\'Association des Professionnels du Dépannage du Québec (APDQ). Une plateforme trois stacks qui met les données critiques de sécurité des véhicules électriques dans les mains des remorqueurs. L\'app Flutter ("Remorqueur Branché") permet aux travailleurs terrain de chercher n\'importe quel VÉ par année/marque/modèle et de consulter instantanément les procédures de désactivation, les étapes de mise au neutre et les données de chronométrage — le tout appuyé par de la documentation PDF. Le backend FastAPI sert les données véhicules depuis MySQL via SQLAlchemy async, stocke les PDFs de procédures et images véhicules sur S3, gère les abonnements Stripe pour les garages et pousse des notifications via Firebase. Le portail admin React permet au personnel APDQ de gérer toute la base de données VÉ : téléverser des PDFs de procédures, ajouter de nouveaux modèles à leur sortie, gérer les abonnements garages et diffuser des alertes de sécurité à tous les remorqueurs.',
     features: [
-      'Flutter mobile : dispatch temps réel, suivi GPS, notifications push Firebase, support hors ligne',
-      'FastAPI + Celery : traitement asynchrone des missions de remorquage, génération factures, gestion documents',
-      'Broker de tâches Redis : file d\'attente pour opérations lourdes (génération PDF, envoi email)',
-      'Portail admin React : i18n français/anglais complet avec react-i18next, accès basé sur les rôles',
-      'Workflow dispatch : création mission → affectation chauffeur → suivi GPS → complétion → facturation',
-      'Coordonnées GPS temps réel via Firebase Realtime Database (mises à jour sub-seconde)',
-      'Gestion documents : rapports de remorquage, évaluations dommages, factures clients',
-      'Support multilingue sur les trois stacks (FR/EN)'
+      'App Flutter ("Remorqueur Branché") : recherche VÉ par année/marque/modèle, affichage PDFs désactivation + neutre, classement véhicules populaires, notifications push Firebase',
+      'Base de données sécurité VÉ : chaque modèle de véhicule électrique avec procédures de désactivation, étapes de mise au neutre, chronométrages (secondes), et images d\'identification du véhicule',
+      'Visionneuse PDF : consultation in-app des documents de procédure neutre et désactivation — critique pour la sécurité terrain',
+      'Backend FastAPI : SQLAlchemy 2.0 async + aiomysql, stockage fichiers S3 pour PDFs/images, gestion abonnements Stripe, Firebase FCM',
+      'Portail admin React (MUI 6) : CRUD véhicules complet, upload/mise à jour/suppression PDFs, gestion garages, système de messagerie, tableau de bord abonnements',
+      'Intégration Stripe : abonnements garages avec sessions de paiement, gestion webhooks, portail facturation, vérification statut abonnement',
+      'Multi-tenant : hiérarchie Organisations → Garages → Remorqueurs avec accès basé sur les rôles (superadmin, admin, garage_admin, remorqueur)',
+      'Système de messagerie : diffusions admin-vers-garage et garage-vers-remorqueur avec suivi de lecture et livraison push Firebase',
+      'i18n complet (FR/EN) sur les trois stacks — routage URL par langue sur le portail, bascule in-app sur mobile',
+      'Hachage Argon2 avec pepper + auth JWT (expiration 24h) sur tous les clients'
     ],
     technologies: {
-      mobile: ['Flutter', 'Dart', 'Firebase Realtime DB', 'FCM Notifications Push'],
-      backend: ['FastAPI', 'Python', 'Celery', 'Redis'],
-      web: ['React', 'TypeScript', 'Material-UI', 'react-i18next'],
-      database: ['MySQL', 'Firebase'],
-      cloud: ['AWS S3', 'Azure', 'Google Cloud']
+      mobile: ['Flutter 3.4+', 'Dart', 'BLoC', 'Firebase (Analytics, Crashlytics, FCM)', 'flutter_pdfview'],
+      backend: ['FastAPI 0.110', 'Python', 'SQLAlchemy 2.0 (async)', 'aiomysql', 'Celery', 'Redis'],
+      web: ['React 18', 'TypeScript 5.6', 'MUI 6', 'Vite 6', 'i18next', 'react-router-dom 7'],
+      database: ['MySQL (async)', 'Redis'],
+      cloud: ['AWS S3 (PDFs + images)', 'Firebase Cloud Messaging'],
+      paiements: ['Stripe (abonnements, webhooks, portail facturation)'],
+      sécurité: ['Argon2 + pepper', 'JWT (HS256)', 'RBAC (4 rôles)']
     },
     metrics: {
-      stacks: '3 applications de production indépendantes',
-      plateformes: 'Mobile (iOS/Android) + Portail Web + API REST',
-      realtime: 'Mises à jour GPS sub-secondes via Firebase',
-      i18n: 'Français/Anglais complet sur tous les stacks'
+      stacks: '3 stacks production : Flutter mobile + API FastAPI + portail React',
+      couverture: 'Chaque modèle de véhicule électrique sur la route avec procédures de sécurité',
+      paiements: 'Gestion abonnements Stripe pour accès garages',
+      i18n: 'Français/Anglais complet sur les trois stacks'
     },
-    architecture: 'Trois stacks indépendants partageant une base MySQL : Flutter+Firebase pour le mobile temps réel, FastAPI+Celery+Redis pour le backend async, React+TS pour l\'admin web',
+    architecture: 'Plateforme trois stacks partageant une base MySQL async : app mobile Flutter BLoC pour remorqueurs terrain, backend FastAPI avec stockage fichiers S3 et facturation Stripe, portail admin React+MUI pour gestion données VÉ — le tout sécurisé avec auth Argon2+JWT',
     liveUrl: null,
-    problem: 'Trois stacks indépendants (Flutter+Firebase, FastAPI+Celery+Redis, React+TypeScript) écrivant tous dans la même base MySQL sans outil de migration partagé. Un changement de schéma pour la table GPS de l\'app chauffeur a cassé les requêtes JOIN du dashboard admin. Les workers Celery relançaient silencieusement les assignations de remorquage échouées, causant des dispatches en double — deux camions se présentant pour le même appel.',
-    lesson: 'Établissement d\'un workflow migration-first : tous les changements de schéma passent par Alembic, et les apps React et Flutter épinglent une version API spécifique. Pour Celery, passage du auto-retry à l\'acquittement explicite — une tâche de remorquage ne se marque complète qu\'après confirmation du chauffeur via WebSocket. L\'approche de contrat API strict (spec OpenAPI comme artifact partagé) a permis aux trois stacks d\'évoluer indépendamment sans se casser mutuellement.'
+    problem: 'Les véhicules électriques sont fondamentalement dangereux pour les remorqueurs qui ne connaissent pas la séquence exacte d\'arrêt. Chaque marque de VÉ a des étapes de désactivation différentes, des procédures de mise au neutre différentes et des chronométrages différents — une mauvaise manipulation sur une Tesla vs. une BMW i4 peut signifier un incident de sécurité haute tension. L\'APDQ avait besoin d\'un moyen de rendre ces données critiques accessibles à chaque remorqueur au Québec, cherchables sur le terrain, avec des PDFs de procédures consultables hors ligne.',
+    lesson: 'Le modèle utilisateur polymorphique (User → Garage | Remorqueur) avec héritage SQLAlchemy a simplifié significativement l\'auth multi-tenant — un seul token JWT, un seul middleware auth, rôle déterminé par le discriminateur user_type. La gestion de fichiers S3 pour les PDFs a nécessité une logique de suppression en cascade : supprimer un véhicule doit aussi supprimer tous les PDFs neutre, PDFs désactivation et images associés de S3 dans une seule transaction. La gestion des webhooks Stripe m\'a appris à toujours vérifier les signatures webhook et rendre les handlers idempotents — les livraisons webhook en double créaient des enregistrements d\'abonnement en double jusqu\'à l\'ajout de la dédup par session_id.'
   },
   {
     id: 9,
@@ -488,7 +492,7 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Service Python double-processus géré PM2 : boucle principale fetch.py + processus cron scheduler.py, bridgeant ODBC Windows (Epicor) vers MySQL via Pandas + Parquet, avec API de contrôle FastAPI',
     liveUrl: null,
-    problem: 'Le SQL Server d\'Epicor n\'est accessible que via le driver ODBC Windows — pas de REST API, pas de réplication, pas de change-data-capture. La connexion pyodbc tombe silencieusement après 30 minutes d\'inactivité, et la reconnexion sous gestion de processus PM2 sur Windows crée des handles de base de données orphelins qui verrouillent les tables. Les services en aval (vitrine, agent IA, parser) ont besoin de données d\'inventaire fraîches sous 5 minutes, mais un scan complet de 40K+ SKUs prend 12 minutes.',
+    problem: 'Le SQL Server d\'Epicor n\'est accessible que via le driver ODBC Windows — pas de REST API, pas de réplication, pas de change-data-capture. La connexion pyodbc tombe silencieusement après 30 minutes d\'inactivité, et la reconnexion sous gestion de processus PM2 sur Windows crée des handles de base de données orphelins qui verrouillent les tables. Les services en aval (vitrine, agent IA, parser) ont besoin de données d\'inventaire fraîches sous 5 minutes, mais un scan complet de 5M+ SKUs prend 12 minutes.',
     lesson: 'La sync incrémentale via une colonne modified_date a réduit le scan complet de 12 minutes à des fetches delta de 45 secondes. Parquet comme format intermédiaire (pas CSV) préserve les types de colonnes et gère les valeurs NULL sans l\'ambiguïté du parsing. Les scripts de récupération PM2 n\'étaient pas optionnels — sur Windows, PM2 ne redémarre pas automatiquement après reboot à moins d\'exécuter pm2 save + pm2-startup manuellement. Écriture de scripts batch que le personnel d\'exploitation peut double-cliquer pour restaurer le pipeline complet sans intervention dev.'
   },
   {
