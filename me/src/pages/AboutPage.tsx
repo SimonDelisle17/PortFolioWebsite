@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InnerPageLayout from '../components/InnerPageLayout';
 import mePhoto from '../assets/me.jpg';
+import simondevLogo from '../assets/simondev_transparent.png';
 
 const MILESTONES_EN = [
   { year: '2021', event: 'First developer role — Shopify e-commerce at Blue Badger' },
@@ -26,7 +27,7 @@ const MILESTONES_FR = [
 const STATS = [
   { value: '19', label: { en: 'Projects shipped', fr: 'Projets livrés' } },
   { value: '5+', label: { en: 'Years in production', fr: 'Ans en production' } },
-  { value: '300K+', label: { en: 'Lines of code', fr: 'Lignes de code' } },
+  { value: '1M+', label: { en: 'Lines of code', fr: 'Lignes de code' } },
   { value: '2', label: { en: 'Languages spoken', fr: 'Langues parlées' } },
 ];
 
@@ -54,23 +55,30 @@ const AboutPage = () => {
             mb: { xs: 5, md: 6 },
           }}
         >
-          {/* Photo */}
+          {/* Photo + logo */}
           <motion.div {...fade(0.05)}>
-            <Box
-              sx={{
-                width: { xs: 120, md: 180 },
-                height: { xs: 120, md: 180 },
-                borderRadius: '16px',
-                overflow: 'hidden',
-                border: '1px solid rgba(245,200,66,0.15)',
-                flexShrink: 0,
-              }}
-            >
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
+              <Box
+                sx={{
+                  width: { xs: 120, md: 180 },
+                  height: { xs: 120, md: 180 },
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(245,200,66,0.15)',
+                }}
+              >
+                <Box
+                  component="img"
+                  src={mePhoto}
+                  alt="Simon Claude Delisle"
+                  sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </Box>
               <Box
                 component="img"
-                src={mePhoto}
-                alt="Simon Claude Delisle"
-                sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                src={simondevLogo}
+                alt="SimonDev Inc"
+                sx={{ width: { xs: 90, md: 200 }, height: 'auto', display: 'block', opacity: 0.92 }}
               />
             </Box>
           </motion.div>
