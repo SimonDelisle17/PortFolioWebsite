@@ -70,7 +70,7 @@ const AboutPage = () => {
                 <Box
                   component="img"
                   src={mePhoto}
-                  alt="Simon Claude Delisle"
+                  alt="Simon Delisle"
                   sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </Box>

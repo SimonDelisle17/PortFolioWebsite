@@ -65,7 +65,7 @@ const InnerPageLayout = ({ children, title }: InnerPageLayoutProps) => {
               display: { xs: 'none', sm: 'block' },
             }}
           >
-            Simon Claude Delisle
+            Simon Delisle
           </Typography>
           <Typography
             sx={{

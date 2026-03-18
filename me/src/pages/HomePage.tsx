@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
@@ -7,6 +7,7 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import mePhoto from '../assets/me.jpg';
+import simondevLogo from '../assets/simondev_transparent.png';
 
 // ─── Typewriter ───────────────────────────────────────────────────────────────
 const PHRASES_EN = [
@@ -235,65 +236,6 @@ const StarBackground = () => (
   </Box>
 );
 
-// ─── "Claude" easter egg tooltip ─────────────────────────────────────────────
-const ClaudeWord = () => {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <Box
-      component="span"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      sx={{ position: 'relative', cursor: 'help' }}
-    >
-      <Box
-        component="span"
-        sx={{
-          borderBottom: '1px dotted rgba(245, 200, 66, 0.5)',
-          transition: 'border-color 0.15s',
-          '&:hover': { borderColor: '#f5c842' },
-        }}
-      >
-        Claude
-      </Box>
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 4, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
-            style={{
-              position: 'absolute',
-              bottom: '100%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              marginBottom: 6,
-              pointerEvents: 'none',
-              zIndex: 100,
-            }}
-          >
-            <Box
-              sx={{
-                background: '#1e1b17',
-                border: '1px solid rgba(245, 200, 66, 0.3)',
-                borderRadius: '8px',
-                px: 1.5,
-                py: 0.75,
-                fontSize: '0.72rem',
-                color: '#f5c842',
-                whiteSpace: 'nowrap',
-                fontFamily: "'DM Sans', sans-serif",
-                boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-              }}
-            >
-              Named before it was cool 🤖
-            </Box>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Box>
-  );
-};
 
 // ─── Main HomePage ────────────────────────────────────────────────────────────
 const HomePage = () => {
@@ -372,23 +314,67 @@ const HomePage = () => {
         >
           <BentoCard delay={0.05} sx={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
             <Box sx={{ p: { xs: 3, md: 5 }, pt: { xs: 3, md: 4 } }}>
-              {/* Name */}
-              <Typography
-                variant="h1"
+              {/* Name + logo lockup */}
+              <Box
                 sx={{
-                  fontFamily: "'Fraunces', Georgia, serif",
-                  fontSize: { xs: '2.8rem', sm: '3.8rem', md: '5.5rem', lg: '6.5rem' },
-                  fontWeight: 700,
-                  color: '#f0ece4',
-                  lineHeight: 1.0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: { xs: 2, md: 3 },
                   mb: 1.5,
-                  letterSpacing: '-0.03em',
+                  flexWrap: { xs: 'wrap', sm: 'nowrap' },
                 }}
               >
-                Simon{' '}
-                <ClaudeWord />{' '}
-                Delisle
-              </Typography>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontFamily: "'Fraunces', Georgia, serif",
+                    fontSize: { xs: '2.8rem', sm: '3.8rem', md: '5.5rem', lg: '6.5rem' },
+                    fontWeight: 700,
+                    color: '#f0ece4',
+                    lineHeight: 1.0,
+                    letterSpacing: '-0.03em',
+                    flexShrink: 0,
+                  }}
+                >
+                  Simon Delisle
+                </Typography>
+
+                {/* Thin amber rule */}
+                <Box
+                  sx={{
+                    width: '1px',
+                    height: { sm: '44px', md: '60px', lg: '72px' },
+                    background: 'linear-gradient(to bottom, transparent, rgba(245,200,66,0.5), transparent)',
+                    flexShrink: 0,
+                    display: { xs: 'none', sm: 'block' },
+                  }}
+                />
+
+                {/* SimonDev Inc logo */}
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  sx={{
+                    display: { xs: 'none', sm: 'block' },
+                    flexShrink: 0,
+                    transition: 'filter 0.2s, opacity 0.2s',
+                    opacity: 0.85,
+                    '&:hover': {
+                      opacity: 1,
+                      filter: 'drop-shadow(0 0 10px rgba(245,200,66,0.25))',
+                    },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={simondevLogo}
+                    alt="SimonDev Inc"
+                    sx={{ width: { sm: 110, md: 150, lg: 200 }, height: 'auto', display: 'block' }}
+                  />
+                </Box>
+              </Box>
 
               {/* Subtitle + typewriter */}
               <Typography
@@ -670,7 +656,7 @@ const HomePage = () => {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  simon.delisle2025@gmail.com
+                  info@simondelisle.dev
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1, mt: 1.5, flexWrap: 'wrap' }}>
                   {[

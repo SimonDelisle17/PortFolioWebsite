@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import InnerPageLayout from '../components/InnerPageLayout';
 
-const EMAIL = 'simon.delisle2025@gmail.com';
+const EMAIL = 'info@simondelisle.dev';
 const LINKEDIN = 'https://www.linkedin.com/in/simon-d2088/';
 const GITHUB = 'https://github.com/SimonPasuper';
 

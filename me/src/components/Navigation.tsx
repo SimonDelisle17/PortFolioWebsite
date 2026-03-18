@@ -58,7 +58,7 @@ const Navigation = () => {
   };
 
   const handleContactClick = () => {
-    navigator.clipboard.writeText('simon.delisle2025@gmail.com');
+    navigator.clipboard.writeText('info@simondelisle.dev');
     setSnackbarOpen(true);
   };
 
