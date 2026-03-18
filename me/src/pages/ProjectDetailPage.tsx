@@ -111,6 +111,27 @@ const ProjectDetailPage = () => {
           </Box>
         </motion.div>
 
+        {/* The Problem — case study section */}
+        {project.problem && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+          >
+            <Card sx={{ mb: 4, borderLeft: '3px solid', borderLeftColor: 'primary.main', borderTop: 'none', borderRight: 'none', borderBottom: 'none' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box component="span" sx={{ fontSize: '1.4rem' }}>🔍</Box>
+                  {t('projectDetail.theProblem')}
+                </Typography>
+                <Typography variant="body1" sx={{ fontStyle: 'italic', color: 'text.secondary', lineHeight: 1.8 }}>
+                  {project.problem}
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+
         {/* Description */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -282,6 +303,27 @@ const ProjectDetailPage = () => {
             </CardContent>
           </Card>
         </motion.div>
+
+        {/* What I Learned — case study section */}
+        {project.lesson && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            <Card sx={{ mt: 4, borderLeft: '3px solid', borderLeftColor: 'secondary.main', borderTop: 'none', borderRight: 'none', borderBottom: 'none' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box component="span" sx={{ fontSize: '1.4rem' }}>💡</Box>
+                  {t('projectDetail.whatILearned')}
+                </Typography>
+                <Typography variant="body1" sx={{ lineHeight: 1.8, color: 'text.secondary' }}>
+                  {project.lesson}
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
 
         {/* Back Button */}
         <Box sx={{ textAlign: 'center', mt: 6 }}>

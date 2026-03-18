@@ -58,6 +58,8 @@ export const fr = {
     metrics: "Métriques d'Impact",
     architecture: 'Architecture',
     visitWebsite: 'Visiter le Site',
+    theProblem: 'Le Problème',
+    whatILearned: "Ce que j'ai Appris",
   },
   resume: {
     title: 'CV',

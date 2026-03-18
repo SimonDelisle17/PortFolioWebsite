@@ -37,8 +37,8 @@ const ContactPage = () => {
           </Typography>
           <Typography sx={{ fontSize: '0.9rem', color: '#8c8272', mb: 4 }}>
             {isEn
-              ? "I'm full-time at PA Super but always open to interesting conversations."
-              : "Je suis à temps plein chez PA Super, mais toujours ouvert aux conversations intéressantes."}
+              ? "Founder of SimonDev Inc — I build production software for clients. Open to new projects."
+              : "Fondateur de SimonDev Inc — je construis des logiciels de production pour des clients. Ouvert à de nouveaux projets."}
           </Typography>
         </motion.div>
 

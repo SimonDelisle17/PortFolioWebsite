@@ -9,12 +9,12 @@ import IconButton from '@mui/material/IconButton';
 const ANSWERS_EN: Record<string, string> = {
   default:
     "I'm Simon Claude Delisle — a full-stack & AI engineer based in Québec. I build production software: logistics platforms, Flutter mobile apps, and AI systems. Try one of the suggestions above!",
-  who: "Simon Claude Delisle. Full-stack engineer at PA Super. I design and ship complete software systems — from Flutter warehouse apps used daily by field workers to AI phone assistants handling real customer calls. The 'Claude' in my name? Named before it was cool 🤖",
+  who: "Simon Claude Delisle. Founder of SimonDev Inc — I design and ship complete production software systems for clients. Flutter warehouse apps, AI phone assistants, logistics backends. The 'Claude' in my name is my Catholic name — a Québec tradition. The AI coincidence is one I've accepted. 🤖",
   built: "19 production projects over 4 years:\n• Super API Ecosystem — enterprise logistics backend (300K+ lines)\n• SuperApp Mobile — Flutter dual-mode app for drivers & warehouse\n• PaSUPER AI — omnichannel AI: real phone calls + streaming chat\n• APDQ Towing System — Flutter + FastAPI + React (3 stacks)\n• Kubernetes infrastructure, parsers, cron systems, and more.",
   stack:
     "Core: Flutter / Dart, Python / FastAPI, Node.js / TypeScript, React, Angular.\nAI: LangChain, OpenAI GPT-4o, Gladia STT, AWS Polly, SSE streaming.\nInfra: Kubernetes, Docker, ArgoCD, Redis, PostgreSQL, MySQL.\nTools: Helm, Prometheus, Celery, Elasticsearch, Twilio.",
   available:
-    "I'm currently employed full-time at PA Super, but I'm open to interesting conversations. Send me a message at simon.delisle2025@gmail.com or connect on LinkedIn.",
+    "I run SimonDev Inc and take on client projects. If you have something interesting to build, reach out at simon.delisle2025@gmail.com or connect on LinkedIn.",
   biggest:
     "The PaSUPER AI system — a production omnichannel AI for a 40,000-part automotive distributor. It handles real Twilio phone calls with voice recognition (Gladia STT + AWS Polly) AND web chat via Server-Sent Events, in French, English, and Spanish. Single LangChain agent, stateless, runs on Kubernetes. 4,353 lines across 40 Python files.",
 };
@@ -22,13 +22,13 @@ const ANSWERS_EN: Record<string, string> = {
 const ANSWERS_FR: Record<string, string> = {
   default:
     "Je suis Simon Claude Delisle — ingénieur full-stack & IA basé au Québec. Je construis des logiciels en production : plateformes logistiques, apps mobiles Flutter et systèmes IA. Essayez une des suggestions!",
-  who: "Simon Claude Delisle. Ingénieur full-stack chez PA Super. Je conçois et livre des systèmes logiciels complets — des apps Flutter utilisées quotidiennement sur le terrain aux assistants IA qui gèrent de vrais appels. Le 'Claude' dans mon nom? Nommé avant que ce soit à la mode 🤖",
+  who: "Simon Claude Delisle. Fondateur de SimonDev Inc — je conçois et livre des systèmes logiciels de production pour des clients. Apps Flutter, assistants IA, backends logistiques. «Claude» est mon nom catholique — une tradition québécoise. La coïncidence avec l'IA, j'ai arrêté de l'expliquer. 🤖",
   built:
     "19 projets en production en 4 ans:\n• Super API Ecosystem — backend logistique (300K+ lignes)\n• SuperApp Mobile — app Flutter double mode (livreurs & entrepôt)\n• PaSUPER IA — IA omnicanal: vrais appels + chat SSE\n• Système de remorquage APDQ — Flutter + FastAPI + React\n• Infrastructure Kubernetes, parseurs, systèmes cron, et plus.",
   stack:
     "Cœur: Flutter / Dart, Python / FastAPI, Node.js / TypeScript, React, Angular.\nIA: LangChain, OpenAI GPT-4o, Gladia STT, AWS Polly, streaming SSE.\nInfra: Kubernetes, Docker, ArgoCD, Redis, PostgreSQL, MySQL.\nOutils: Helm, Prometheus, Celery, Elasticsearch, Twilio.",
   available:
-    "Je suis actuellement en poste à temps plein chez PA Super, mais je suis ouvert aux conversations intéressantes. Écrivez-moi à simon.delisle2025@gmail.com ou connectez-vous sur LinkedIn.",
+    "Je gère SimonDev Inc et prends des projets clients. Si vous avez quelque chose d'intéressant à construire, écrivez-moi à simon.delisle2025@gmail.com ou connectez-vous sur LinkedIn.",
   biggest:
     "Le système PaSUPER IA — une IA omnicanal en production pour un distributeur automobile de 40 000 pièces. Il gère de vrais appels Twilio avec reconnaissance vocale (Gladia STT + AWS Polly) ET le chat web via Server-Sent Events, en français, anglais et espagnol. Agent LangChain unique, sans état, tourne sur Kubernetes. 4 353 lignes dans 40 fichiers Python.",
 };

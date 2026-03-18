@@ -23,12 +23,12 @@ const ALSO_USED = [
 
 const EXPERIENCE = [
   {
-    company: 'Pièces Auto Super',
-    role: { en: 'Senior Full-Stack / Flutter / AI Engineer', fr: 'Ingénieur Senior Full-Stack / Flutter / IA' },
+    company: 'SimonDev Inc',
+    role: { en: 'Founder — Full-Stack & AI Engineer', fr: 'Fondateur — Ingénieur Full-Stack & IA' },
     period: '2024 – Present',
     desc: {
-      en: 'Built the entire logistics software ecosystem from zero. 19 systems spanning mobile, web, backend, AI, and infrastructure — all in production.',
-      fr: 'Construit tout l\'écosystème logistique de zéro. 19 systèmes couvrant mobile, web, backend, IA et infrastructure — tous en production.',
+      en: 'My company. I take on client software projects — production systems, not side experiments. Currently building for PA Super as the main client: 19 systems in prod spanning mobile, web, backend, AI, and K8s infrastructure.',
+      fr: 'Ma compagnie. Je prends des projets logiciels pour des clients — des systèmes en production, pas des expériences. Client principal actuel : PA Super — 19 systèmes en prod couvrant mobile, web, backend, IA et infra K8s.',
     },
     tech: ['Flutter', 'Python', 'FastAPI', 'React', 'Angular', 'LangChain', 'K8s', 'MySQL', 'Redis'],
   },

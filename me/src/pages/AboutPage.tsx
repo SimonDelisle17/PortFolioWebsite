@@ -6,25 +6,27 @@ import InnerPageLayout from '../components/InnerPageLayout';
 import mePhoto from '../assets/me.jpg';
 
 const MILESTONES_EN = [
-  { year: '2021', event: 'First full-time developer role — Shopify e-commerce at Blue Badger' },
+  { year: '2021', event: 'First developer role — Shopify e-commerce at Blue Badger' },
   { year: '2021', event: 'Built cross-platform mobile apps at FetchVision with Flutter' },
   { year: '2024', event: 'Joined PA Super as the main software engineer — built everything from scratch' },
+  { year: '2024', event: 'Founded SimonDev Inc — taking on client projects outside work hours' },
   { year: '2025', event: 'Deployed PaSUPER AI in production — real phone calls handled by an LLM' },
   { year: '2026', event: 'Still shipping. Still learning. Coffee intake: concerning.' },
 ];
 
 const MILESTONES_FR = [
-  { year: '2021', event: 'Premier poste de développeur — e-commerce Shopify chez Blue Badger' },
+  { year: '2021', event: 'Premier poste dev — e-commerce Shopify chez Blue Badger' },
   { year: '2021', event: 'Apps mobiles multiplateformes chez FetchVision avec Flutter' },
   { year: '2024', event: 'Rejoint PA Super comme ingénieur principal — tout construit from scratch' },
+  { year: '2024', event: 'Fondation de SimonDev Inc — projets clients en dehors des heures de travail' },
   { year: '2025', event: 'PaSUPER IA déployé en production — vrais appels téléphoniques gérés par un LLM' },
   { year: '2026', event: 'Toujours en prod. Toujours en train d\'apprendre. Consommation de café : alarmante.' },
 ];
 
 const STATS = [
   { value: '19', label: { en: 'Projects shipped', fr: 'Projets livrés' } },
-  { value: '4+', label: { en: 'Years shipping', fr: 'Ans de prod' } },
-  { value: '3', label: { en: 'Companies', fr: 'Entreprises' } },
+  { value: '5+', label: { en: 'Years in production', fr: 'Ans en production' } },
+  { value: '300K+', label: { en: 'Lines of code', fr: 'Lignes de code' } },
   { value: '2', label: { en: 'Languages spoken', fr: 'Langues parlées' } },
 ];
 
@@ -108,8 +110,8 @@ const AboutPage = () => {
               </Typography>
               <Typography sx={{ fontSize: '1.05rem', color: '#c8bfaf', lineHeight: 1.8 }}>
                 {isEn
-                  ? "Outside work, I play golf badly and think about software constantly. The name \"Claude\" was my parents' idea — turns out it aged well."
-                  : "En dehors du travail, je joue mal au golf et je pense constamment à des logiciels. Le prénom \"Claude\" était l'idée de mes parents — il s'avère que ça a bien vieilli."}
+                  ? "Outside work, I play golf badly and think about software constantly. \"Claude\" is my Catholic name — a Québec tradition. The fact that it's also the name of the AI I use every day is a coincidence I've stopped trying to explain at dinner."
+                  : "En dehors du travail, je joue mal au golf et je pense constamment à des logiciels. «Claude» est mon nom catholique — une tradition bien québécoise. Le fait que ce soit aussi le nom de l'IA que j'utilise tous les jours est une coïncidence que j'ai arrêté d'expliquer à table."}
               </Typography>
             </motion.div>
           </Box>

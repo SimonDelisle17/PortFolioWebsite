@@ -298,7 +298,7 @@ const ClaudeWord = () => {
 // ─── Main HomePage ────────────────────────────────────────────────────────────
 const HomePage = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const isEn = i18n.language === 'en' || i18n.language.startsWith('en');
   const phrases = isEn ? PHRASES_EN : PHRASES_FR;
 
@@ -408,25 +408,38 @@ const HomePage = () => {
               {/* Quick stat pills */}
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 3 }}>
                 {[
-                  { label: isEn ? '19 projects shipped' : '19 projets livrés', accent: true },
-                  { label: isEn ? 'Based in Québec' : 'Basé au Québec', accent: false },
-                  { label: isEn ? 'Open to work' : 'Disponible', accent: false },
+                  { label: isEn ? '19 projects shipped' : '19 projets livrés', accent: true, link: '/projects' },
+                  { label: isEn ? 'Based in Québec' : 'Basé au Québec', accent: false, link: null },
+                  { label: isEn ? 'Open to work' : 'Disponible', accent: false, link: '/contact', green: true },
                 ].map((p) => (
                   <Box
                     key={p.label}
+                    onClick={p.link ? () => navigate(p.link!) : undefined}
                     sx={{
                       px: 1.5,
                       py: 0.5,
                       borderRadius: '20px',
                       border: '1px solid',
-                      borderColor: p.accent ? 'rgba(245, 200, 66, 0.4)' : 'rgba(240, 236, 228, 0.1)',
+                      borderColor: p.accent
+                        ? 'rgba(245, 200, 66, 0.4)'
+                        : p.green
+                        ? 'rgba(74, 222, 128, 0.35)'
+                        : 'rgba(240, 236, 228, 0.1)',
                       fontSize: '0.78rem',
-                      color: p.accent ? '#f5c842' : '#8c8272',
+                      color: p.accent ? '#f5c842' : p.green ? '#4ade80' : '#8c8272',
                       fontFamily: "'DM Sans', sans-serif",
                       fontWeight: 500,
+                      cursor: p.link ? 'pointer' : 'default',
+                      transition: 'all 0.15s ease',
+                      ...(p.link && {
+                        '&:hover': {
+                          borderColor: p.accent ? 'rgba(245,200,66,0.7)' : p.green ? 'rgba(74,222,128,0.6)' : 'rgba(240,236,228,0.25)',
+                          color: p.accent ? '#f5c842' : p.green ? '#86efac' : '#c8c0b4',
+                        },
+                      }),
                     }}
                   >
-                    {p.label}
+                    {p.green && <Box component="span" sx={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', bgcolor: '#4ade80', mr: 0.7, mb: '1px', verticalAlign: 'middle', animation: 'pulse 2s ease-in-out infinite', '@keyframes pulse': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.4 } } }} />}{p.label}
                   </Box>
                 ))}
               </Box>
@@ -526,8 +539,8 @@ const HomePage = () => {
                 }}
               >
                 {isEn
-                  ? 'Full-stack engineer at PA Super. I architect logistics ecosystems, ship mobile apps for field workers, and wire AI into things that actually save people time.'
-                  : "Ingénieur full-stack chez PA Super. J'architecture des écosystèmes logistiques, livre des apps mobiles sur le terrain et intègre l'IA dans des systèmes qui font vraiment gagner du temps."}
+                  ? 'Founder of SimonDev Inc. I architect logistics ecosystems, ship mobile apps for field workers, and wire AI into things that actually save people time.'
+                  : "Fondateur de SimonDev Inc. J'architecture des écosystèmes logistiques, livre des apps mobiles sur le terrain et intègre l'IA dans des systèmes qui font vraiment gagner du temps."}
               </Typography>
 
               <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
@@ -543,7 +556,7 @@ const HomePage = () => {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  @PaSuper
+                  @SimonDevInc
                 </Box>
                 <Box
                   sx={{

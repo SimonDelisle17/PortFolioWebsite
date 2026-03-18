@@ -58,6 +58,8 @@ export const en = {
     metrics: 'Impact Metrics',
     architecture: 'Architecture',
     visitWebsite: 'Visit Website',
+    theProblem: 'The Problem',
+    whatILearned: 'What I Learned',
   },
   resume: {
     title: 'RESUME',
