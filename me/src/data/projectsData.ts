@@ -9,32 +9,35 @@ export const projectsData: Project[] = [
     tags: ['FastAPI', 'Python', 'MySQL', 'Redis', 'Docker', 'JWE', 'HERE Maps', 'WebSocket'],
     shortDescription: 'Enterprise-Grade Logistics & Delivery Management Platform',
     icon: '🚚',
-    impact: 'Complete logistics ecosystem serving multiple business units',
-    detailedDescription: 'Comprehensive backend platform serving the entire PA Super logistics ecosystem with dual-database architecture, microservices, real-time communication, and enterprise security.',
+    impact: 'Complete logistics backbone — 300K+ lines serving drivers, warehouse workers, dispatchers and managers in real time',
+    detailedDescription: 'The central FastAPI 0.110 backend powering every PA Super logistics operation. Dual-database architecture (MySQL for persistence, Redis for cache/real-time state), dedicated geo-processing microservice for HERE Maps route optimization, and a WebSocket layer that cut polling load by 90%. Every other PA Super system talks to this API.',
     features: [
-      'SuperDeliver: Route optimization, GPS tracking, delivery confirmation with photos/signatures',
+      'SuperDeliver: Route optimization via HERE Maps, live GPS tracking, delivery proof (photo + signature)',
       'SuperLocator: Warehouse inventory management, barcode scanning, pick-list optimization',
-      'SuperTransfer: Inter-store transfer automation with intelligent routing',
-      'SuperStatement: Automated client billing with Office 365 integration',
-      'SuperDispatch: Real-time operational dashboard with driver tracking',
-      'Real-time WebSocket updates reducing server load by 90%',
-      'Order lifecycle management with comprehensive tracking',
-      'Delivery analytics and performance metrics'
+      'SuperTransfer: Inter-store transfer automation with intelligent routing and lifecycle tracking',
+      'SuperStatement: Automated client billing integrated with Microsoft Graph / Office 365',
+      'SuperDispatch: Real-time driver tracking dashboard and operational command center',
+      'WebSocket event bus reducing polling API calls by 90% across all clients',
+      'Dedicated geo microservice: isolated HERE Maps routing, batch geocoding, ETA calculation',
+      'JWE-encrypted tokens + Ed25519 request signatures for inter-service auth'
     ],
     technologies: {
-      backend: ['Python 3.12', 'FastAPI', 'SQLAlchemy 2.0', 'Async/Await'],
-      database: ['MySQL (Dual Database)', 'Redis Cache'],
+      backend: ['Python 3.12', 'FastAPI 0.110', 'SQLAlchemy 2.0', 'Async/Await', 'Uvicorn'],
+      database: ['MySQL (Dual Database)', 'Redis (Cache + Pub/Sub)'],
       security: ['JWE Encryption', 'Ed25519 Signatures', 'AES-GCM', 'Argon2'],
       integrations: ['HERE Maps API', 'Microsoft Graph API', 'Azure AD', 'Office 365'],
-      deployment: ['Docker', 'Kubernetes', 'Microservices']
+      deployment: ['Docker', 'Kubernetes', 'Microservices', 'ArgoCD']
     },
     metrics: {
-      scale: '300,000+ lines of code',
-      performance: '90% reduction in API calls',
-      architecture: 'Dual-database microservices'
+      codebase: '300,000+ lines across all PA Super services',
+      performance: '90% reduction in API polling via WebSocket',
+      architecture: 'Dual-database + dedicated geo microservice',
+      uptime: '24/7 production — horizontally scaled on K8s'
     },
-    architecture: 'Microservices with dedicated geo-processing service and dual-database for performance scaling',
-    liveUrl: null
+    architecture: 'FastAPI monolith with dedicated geo-processing sidecar service, dual MySQL+Redis databases, and WebSocket pub/sub layer for real-time fleet state',
+    liveUrl: null,
+    problem: 'PA Super was running delivery operations on WhatsApp messages and manual Excel sheets. Drivers had no route optimization, dispatchers had no real-time visibility, and billing was done by hand at end of month. Everything needed to be built from zero.',
+    lesson: 'Building the geo microservice as a separate process (not just a module) was the right call — HERE Maps SDK has its own memory profile and retry logic that would have polluted the main API process. Isolation made it easier to scale and debug independently. The 90% WebSocket win came from observing that 80% of requests were just "any updates?" polls — replacing those with push events was the highest-leverage change in the codebase.'
   },
   {
     id: 2,
