@@ -5,13 +5,13 @@ import Typography from '@mui/material/Typography';
 import InnerPageLayout from '../components/InnerPageLayout';
 
 const CORE_STACK = [
-  { icon: '🦋', name: 'Flutter', context: { en: '6 production apps — iOS, Android, Desktop', fr: '6 apps en prod — iOS, Android, Desktop' } },
-  { icon: '🐍', name: 'Python', context: { en: 'FastAPI, LangChain, async pipelines', fr: 'FastAPI, LangChain, pipelines async' } },
-  { icon: '⚡', name: 'FastAPI', context: { en: 'Primary backend for 7+ microservices', fr: 'Backend principal de 7+ microservices' } },
-  { icon: '📦', name: 'Node.js', context: { en: 'TypeScript, Express, Socket.IO, NestJS', fr: 'TypeScript, Express, Socket.IO, NestJS' } },
-  { icon: '⚛️', name: 'React / Angular', context: { en: 'React 19 + Angular 13–20, both in prod', fr: 'React 19 + Angular 13–20, les deux en prod' } },
-  { icon: '🤖', name: 'AI / LangChain', context: { en: 'GPT-4o, voice STT/TTS, SSE streaming', fr: 'GPT-4o, voix STT/TTS, streaming SSE' } },
-  { icon: '☸️', name: 'Kubernetes', context: { en: 'GitOps with ArgoCD + Helm, OVH infra', fr: 'GitOps avec ArgoCD + Helm, infra OVH' } },
+  { icon: '🦋', name: 'Flutter', url: 'https://docs.flutter.dev/', context: { en: '6 production apps — iOS, Android, Desktop', fr: '6 apps en prod — iOS, Android, Desktop' } },
+  { icon: '🐍', name: 'Python', url: 'https://docs.python.org/3/', context: { en: 'FastAPI, LangChain, async pipelines', fr: 'FastAPI, LangChain, pipelines async' } },
+  { icon: '⚡', name: 'FastAPI', url: 'https://fastapi.tiangolo.com/', context: { en: 'Primary backend for 7+ microservices', fr: 'Backend principal de 7+ microservices' } },
+  { icon: '📦', name: 'Node.js', url: 'https://nodejs.org/docs/latest/api/', context: { en: 'TypeScript, Express, Socket.IO, NestJS', fr: 'TypeScript, Express, Socket.IO, NestJS' } },
+  { icon: '⚛️', name: 'React / Angular', url: 'https://react.dev/', context: { en: 'React 19 + Angular 13–20, both in prod', fr: 'React 19 + Angular 13–20, les deux en prod' } },
+  { icon: '🤖', name: 'AI / LangChain', url: 'https://python.langchain.com/docs/', context: { en: 'GPT-4o, voice STT/TTS, SSE streaming', fr: 'GPT-4o, voix STT/TTS, streaming SSE' } },
+  { icon: '☸️', name: 'Kubernetes', url: 'https://kubernetes.io/docs/', context: { en: 'GitOps with ArgoCD + Helm, OVH infra', fr: 'GitOps avec ArgoCD + Helm, infra OVH' } },
 ];
 
 const ALSO_USED = [
@@ -86,7 +86,7 @@ const SkillsPage = () => {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 1.5, mb: 5 }}>
             {CORE_STACK.map((item, i) => (
               <motion.div key={item.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.12 + i * 0.05 }}>
-                <Box sx={{ p: 2.5, borderRadius: '14px', border: '1px solid rgba(240,236,228,0.07)', background: '#161412', transition: 'border-color 0.15s, transform 0.15s', '&:hover': { borderColor: 'rgba(245,200,66,0.2)', transform: 'translateY(-2px)' } }}>
+                <Box component="a" href={item.url} target="_blank" rel="noopener noreferrer" sx={{ display: 'block', textDecoration: 'none', p: 2.5, borderRadius: '14px', border: '1px solid rgba(240,236,228,0.07)', background: '#161412', cursor: 'pointer', transition: 'border-color 0.15s, transform 0.15s', '&:hover': { borderColor: 'rgba(245,200,66,0.2)', transform: 'translateY(-2px)' } }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2, mb: 1 }}>
                     <Box sx={{ fontSize: '1.3rem' }}>{item.icon}</Box>
                     <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '1rem', fontWeight: 600, color: '#f0ece4' }}>{item.name}</Typography>
@@ -111,6 +111,9 @@ const SkillsPage = () => {
                 {tech}
               </Box>
             ))}
+            <Box sx={{ px: 1.2, py: 0.4, borderRadius: '6px', border: '1px solid rgba(245,200,66,0.2)', fontSize: '0.75rem', color: '#f5c842', fontFamily: "'DM Sans', sans-serif", fontStyle: 'italic' }}>
+              and many more…
+            </Box>
           </Box>
         </motion.div>
 
