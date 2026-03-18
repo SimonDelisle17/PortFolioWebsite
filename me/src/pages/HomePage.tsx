@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import mePhoto from '../assets/me.jpg';
 import simondevLogo from '../assets/simondev_transparent.png';
+import apdqLogo from '../assets/apdq.png';
 
 // ─── Typewriter ───────────────────────────────────────────────────────────────
 const PHRASES_EN = [
@@ -145,8 +146,14 @@ const STACK = [
   'Redis', 'PostgreSQL', 'Docker', 'TypeScript',
 ];
 
-// ─── Project icons (using the actual project icons from data) ─────────────────
-const PROJECT_ICONS = ['🤖', '🚚', '📱', '🏗️', '🔄', '🍷', '📊', '🛰️', '⚡', '⏱️', '📡', '🗄️', '📦', '🏌️', '🎓', '🛒', '🛍️'];
+// ─── Project items (id + icon for clickable navigation) ──────────────────────
+const PROJECT_ITEMS: { id: number; icon: string | 'tow' }[] = [
+  { id: 6, icon: '🤖' }, { id: 8, icon: 'tow' }, { id: 1, icon: '🚚' }, { id: 2, icon: '📱' },
+  { id: 3, icon: '🛒' }, { id: 4, icon: '🏢' }, { id: 5, icon: '🚗' }, { id: 7, icon: '⚙️' },
+  { id: 9, icon: '☸️' }, { id: 10, icon: '🎛️' }, { id: 11, icon: '📡' }, { id: 12, icon: '⏰' },
+  { id: 13, icon: '🔗' }, { id: 14, icon: '📦' }, { id: 15, icon: '🔄' }, { id: 16, icon: '⛳' },
+  { id: 17, icon: '🎓' }, { id: 18, icon: '🛍️' }, { id: 19, icon: '🔧' },
+];
 
 // ─── Bento card base ──────────────────────────────────────────────────────────
 interface BentoCardProps {
@@ -464,7 +471,7 @@ const HomePage = () => {
             interactive
             delay={0.1}
             onClick={() => navigate('/about')}
-            sx={{ gridRow: { md: '1 / 3' } }}
+            sx={{ gridRow: { md: '1 / 4' } }}
           >
             <CardArrow />
             <Box sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -612,31 +619,35 @@ const HomePage = () => {
                 {isEn ? 'All in production' : 'Tous en production'}
               </Typography>
 
-              {/* Icon grid */}
+              {/* Icon grid — each icon links to its project */}
               <Box
                 sx={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(6, 1fr)',
-                  gap: 0.8,
+                  gridTemplateColumns: 'repeat(5, 1fr)',
+                  gap: 1,
                 }}
               >
-                {PROJECT_ICONS.map((icon, i) => (
+                {PROJECT_ITEMS.map((item) => (
                   <Box
-                    key={i}
+                    key={item.id}
+                    onClick={(e: React.MouseEvent) => { e.stopPropagation(); navigate(`/project/${item.id}`); }}
                     sx={{
                       aspectRatio: '1',
-                      borderRadius: '8px',
+                      borderRadius: '10px',
                       background: 'rgba(240, 236, 228, 0.04)',
                       border: '1px solid rgba(240, 236, 228, 0.07)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '1rem',
-                      transition: 'background 0.15s',
-                      '&:hover': { background: 'rgba(245, 200, 66, 0.1)' },
+                      fontSize: '1.4rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s',
+                      '&:hover': { background: 'rgba(245, 200, 66, 0.12)', borderColor: 'rgba(245,200,66,0.25)', transform: 'scale(1.08)' },
                     }}
                   >
-                    {icon}
+                    {item.icon === 'tow'
+                      ? <Box component="img" src={apdqLogo} alt="APDQ" sx={{ width: '60%', height: '60%', objectFit: 'contain' }} />
+                      : item.icon}
                   </Box>
                 ))}
               </Box>
@@ -754,101 +765,63 @@ const HomePage = () => {
             </Box>
           </BentoCard>
 
-          {/* ── Flagship project card (bottom right) ────────────────────── */}
-          <BentoCard interactive delay={0.3} onClick={() => navigate('/project/6')}>
-            <CardArrow />
-            <Box
-              sx={{
-                p: 3,
-                height: '100%',
-                background: 'linear-gradient(135deg, #161412 0%, #1a1610 100%)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              {/* Subtle amber glow */}
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: -40,
-                  right: -40,
-                  width: 150,
-                  height: 150,
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(245, 200, 66, 0.08) 0%, transparent 70%)',
-                  pointerEvents: 'none',
-                }}
-              />
+          {/* ── Featured projects (bottom right — spans col 2+3) ─────── */}
+          <Box sx={{ gridColumn: { md: '2 / 4' }, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: { xs: 1.5, md: 2 } }}>
 
-              <Box
-                sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 0.5,
-                  px: 1,
-                  py: 0.3,
-                  borderRadius: '4px',
-                  background: 'rgba(245, 200, 66, 0.12)',
-                  border: '1px solid rgba(245, 200, 66, 0.25)',
-                  fontSize: '0.65rem',
-                  fontWeight: 600,
-                  color: '#f5c842',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  fontFamily: "'DM Sans', sans-serif",
-                  mb: 2,
-                }}
-              >
-                ⚡ {isEn ? 'Flagship' : 'Phare'}
+            {/* Flagship — PaSUPER AI */}
+            <BentoCard interactive delay={0.3} onClick={() => navigate('/project/6')}>
+              <CardArrow />
+              <Box sx={{ p: 3, height: '100%', background: 'linear-gradient(135deg, #161412 0%, #1a1610 100%)', position: 'relative', overflow: 'hidden' }}>
+                <Box sx={{ position: 'absolute', top: -40, right: -40, width: 150, height: 150, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,200,66,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5, px: 1, py: 0.3, borderRadius: '4px', background: 'rgba(245,200,66,0.12)', border: '1px solid rgba(245,200,66,0.25)', fontSize: '0.65rem', fontWeight: 600, color: '#f5c842', letterSpacing: '0.05em', textTransform: 'uppercase', fontFamily: "'DM Sans', sans-serif", mb: 2 }}>
+                  ⚡ {isEn ? 'Flagship' : 'Phare'}
+                </Box>
+                <Typography sx={{ fontSize: '1.5rem', mb: 0.5 }}>🤖</Typography>
+                <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '1.1rem', fontWeight: 600, color: '#f0ece4', lineHeight: 1.3, mb: 1 }}>
+                  {isEn ? 'PaSUPER AI — Voice & Chat' : 'PaSUPER IA — Voix & Chat'}
+                </Typography>
+                <Typography sx={{ fontSize: '0.78rem', color: '#8c8272', lineHeight: 1.6, mb: 2 }}>
+                  {isEn
+                    ? 'Omnichannel AI for a 40K-part auto distributor. Real phone calls + streaming chat, 3 languages.'
+                    : 'IA omnicanal pour un distributeur auto de 40K pièces. Appels réels + chat SSE, 3 langues.'}
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.6 }}>
+                  {['LangChain', 'GPT-4o', 'FastAPI', 'Twilio'].map((t) => (
+                    <Box key={t} sx={{ px: 1, py: 0.3, borderRadius: '4px', background: 'rgba(240,236,228,0.05)', border: '1px solid rgba(240,236,228,0.1)', fontSize: '0.68rem', color: '#8c8272', fontFamily: "'JetBrains Mono', monospace" }}>{t}</Box>
+                  ))}
+                </Box>
               </Box>
+            </BentoCard>
 
-              <Typography
-                sx={{
-                  fontSize: '1.5rem',
-                  mb: 0.5,
-                }}
-              >
-                🤖
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "'Fraunces', Georgia, serif",
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  color: '#f0ece4',
-                  lineHeight: 1.3,
-                  mb: 1,
-                }}
-              >
-                {isEn ? 'PaSUPER AI — Voice & Chat' : 'PaSUPER IA — Voix & Chat'}
-              </Typography>
-              <Typography sx={{ fontSize: '0.78rem', color: '#8c8272', lineHeight: 1.6, mb: 2 }}>
-                {isEn
-                  ? 'Omnichannel AI for a 40K-part auto distributor. Real phone calls + streaming chat, 3 languages.'
-                  : 'IA omnicanal pour un distributeur auto de 40K pièces. Appels réels + chat SSE, 3 langues.'}
-              </Typography>
-
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.6 }}>
-                {['LangChain', 'GPT-4o', 'FastAPI', 'Twilio'].map((t) => (
-                  <Box
-                    key={t}
-                    sx={{
-                      px: 1,
-                      py: 0.3,
-                      borderRadius: '4px',
-                      background: 'rgba(240, 236, 228, 0.05)',
-                      border: '1px solid rgba(240, 236, 228, 0.1)',
-                      fontSize: '0.68rem',
-                      color: '#8c8272',
-                      fontFamily: "'JetBrains Mono', monospace",
-                    }}
-                  >
-                    {t}
-                  </Box>
-                ))}
+            {/* APDQ Towing — identical layout to flagship */}
+            <BentoCard interactive delay={0.35} onClick={() => navigate('/project/8')}>
+              <CardArrow />
+              <Box sx={{ p: 3, height: '100%', background: 'linear-gradient(135deg, #161412 0%, #1a1610 100%)', position: 'relative', overflow: 'hidden' }}>
+                <Box sx={{ position: 'absolute', top: -40, right: -40, width: 150, height: 150, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,200,66,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5, px: 1, py: 0.3, borderRadius: '4px', background: 'rgba(245,200,66,0.12)', border: '1px solid rgba(245,200,66,0.25)', fontSize: '0.65rem', fontWeight: 600, color: '#f5c842', letterSpacing: '0.05em', textTransform: 'uppercase', fontFamily: "'DM Sans', sans-serif", mb: 2 }}>
+                  ⚡ {isEn ? 'Client Project' : 'Projet Client'}
+                </Box>
+                <Box component="img" src={apdqLogo} alt="APDQ" sx={{ width: 36, height: 36, objectFit: 'contain', display: 'block', mb: 0.5 }} />
+                <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '1.1rem', fontWeight: 600, color: '#f0ece4', lineHeight: 1.3, mb: 1 }}>
+                  {isEn ? 'APDQ — Towing Management' : 'APDQ — Gestion Remorquage'}
+                </Typography>
+                <Typography sx={{ fontSize: '0.82rem', color: '#f5c842', lineHeight: 1.4, mb: 1, fontFamily: "'DM Sans', sans-serif", fontWeight: 500 }}>
+                  Association des Professionnels du Dépannage du Québec
+                </Typography>
+                <Typography sx={{ fontSize: '0.78rem', color: '#8c8272', lineHeight: 1.6, mb: 2 }}>
+                  {isEn
+                    ? 'Three-stack ecosystem: Flutter mobile + FastAPI backend + React portal. Real-time GPS dispatch.'
+                    : 'Écosystème trois stacks : Flutter mobile + FastAPI backend + portail React. Dispatch GPS temps réel.'}
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.6 }}>
+                  {['Flutter', 'FastAPI', 'React', 'Firebase'].map((t) => (
+                    <Box key={t} sx={{ px: 1, py: 0.3, borderRadius: '4px', background: 'rgba(240,236,228,0.05)', border: '1px solid rgba(240,236,228,0.1)', fontSize: '0.68rem', color: '#8c8272', fontFamily: "'JetBrains Mono', monospace" }}>{t}</Box>
+                  ))}
+                </Box>
               </Box>
-            </Box>
-          </BentoCard>
+            </BentoCard>
+
+          </Box>
         </Box>
       </Box>
 

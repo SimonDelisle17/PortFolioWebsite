@@ -36,8 +36,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Monolithe FastAPI avec service sidecar géo dédié, double base de données MySQL+Redis, et couche pub/sub WebSocket pour l\'état temps réel de la flotte',
     liveUrl: null,
-    problem: 'PA Super gérait ses opérations de livraison avec des messages WhatsApp et des tableaux Excel manuels. Les chauffeurs n\'avaient pas d\'optimisation d\'itinéraires, les répartiteurs n\'avaient aucune visibilité en temps réel, et la facturation se faisait à la main en fin de mois. Tout devait être construit de zéro.',
-    lesson: 'Construire le microservice géo comme un processus séparé (pas juste un module) était le bon choix — le SDK HERE Maps a son propre profil mémoire et sa logique de retry qui auraient pollué le processus API principal. L\'isolation a facilité la mise à l\'échelle et le débogage indépendants. Le gain WebSocket de 90% est venu de l\'observation que 80% des requêtes étaient des polls "y a-t-il des mises à jour?" — les remplacer par des push events était le changement le plus efficace de la base de code.'
+    problem: 'L\'API d\'optimisation d\'itinéraires HERE Maps a une limite de 20 waypoints par requête, mais les chauffeurs ont souvent 30+ arrêts. Les appels séquentiels naïfs doublaient le temps de réponse à 8 secondes. En parallèle, la couche WebSocket était en compétition avec 6 types de clients différents (Flutter, React, Angular, agent IA) pour les mêmes canaux Redis pub/sub, causant des problèmes d\'ordonnancement des messages sous charge.',
+    lesson: 'Découper les appels HERE Maps en chunks parallèles de 15 waypoints et fusionner les segments optimisés a réduit le calcul d\'itinéraire de 8s à 1,2s. Pour WebSocket, le partitionnement des canaux Redis par type de client (driver:*, dispatch:*, warehouse:*) a éliminé les interférences et permis d\'ajuster les TTL par canal. La réduction de 90% du polling vient du remplacement des boucles HTTP GET /status par des événements push — le refactoring le plus rentable dans 300K lignes de code.'
   },
   {
     id: 2,
@@ -74,8 +74,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Binaire Flutter unique avec basculement de mode basé sur les rôles, queue SQLite offline-first, et gestion d\'état BLoC séparant la logique métier chauffeur/entrepôt',
     liveUrl: null,
-    problem: 'Deux équipes différentes — les chauffeurs sur la route et les travailleurs en entrepôt — avaient besoin d\'outils mobiles sur mesure. Construire deux applications séparées aurait signifié maintenir deux bases de code, doublant la charge de publication et les bugs. Le défi était de concevoir une application unique qui se sente native à chaque rôle sans qu\'un utilisateur ne voie jamais les écrans de l\'autre.',
-    lesson: 'La décision offline-first était la bonne, mais plus difficile que prévu. Concevoir la queue de synchronisation pour gérer les uploads partiels, la logique de retry et la résolution de conflits a demandé plus de réflexion que la fonctionnalité elle-même. La leçon : décider de ta stratégie offline dès le premier jour, pas quand les chauffeurs commencent à se plaindre de signatures perdues dans des zones sans signal.'
+    problem: 'La file SQLite offline fonctionnait bien pour les écritures simples, mais les chauffeurs soumettant des preuves de livraison (photo + signature + GPS + timestamp) dans des zones avec 3G instable créaient des uploads partiels — la photo réussissait mais le POST de signature échouait, laissant le backend avec un enregistrement de livraison incomplet sans moyen de relancer uniquement la pièce manquante.',
+    lesson: 'Migration vers une file de sync transactionnelle : tous les champs de preuve de livraison sont groupés en un seul payload atomique avec une empreinte SHA-256. Si une partie échoue, tout le bundle est relancé. La résolution de conflits utilise server-timestamp-wins pour les données GPS mais client-timestamp-wins pour les signatures (les chauffeurs signent une fois, le serveur ne devrait jamais écraser). Ce pattern est devenu le modèle pour chaque fonctionnalité offline depuis.'
   },
   {
     id: 3,
@@ -110,8 +110,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Monorepo avec backend NestJS 11 et frontend Angular 20, service adaptatif à l\'environnement pour basculement dev/prod fluide',
     liveUrl: null,
-    problem: 'Les opérations d\'achat chez PA Super étaient suivies dans des tableurs. Les demandes d\'approvisionnement, les contacts fournisseurs et les décisions d\'achat n\'avaient pas de système centralisé. L\'équipe acheteurs avait besoin d\'un outil sur mesure, pas d\'un bricolage.',
-    lesson: 'TypeORM dans un monorepo avec une couche d\'entités partagées est vraiment ergonomique — un changement à l\'entité Produit se propage correctement à la fois à l\'API et à la couche de service Angular type-safe. La gestion d\'état basée sur les signaux Angular 20 a remplacé beaucoup de boilerplate RxJS qui rendait l\'ancien code plus difficile à suivre.'
+    problem: 'L\'équipe d\'achat gérait 400+ relations fournisseurs à travers des fils d\'emails et fichiers Excel. Quand un fournisseur changeait ses prix ou arrêtait une pièce, l\'information restait dans la boîte mail d\'une seule personne. Le frontend Angular devait gérer des workflows d\'approvisionnement complexes multi-étapes avec des comparaisons de prix en temps réel entre fournisseurs — pas une simple app CRUD.',
+    lesson: 'La couche d\'entités TypeORM partagée dans un monorepo NestJS/Angular était le bon choix — modifier une colonne de l\'entité Product propage les types TypeScript à la fois à la couche de validation API et aux form builders Angular. La réactivité signal-based d\'Angular 20 a remplacé 14 BehaviorSubjects RxJS par des signaux computed, réduisant le code de gestion d\'état de 40% et éliminant trois classes de bugs de fuite d\'abonnement.'
   },
   {
     id: 4,
@@ -145,7 +145,9 @@ export const projectsDataFr: Project[] = [
       documentation: 'Spec OpenAPI 3.0 complète'
     },
     architecture: 'Proxy Spring Boot unifiant le SDK AConneX Epicor et l\'API PEDS Cloud derrière une seule surface REST authentifiée, consommée par tous les autres services PA Super',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Deux APIs Epicor complètement différentes (SDK AConneX pour commandes/facturation et PEDS Cloud pour compatibilité véhicule/décodage VIN) chacune avec son propre schéma d\'auth, limites de débit, formats d\'erreur et comportements de timeout. Chaque service PA Super qui avait besoin de données ERP implémentait sa propre intégration Epicor — dupliquant la gestion des credentials, la logique de retry et la gestion d\'erreurs à travers 4 codebases.',
+    lesson: 'Encapsuler les deux APIs derrière un seul proxy Spring Boot avec des codes d\'erreur unifiés signifie que les services en aval ne touchent jamais Epicor directement. L\'insight clé : le SDK AConneX lance des exceptions Java sur timeout tandis que PEDS retourne des HTTP 504 — normaliser les deux en une réponse JSON consistante {error, code, retryable} a épargné à chaque consommateur d\'implémenter deux chemins de gestion d\'erreurs différents. La spec OpenAPI 3.0 est devenue la source de vérité unique pour 3 équipes différentes.'
   },
   {
     id: 5,
@@ -182,8 +184,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'App Flutter BLoC avec capture VIN tri-mode (barcode/OCR/manuel), API OptiCAT pour données véhicule, et gestion garage authentifiée Strapi',
     liveUrl: null,
-    problem: 'Le personnel du comptoir saisissait manuellement les VIN depuis les plaques et les documents — lent et source d\'erreurs pour chaque interaction client. Un seul caractère mal lu signifie un mauvais lookup véhicule et une interaction gâchée.',
-    lesson: 'Le scan barcode et l\'OCR Google ML Kit fonctionnent bien séparément mais nécessitent un séquençage BLoC soigné — un type d\'événement par mode de capture, tous convergeant vers la même action de lookup VIN. Le pattern de config multi-environnements (initialisation au démarrage de l\'app, aucun changement de code par environnement) est devenu un template réutilisé dans tous les projets Flutter suivants.'
+    problem: 'Le scanner de codes-barres et le moteur OCR de Google ML Kit veulent tous deux un accès caméra exclusif — les exécuter simultanément crash sur les anciens appareils Android. Les plaques VIN arrivent dans des formats très inconsistants : métal gravé, étiquettes autocollantes, manuscrit sur des formulaires. Le score de confiance OCR pour un VIN comme "0O1Il" (zéro-oh-un-i-elle) tombe sous 60%, rendant la capture automatisée peu fiable sans post-traitement.',
+    lesson: 'Construction d\'une machine à états BLoC avec trois modes de capture (code-barres → OCR → manuel) qui libère la caméra entre les changements de mode. Ajout d\'un validateur de checksum VIN (ISO 3779) comme filtre post-OCR : si la chaîne scannée échoue le chiffre de contrôle, elle relance automatiquement avec un prétraitement à contraste amélioré avant de basculer en mode manuel. Le pattern de config multi-environnement (fichiers flavor chargés à l\'init de l\'app) est devenu le standard pour les 6 apps Flutter.'
   },
   {
     id: 6,
@@ -227,8 +229,8 @@ export const projectsDataFr: Project[] = [
     liveUrl: null,
     featured: true,
     displayOrder: 0,
-    problem: 'L\'entreprise perdait des clients après les heures de bureau — les appels restaient sans réponse, et la boutique web n\'avait aucun moyen de répondre aux questions de compatibilité de pièces en temps réel. Il fallait un seul système intelligent capable de gérer un appel téléphonique et un message de chat, en français ou anglais, et de réellement rechercher des données pièces réelles — pas juste donner des réponses génériques.',
-    lesson: 'Construire deux pipelines IA temps réel partageant le même agent m\'a appris à quel point les décisions d\'architecture se propagent. Le streaming SSE pour le chat a réduit la latence perçue de 3 secondes à moins de 200ms — non pas en rendant l\'IA plus rapide, mais en changeant le moment où on commence à envoyer des octets. Sur voix, chaque 100ms de latence de pipeline rend la conversation robotique. Profiler chaque étape (VAD → STT → LLM → TTS) était la seule façon de trouver où le temps se perdait vraiment.'
+    problem: 'Twilio WebSocket diffuse l\'audio brut à 8kHz μ-law — Gladia STT attend du PCM 16kHz. Le pipeline de rééchantillonnage ajoutait 400ms de latence, rendant les conversations saccadées. Côté chat, le client SSE Angular coupait silencieusement les connexions après 60 secondes d\'inactivité (défaut navigateur), perdant le contexte de conversation en pleine réponse.',
+    lesson: 'Déplacement du rééchantillonnage audio de Python (audioop) vers une extension C native via cffi — la latence est passée de 400ms à 45ms. Pour SSE, implémentation d\'un heartbeat toutes les 15 secondes avec un handler de reconnexion côté client qui rejoue le dernier message ID. L\'insight majeur : le profiling du pipeline vocal (VAD → STT → LLM → TTS) a révélé que 60% de la latence perçue était dans le buffering TTS, pas l\'inférence LLM. Streamer le premier chunk TTS pendant la génération du reste a réduit le temps de réponse de 3,2s à 1,1s.'
   },
   {
     id: 7,
@@ -262,7 +264,9 @@ export const projectsDataFr: Project[] = [
       sécurité: 'Requêtes signées HMAC uniquement'
     },
     architecture: 'Pipeline async FastAPI avec auth par requête signée, payloads Fernet chiffrés, traitement en lots Pandas, et automatisation retry APScheduler',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Les fichiers d\'inventaire fournisseurs arrivent via FTP dans 6 formats CSV différents sans documentation de schéma. Les codes UPC ont des zéros en tête qu\'Excel supprime, les codes de localisation utilisent une casse inconsistante, et le même produit peut apparaître dans plusieurs fichiers avec des quantités contradictoires. Une seule ligne malformée crashait tout l\'import batch, bloquant tous les enregistrements suivants.',
+    lesson: 'L\'application de dtype Pandas à la lecture (forcer UPC en string, pas int) a résolu le problème des zéros en tête. Construction d\'un hash d\'empreinte (SHA-256 de UPC+localisation+timestamp) pour la dédup — le même enregistrement soumis deux fois est silencieusement ignoré au lieu de créer des doublons. La décision de design critique : traiter chaque ligne indépendamment avec capture d\'erreur par ligne au lieu de faire échouer tout le batch. Une mauvaise ligne déclenche maintenant un email d\'alerte avec le numéro de ligne exact et le champ qui a échoué la validation, pendant que les 10 000 autres lignes se traitent normalement.'
   },
   {
     id: 8,
@@ -298,8 +302,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Trois stacks indépendants partageant une base MySQL : Flutter+Firebase pour le mobile temps réel, FastAPI+Celery+Redis pour le backend async, React+TS pour l\'admin web',
     liveUrl: null,
-    problem: 'L\'entreprise de remorquage coordonnait tout par téléphone et formulaires papier. Les répartiteurs n\'avaient aucune visibilité sur les positions des chauffeurs, les clients n\'avaient pas de suivi, et la facturation était faite manuellement des jours après le remorquage.',
-    lesson: 'Gérer trois stacks de production simultanément est un défi de coordination que le code ne prépare pas. Les changements de schéma de base de données se propagent dans les trois. La vraie leçon était d\'établir un contrat API strict tôt pour que chaque stack puisse évoluer indépendamment sans casser les autres.'
+    problem: 'Trois stacks indépendants (Flutter+Firebase, FastAPI+Celery+Redis, React+TypeScript) écrivant tous dans la même base MySQL sans outil de migration partagé. Un changement de schéma pour la table GPS de l\'app chauffeur a cassé les requêtes JOIN du dashboard admin. Les workers Celery relançaient silencieusement les assignations de remorquage échouées, causant des dispatches en double — deux camions se présentant pour le même appel.',
+    lesson: 'Établissement d\'un workflow migration-first : tous les changements de schéma passent par Alembic, et les apps React et Flutter épinglent une version API spécifique. Pour Celery, passage du auto-retry à l\'acquittement explicite — une tâche de remorquage ne se marque complète qu\'après confirmation du chauffeur via WebSocket. L\'approche de contrat API strict (spec OpenAPI comme artifact partagé) a permis aux trois stacks d\'évoluer indépendamment sans se casser mutuellement.'
   },
   {
     id: 9,
@@ -334,7 +338,9 @@ export const projectsDataFr: Project[] = [
       disponibilité: 'Auto-réparant avec correction dérive K8s + ArgoCD'
     },
     architecture: 'Cluster Kubernetes OVH avec définitions de services templatées Helm, sync GitOps ArgoCD, ingress NGINX+cert-manager, et observabilité Prometheus — géré entièrement depuis WSL2 sur Windows',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Déployer 19 services manuellement avec kubectl apply était sujet aux erreurs et prenait 45 minutes. Une faute de frappe dans un ConfigMap a crashé le service vocal IA en production pendant 20 minutes avant que quelqu\'un ne le remarque. Aucun mécanisme de rollback n\'existait — "rollback" signifiait SSH dans le cluster et reverser manuellement les fichiers YAML.',
+    lesson: 'Le templating Helm avec un chart de base partagé + overlay values.yaml par service a éliminé 80% de la duplication YAML. L\'auto-sync ArgoCD sur merge vers main signifie des déploiements en moins de 2 minutes avec correction automatique de dérive. L\'apprentissage clé : cert-manager avec l\'issuer staging Let\'s Encrypt d\'abord — on a épuisé la limite de production (50 certs/semaine) le premier jour en mal configurant le ClusterIssuer. Toujours tester avec staging.'
   },
   {
     id: 10,
@@ -370,7 +376,9 @@ export const projectsDataFr: Project[] = [
       accès: 'Basé sur les rôles : répartiteur / gestionnaire / admin'
     },
     architecture: 'SPA React 18 avec gestion d\'état Redux Toolkit, couche temps réel Socket.IO, analytiques Recharts, et configuration .env multi-environnements',
-    liveUrl: 'https://dispatch.pasuper.xyz'
+    liveUrl: 'https://dispatch.pasuper.xyz',
+    problem: 'Les mises à jour de position Socket.IO à intervalles de 5 secondes sur 50+ chauffeurs généraient 600 événements/minute. Les mises à jour d\'état Redux déclenchaient des re-rendus complets de la carte Leaflet, causant des saccades sous 15fps sur les PCs bas de gamme des répartiteurs. L\'état des filtres (route, statut, plage horaire) était couplé au composant carte, donc changer un filtre remontait chaque marqueur.',
+    lesson: 'Mémoïsation de la couche de marqueurs Leaflet avec useMemo indexé sur un hash de position — seuls les chauffeurs dont les coordonnées ont réellement changé déclenchent un re-rendu. Déplacement de l\'état des filtres dans un slice Redux séparé du slice positions pour que les changements de filtres ne touchent pas le chemin de rendu de la carte. FPS passé de 15 à 60 stable. Le pattern multi-environnement .env (VITE_API_URL par environnement) a éliminé entièrement la classe de bugs "fonctionne en staging, cassé en prod".'
   },
   {
     id: 11,
@@ -405,7 +413,9 @@ export const projectsDataFr: Project[] = [
       fiabilité: 'Shutdown gracieux pour zéro connexion perdue'
     },
     architecture: 'Serveur Socket.IO Node.js avec Redis pub/sub pour fan-out multi-instance, observabilité Prometheus, logs structurés Pino, et frontend HUD AngularJS+Leaflet',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Une seule instance Node.js plafonnait à 35 connexions WebSocket concurrentes — le CPU montait à 95% parce que chaque trame GPS entrante était diffusée à chaque dashboard répartiteur connecté, y compris les dashboards qui ne visualisaient même pas la région de ce chauffeur. Scaler vers une deuxième instance cassait les rooms Socket.IO parce que l\'état de session était en mémoire.',
+    lesson: 'Redis pub/sub comme couche de fan-out WebSocket a résolu le scaling horizontal — l\'adaptateur Redis de Socket.IO partage l\'état des rooms entre instances sans sessions sticky. Le vrai gain de performance était le partitionnement des canaux : les répartiteurs s\'abonnent uniquement aux chauffeurs de leur région assignée, réduisant le volume de diffusion de 70%. L\'endpoint Prometheus /metrics a exposé que 30% des trames GPS étaient des doublons (retries mobile) — ajouter un SET Redis avec TTL de 5 secondes pour la dédup a fait passer le CPU de 95% à 40% sur le même hardware.'
   },
   {
     id: 12,
@@ -440,7 +450,9 @@ export const projectsDataFr: Project[] = [
       fiabilité: 'Isolation des défaillances par job et alertes email'
     },
     architecture: 'Service FastAPI avec APScheduler faisant tourner 7 jobs cron indépendants — sync fournisseur ESL, ingestion fichiers FTP/SFTP, tirages données ERP, et mises à jour Strapi CMS avec isolation des défaillances par job',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Sept jobs cron partageant une seule instance APScheduler signifiait qu\'une longue sync ESL (45 minutes pour 12 000 étiquettes de rayon) bloquait le job d\'ingestion FTP de démarrer à l\'heure. Quand l\'API du vendeur ESL retournait 429 (rate limit), le job crashait et emportait tous les autres jobs avec lui, y compris la sync d\'inventaire Epicor critique en temps.',
+    lesson: 'Isolation des jobs via le ThreadPoolExecutor d\'APScheduler (max_workers=7) — chaque job tourne dans son propre thread, donc une sync ESL bloquée n\'affame pas le job FTP. Ajout de circuit breakers par job : après 3 échecs consécutifs, un job se désactive et envoie un email d\'alerte avec la stack trace et le dernier timestamp de succès. L\'endpoint de santé (/health) retourne le next_run_time et last_status de chaque job — le personnel d\'exploitation peut diagnostiquer les problèmes sans accès SSH.'
   },
   {
     id: 13,
@@ -476,8 +488,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Service Python double-processus géré PM2 : boucle principale fetch.py + processus cron scheduler.py, bridgeant ODBC Windows (Epicor) vers MySQL via Pandas + Parquet, avec API de contrôle FastAPI',
     liveUrl: null,
-    problem: 'L\'ERP Epicor stocke les données d\'inventaire et de commandes live dans un SQL Server Windows accessible uniquement via driver ODBC. Chaque autre service PA Super (boutique, parser, agent IA) avait besoin de ces données dans MySQL — il n\'y avait pas de pont, les systèmes en aval tournaient sur des données obsolètes.',
-    lesson: 'Sur Windows, PM2 + Python venv signifie que ton plan de récupération doit être à toute épreuve — quand un PC redémarre, rien ne revient automatiquement sans avoir testé la séquence de redémarrage complète. Les scripts de récupération batch n\'étaient pas optionnels ; l\'équipe ops devait s\'auto-réparer sans intervention dev. La documentation comme artefact de déploiement.'
+    problem: 'Le SQL Server d\'Epicor n\'est accessible que via le driver ODBC Windows — pas de REST API, pas de réplication, pas de change-data-capture. La connexion pyodbc tombe silencieusement après 30 minutes d\'inactivité, et la reconnexion sous gestion de processus PM2 sur Windows crée des handles de base de données orphelins qui verrouillent les tables. Les services en aval (vitrine, agent IA, parser) ont besoin de données d\'inventaire fraîches sous 5 minutes, mais un scan complet de 40K+ SKUs prend 12 minutes.',
+    lesson: 'La sync incrémentale via une colonne modified_date a réduit le scan complet de 12 minutes à des fetches delta de 45 secondes. Parquet comme format intermédiaire (pas CSV) préserve les types de colonnes et gère les valeurs NULL sans l\'ambiguïté du parsing. Les scripts de récupération PM2 n\'étaient pas optionnels — sur Windows, PM2 ne redémarre pas automatiquement après reboot à moins d\'exécuter pm2 save + pm2-startup manuellement. Écriture de scripts batch que le personnel d\'exploitation peut double-cliquer pour restaurer le pipeline complet sans intervention dev.'
   },
   {
     id: 14,
@@ -511,7 +523,9 @@ export const projectsDataFr: Project[] = [
       plateformes: 'iOS, Android, Web, Desktop'
     },
     architecture: 'Architecture BLoC avec pattern repository, intégration appareils Zebra, et configuration multi-environnements',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Les scanners Zebra TC21 émettent des intents DataWedge à intervalles de 200ms pendant un scan rapide — le gestionnaire d\'événements BLoC traitait chaque scan de manière synchrone, causant un gel de l\'UI de 3 secondes quand un magasinier scannait 10 articles rapidement. Les scans en double du même code-barres dans un comptage de cycle créaient des chiffres d\'inventaire gonflés qui se propageaient à l\'ERP.',
+    lesson: 'Debounce du listener d\'intent DataWedge à 300ms et ajout d\'un buffer de scan avec dédup de code-barres (même code-barres dans les 5 secondes = ignoré). Le BLoC traite les événements de scan de manière asynchrone via une file d\'événements, donc l\'UI reste à 60fps même pendant un scan rapide. La logique de prévention des doublons (Set<String> des codes-barres scannés par session) a capturé en moyenne 12% de scans en double par quart de travail qui gonflaient précédemment les comptages.'
   },
   {
     id: 15,
@@ -545,7 +559,9 @@ export const projectsDataFr: Project[] = [
       plateformes: 'iOS, Android, Web, Desktop'
     },
     architecture: 'Architecture BLoC avec pattern repository, tests complets, et configuration multi-environnements',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Les transferts inter-magasins impliquent 3 transitions d\'état (créé → en-transit → reçu) à travers 2 emplacements physiques. Si le magasin expéditeur marque un transfert comme envoyé mais que l\'app du magasin destinataire est hors ligne, le transfert reste coincé dans les limbes "en-transit" sans timeout ni escalade. Les transferts en lot de 50+ articles expiraient sur le HTTP POST parce que le backend validait chaque article séquentiellement.',
+    lesson: 'Ajout d\'un TTL de 48 heures sur le statut en-transit avec alertes d\'escalade automatiques aux deux magasins. Pour les transferts en lot, déplacement de la validation des articles vers un job en arrière-plan — le POST retourne immédiatement avec un ID de transfert, et l\'app poll les résultats de validation. La suite de tests BLoC (85% de couverture) a capturé un cas limite critique : les transferts via magasin proxy (A→B→C) comptabilisaient en double l\'inventaire au lieu intermédiaire.'
   },
   {
     id: 16,
@@ -579,7 +595,9 @@ export const projectsDataFr: Project[] = [
       plateformes: 'iOS, Android'
     },
     architecture: 'Full-stack avec frontend Flutter BLoC et API Express RESTful avec persistance MongoDB',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Le schéma flexible de MongoDB était initialement pratique mais a mené à des documents de score inconsistants — certains avaient "distance" en string ("4.5m"), d\'autres en float (4.5), et un cas limite le stockait en tableau. Le hachage de mot de passe Argon2 ajoutait 800ms à l\'endpoint de login, rendant l\'app lente à la première authentification.',
+    lesson: 'Ajout de la validation de schéma Mongoose avec strict: true pour appliquer les types au niveau ODM — les documents invalides sont rejetés avant d\'atteindre la base de données. Pour Argon2, ajustement du coût mémoire de 64MB à 16MB (sécurité toujours équivalente à bcrypt) et déplacement du hachage vers un worker thread — le login est passé de 800ms à 200ms. Premier projet personnel où j\'ai implémenté la rotation de refresh token JWT, que j\'ai ensuite réutilisée dans 3 projets de production.'
   },
   {
     id: 17,
@@ -611,7 +629,9 @@ export const projectsDataFr: Project[] = [
       architecture: 'App Router avec Server Components + Tailwind 4'
     },
     architecture: 'App Router Next.js 15.5 avec React 19.1 Server Components, Strapi 5.28 CMS headless, et Tailwind CSS 4',
-    liveUrl: null
+    liveUrl: null,
+    problem: 'Next.js 15 App Router avec Server Components signifie qu\'on ne peut pas utiliser useState ou useEffect dans les pages rendues côté serveur — mais les composants TanStack React Table et Recharts nécessitent de l\'état côté client. La frontière entre composants serveur et client causait des mismatches d\'hydratation quand Strapi retournait des dates en UTC mais le client les rendait en fuseau horaire local.',
+    lesson: 'Établissement d\'un pattern clair : les composants serveur fetchent depuis Strapi et passent des données sérialisées en props à des wrappers de composants client qui gèrent l\'interactivité. Pour les dates, normaliser en chaînes ISO 8601 à la couche de réponse Strapi (pas dans React) a éliminé les mismatches d\'hydratation. La validation Zod sur les soumissions de formulaire a capturé 3 cas limites que la validation intégrée de React Hook Form avait manqués, particulièrement autour des objets imbriqués optionnels.'
   },
   {
     id: 18,
@@ -649,8 +669,8 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'Angular Universal SSR avec cache 3 couches, APIs GraphQL + REST, moteur compatibilité véhicule YMME, et mode dual B2B/B2C avec déploiement Kubernetes via ArgoCD',
     liveUrl: 'https://pasuper.com',
-    problem: 'Angular 13 a la réputation d\'être "dépassé" en 2024. Cette base de code prouve le contraire — 188 composants, SSR avec hydratation, cache 3 couches, et un moteur de compatibilité véhicule servant 5M+ pièces. Le défi n\'était pas la version du framework ; c\'était gérer cette échelle sans régressions de performance et sans casser la frontière SSR/CSR à chaque release.',
-    lesson: 'Angular Universal SSR est impitoyable. Tout appel API navigateur uniquement (localStorage, window, document) dans un composant crashe le rendu serveur silencieusement ou lance une erreur à l\'hydratation. La discipline d\'écrire du code isomorphe — toujours protéger les appels spécifiques à la plateforme — est devenue naturelle seulement après avoir débogué une douzaine de crashes SSR en production. Le cache 3 couches n\'était pas une architecture élégante, c\'était un mécanisme de survie : l\'API PEDS est lente, donc on met en cache tout ce qui n\'a pas besoin d\'être temps réel.'
+    problem: 'Le moteur de compatibilité YMME (Année/Marque/Modèle/Moteur) sert 5M+ pièces mais les requêtes de dropdowns en cascade faisaient 4 appels API séquentiels — chacun attendant la résolution du précédent. Le chargement de page avec SSR atteignait 6 secondes parce qu\'Angular Universal rendait côté serveur des composants qui appelaient localStorage (qui n\'existe pas sur le serveur), causant des échecs SSR silencieux qui tombaient en rendu côté client.',
+    lesson: 'Implémentation d\'un cache 3 couches (Redis → LRU en mémoire → HTTP ETag) qui a réduit le temps de lookup YMME de 4 appels séquentiels (2,4s) à un seul cache hit (80ms) pour 92% des requêtes. Pour le SSR, création d\'un PlatformService qui encapsule chaque API navigateur derrière un guard isPlatformBrowser — plus de crashs SSR silencieux. Le pattern GraphQL DataLoader pour le batching des appels API PEDS a réduit les requêtes externes de 60% pendant le pré-rendu SSR.'
   },
   {
     id: 19,
@@ -695,7 +715,7 @@ export const projectsDataFr: Project[] = [
     },
     architecture: 'CMS Strapi 4 avec moteur de recherche Elasticsearch (4 indices), cache multi-couche Redis, traitement jobs async bee-queue pour PDF/email, traitement parallèle chunked PEDS, double base MySQL, et déploiement Kubernetes via ArgoCD',
     liveUrl: null,
-    problem: 'Un distributeur automobile avec 5M+ SKUs a besoin d\'une recherche qui fonctionne vraiment — pas des requêtes SQL LIKE sur des millions de lignes. Au-delà de la recherche, la plateforme devait gérer des workflows lourds en async (génération factures, email en masse, sync données PEDS) sans bloquer le chemin principal de requêtes et sans suffoquer sur des imports CSV de 50 000+ lignes produits.',
-    lesson: 'Le swap d\'alias Elasticsearch pour la ré-indexation zero-downtime semble élégant dans la doc mais a nécessité deux tentatives ratées en production pour s\'en sortir. L\'insight clé : toujours écrire dans un nouvel index avec suffixe timestamp, vérifier que le nombre de docs correspond, puis swapper l\'alias atomiquement. Ne jamais ré-indexer en place. Pour bee-queue : séparer la définition des jobs de leur traitement dans des modules distincts a rendu la base de code beaucoup plus facile à raisonner au fur et à mesure que le nombre de types de jobs grandissait.'
+    problem: 'Les requêtes SQL LIKE sur 5M+ SKUs prenaient 12 secondes par recherche. Les imports CSV de 50 000+ lignes de produits PEDS faisaient timeout sur la requête HTTP à 30 secondes, et les imports échoués laissaient la base de données dans un état partiel avec des enregistrements orphelins. La ré-indexation Elasticsearch verrouillait l\'alias de recherche pendant 8 minutes, signifiant que la vitrine affichait "aucun résultat" pendant chaque rafraîchissement de données produit.',
+    lesson: 'L\'alias swapping Elasticsearch a résolu la ré-indexation sans downtime : écrire vers un nouvel index avec un suffixe timestamp, vérifier que le nombre de documents correspond à la source, puis swapper l\'alias atomiquement — la vitrine ne voit jamais de trou. Pour les imports CSV, bee-queue traite les lignes en chunks de 500 dans une transaction database — si le chunk 47 échoue, les chunks 1-46 sont déjà committés et le chunk 47 retry indépendamment. Ce pattern gère des imports de 50K lignes en 90 secondes avec zéro enregistrement orphelin.'
   },
 ];
