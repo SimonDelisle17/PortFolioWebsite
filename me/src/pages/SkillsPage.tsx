@@ -23,12 +23,12 @@ const ALSO_USED = [
 
 const EXPERIENCE = [
   {
-    company: 'SimonDev Inc',
-    role: { en: 'Founder — Full-Stack & AI Engineer', fr: 'Fondateur — Ingénieur Full-Stack & IA' },
+    company: 'PA Super',
+    role: { en: 'Main Software Engineer', fr: 'Ingénieur Logiciel Principal' },
     period: '2024 – Present',
     desc: {
-      en: 'My company. I take on client software projects — production systems, not side experiments. Currently building for PA Super as the main client: 19 systems in prod spanning mobile, web, backend, AI, and K8s infrastructure.',
-      fr: 'Ma compagnie. Je prends des projets logiciels pour des clients — des systèmes en production, pas des expériences. Client principal actuel : PA Super — 19 systèmes en prod couvrant mobile, web, backend, IA et infra K8s.',
+      en: 'Joined as their first software engineer. Built the entire logistics ecosystem from scratch: 19 systems in production spanning mobile apps (drivers & warehouse), AI phone assistant, backend APIs, and Kubernetes infrastructure.',
+      fr: "Rejoint comme premier ingénieur logiciel. Bâti tout l'écosystème logistique de zéro : 19 systèmes en production — apps mobiles (chauffeurs & entrepôt), assistant IA téléphonique, APIs backend et infrastructure Kubernetes.",
     },
     tech: ['Flutter', 'Python', 'FastAPI', 'React', 'Angular', 'LangChain', 'K8s', 'MySQL', 'Redis'],
   },
@@ -45,7 +45,7 @@ const EXPERIENCE = [
   {
     company: 'FetchVision',
     role: { en: 'Hybrid Mobile Developer', fr: 'Développeur Mobile Hybride' },
-    period: '2021',
+    period: '2020 – 2021',
     desc: {
       en: 'Cross-platform mobile apps with Flutter and backend integrations.',
       fr: 'Apps mobiles multiplateformes avec Flutter et intégrations backend.',

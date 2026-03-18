@@ -12,6 +12,7 @@ const MILESTONES_EN = [
   { year: '2024', event: 'Joined PA Super as the main software engineer — built everything from scratch' },
   { year: '2024', event: 'Founded SimonDev Inc — taking on client projects outside work hours' },
   { year: '2025', event: 'Deployed PaSUPER AI in production — real phone calls handled by an LLM' },
+  { year: '2026', event: 'Opened SimonDev Inc to new clients — building production software' },
   { year: '2026', event: 'Still shipping. Still learning. Coffee intake: concerning.' },
 ];
 
@@ -21,14 +22,15 @@ const MILESTONES_FR = [
   { year: '2024', event: 'Rejoint PA Super comme ingénieur principal — tout construit from scratch' },
   { year: '2024', event: 'Fondation de SimonDev Inc — projets clients en dehors des heures de travail' },
   { year: '2025', event: 'PaSUPER IA déployé en production — vrais appels téléphoniques gérés par un LLM' },
+  { year: '2026', event: 'Ouverture de SimonDev Inc aux nouveaux clients — développement logiciel de production à temps plein' },
   { year: '2026', event: 'Toujours en prod. Toujours en train d\'apprendre. Consommation de café : alarmante.' },
 ];
 
 const STATS = [
-  { value: '19', label: { en: 'Projects shipped', fr: 'Projets livrés' } },
+  { value: '19', label: { en: 'Projects, last 2 years', fr: 'Projets en 2 ans' } },
   { value: '5+', label: { en: 'Years in production', fr: 'Ans en production' } },
   { value: '1M+', label: { en: 'Lines of code', fr: 'Lignes de code' } },
-  { value: '2', label: { en: 'Languages spoken', fr: 'Langues parlées' } },
+  { value: '1', label: { en: 'Company founded', fr: 'Compagnie fondée' } },
 ];
 
 const fade = (delay: number) => ({
@@ -97,7 +99,7 @@ const AboutPage = () => {
                   mb: 1,
                 }}
               >
-                Simon <Box component="span" sx={{ color: '#f5c842' }}>Claude</Box> Delisle
+                Simon Delisle
               </Typography>
             </motion.div>
             <motion.div {...fade(0.15)}>
@@ -158,6 +160,117 @@ const AboutPage = () => {
                 </Typography>
               </Box>
             ))}
+          </Box>
+        </motion.div>
+
+        {/* SimonDev Inc — Company section */}
+        <motion.div {...fade(0.28)}>
+          <Box
+            sx={{
+              mb: 6,
+              borderRadius: '20px',
+              border: '1px solid rgba(245,200,66,0.18)',
+              background: 'linear-gradient(135deg, #161412 0%, #1a1710 100%)',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            {/* Ambient glow */}
+            <Box sx={{ position: 'absolute', top: -60, right: -60, width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,200,66,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+            <Box sx={{ p: { xs: 3, md: 4 } }}>
+              {/* Header row */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5, mb: 3, flexWrap: 'wrap' }}>
+                <Box
+                  component="img"
+                  src={simondevLogo}
+                  alt="SimonDev Inc"
+                  sx={{ width: { xs: 110, md: 160 }, height: 'auto', display: 'block', opacity: 0.95 }}
+                />
+                <Box
+                  sx={{
+                    px: 1.2, py: 0.4, borderRadius: '6px',
+                    background: 'rgba(74,222,128,0.1)',
+                    border: '1px solid rgba(74,222,128,0.25)',
+                    fontSize: '0.7rem', fontWeight: 600,
+                    color: '#4ade80',
+                    fontFamily: "'DM Sans', sans-serif",
+                    letterSpacing: '0.05em',
+                    display: 'flex', alignItems: 'center', gap: 0.6,
+                  }}
+                >
+                  <Box component="span" sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#4ade80', display: 'inline-block', animation: 'pulse 2s ease-in-out infinite', '@keyframes pulse': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.3 } } }} />
+                  {isEn ? 'Open to new projects' : 'Ouvert aux nouveaux projets'}
+                </Box>
+              </Box>
+
+              {/* Description */}
+              <Typography sx={{ fontSize: '1rem', color: '#c8bfaf', lineHeight: 1.8, mb: 3, maxWidth: '640px' }}>
+                {isEn
+                  ? 'SimonDev Inc is my software company. I founded it to build production-grade software for clients — the kind that actually ships, scales, and gets used by real people. Whether it\'s a mobile app, a backend API, or an AI integration, I take ownership from architecture to deployment.'
+                  : "SimonDev Inc est ma société de logiciels. Je l'ai fondée pour construire des logiciels de qualité production pour des clients — le genre qui se déploie vraiment, qui scale, et qui est utilisé par de vraies personnes. App mobile, API backend ou intégration IA, je prends en charge l'architecture jusqu'au déploiement."}
+              </Typography>
+
+              {/* Services grid */}
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
+                  gap: 1.5,
+                  mb: 3,
+                }}
+              >
+                {[
+                  { icon: '📱', label: isEn ? 'Mobile Apps' : 'Apps Mobiles', sub: 'Flutter / Dart' },
+                  { icon: '⚙️', label: isEn ? 'Web & API' : 'Web & API', sub: 'React · FastAPI · Node' },
+                  { icon: '🤖', label: isEn ? 'AI Integration' : 'Intégration IA', sub: 'LangChain · GPT-4o' },
+                  { icon: '☁️', label: isEn ? 'Infrastructure' : 'Infrastructure', sub: 'Kubernetes · Docker' },
+                ].map((s) => (
+                  <Box
+                    key={s.label}
+                    sx={{
+                      p: 1.8,
+                      borderRadius: '12px',
+                      border: '1px solid rgba(240,236,228,0.07)',
+                      background: 'rgba(240,236,228,0.03)',
+                      transition: 'border-color 0.2s, background 0.2s',
+                      '&:hover': { borderColor: 'rgba(245,200,66,0.2)', background: 'rgba(245,200,66,0.04)' },
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '1.2rem', mb: 0.8 }}>{s.icon}</Typography>
+                    <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: '#f0ece4', mb: 0.3, fontFamily: "'DM Sans', sans-serif" }}>
+                      {s.label}
+                    </Typography>
+                    <Typography sx={{ fontSize: '0.7rem', color: '#8c8272', fontFamily: "'JetBrains Mono', monospace" }}>
+                      {s.sub}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+
+              {/* CTA */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, pt: 1, borderTop: '1px solid rgba(240,236,228,0.06)' }}>
+                <Typography sx={{ fontSize: '0.82rem', color: '#8c8272', fontFamily: "'DM Sans', sans-serif" }}>
+                  {isEn ? 'Let\'s build something together →' : 'Construisons quelque chose ensemble →'}
+                </Typography>
+                <Typography
+                  component="a"
+                  href="mailto:info@simondelisle.dev"
+                  sx={{
+                    fontSize: '0.82rem',
+                    color: '#f5c842',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    textDecoration: 'none',
+                    borderBottom: '1px solid rgba(245,200,66,0.3)',
+                    pb: '1px',
+                    transition: 'border-color 0.15s',
+                    '&:hover': { borderColor: '#f5c842' },
+                  }}
+                >
+                  info@simondelisle.dev
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         </motion.div>
 
