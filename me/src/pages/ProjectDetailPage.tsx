@@ -14,7 +14,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from '@mui/material';
 import {
   ArrowBack,
@@ -27,6 +26,7 @@ import {
 import { getProjectById } from '../data/projectsData';
 import { projectsDataFr } from '../data/projectsData.fr';
 import { useTranslation } from 'react-i18next';
+import InnerPageLayout from '../components/InnerPageLayout';
 
 const ProjectDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -43,24 +43,19 @@ const ProjectDetailPage = () => {
 
   if (!project) {
     return (
-      <Container sx={{ py: 10, textAlign: 'center' }}>
-        <Typography variant="h3" gutterBottom>
-          {t('projectDetail.backToPortfolio')}
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<ArrowBack />}
-          onClick={() => navigate('/')}
-          sx={{ mt: 3 }}
-        >
-          {t('projectDetail.backToPortfolio')}
-        </Button>
-      </Container>
+      <InnerPageLayout>
+        <Container sx={{ py: 10, textAlign: 'center' }}>
+          <Button variant="contained" startIcon={<ArrowBack />} onClick={() => navigate('/')}>
+            {t('projectDetail.backToPortfolio')}
+          </Button>
+        </Container>
+      </InnerPageLayout>
     );
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', py: 12, bgcolor: 'background.default' }}>
+    <InnerPageLayout title={project.title}>
+    <Box sx={{ minHeight: '100vh', py: 6, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         {/* Header */}
         <motion.div
@@ -301,6 +296,7 @@ const ProjectDetailPage = () => {
         </Box>
       </Container>
     </Box>
+    </InnerPageLayout>
   );
 };
 
