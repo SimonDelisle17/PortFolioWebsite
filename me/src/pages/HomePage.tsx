@@ -16,6 +16,14 @@ const PHRASES_EN = [
   'deploys AI that actually works.',
   'engineers real-time pipelines.',
   'writes K8s manifests at 2am.',
+  'turns coffee into microservices.',
+  'automates what others do by hand.',
+  'builds backends that handle 40K+ parts.',
+  'makes phones answer themselves.',
+  'ships 19 projects in 2 years.',
+  'codes in the evening for fun.',
+  'puts LLMs on real phone lines.',
+  'runs GitOps on bare metal.',
 ];
 const PHRASES_FR = [
   "construit des écosystèmes logistiques.",
@@ -23,6 +31,14 @@ const PHRASES_FR = [
   "met en prod des IA qui fonctionnent vraiment.",
   "conçoit des pipelines en temps réel.",
   "écrit des manifests K8s à 2h du matin.",
+  "transforme le café en microservices.",
+  "automatise ce que d'autres font à la main.",
+  "construit des backends pour 40K+ pièces.",
+  "fait répondre les téléphones tout seuls.",
+  "livre 19 projets en 2 ans.",
+  "code le soir pour le plaisir.",
+  "met des LLMs sur de vraies lignes téléphoniques.",
+  "fait du GitOps sur du bare metal.",
 ];
 
 const Typewriter = ({ phrases }: { phrases: string[] }) => {
