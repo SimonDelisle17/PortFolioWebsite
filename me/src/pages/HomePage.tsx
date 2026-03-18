@@ -579,7 +579,7 @@ const HomePage = () => {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  {'<5y exp'}
+                  {'5y+ exp'}
                 </Box>
               </Box>
             </Box>
