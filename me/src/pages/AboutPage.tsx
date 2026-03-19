@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InnerPageLayout from '../components/InnerPageLayout';
-import mePhoto from '../assets/me.jpg';
+import mePhoto from '../assets/ProfessionalMe.png';
 import simondevLogo from '../assets/simondev_transparent.png';
 
 const MILESTONES_EN = [

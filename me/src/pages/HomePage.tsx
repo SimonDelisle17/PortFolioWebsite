@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import mePhoto from '../assets/me.jpg';
+import mePhoto from '../assets/ProfessionalMe.png';
 import simondevLogo from '../assets/simondev_transparent.png';
 import apdqLogo from '../assets/apdq.png';
 
