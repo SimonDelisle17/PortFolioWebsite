@@ -7,7 +7,7 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import mePhoto from '../assets/ProfessionalMe.png';
-import simondevLogo from '../assets/simondev_transparent.png';
+import simondevLogo from '../assets/simondevLogo.png';
 import apdqLogo from '../assets/apdq.png';
 
 // ─── Typewriter ───────────────────────────────────────────────────────────────
@@ -373,7 +373,7 @@ const HomePage = () => {
                   }}
                 />
 
-                {/* SimonDev Inc logo */}
+                {/* SimonDev logo */}
                 <Box
                   component={motion.div}
                   initial={{ opacity: 0, x: -8 }}
@@ -393,7 +393,7 @@ const HomePage = () => {
                   <Box
                     component="img"
                     src={simondevLogo}
-                    alt="SimonDev Inc"
+                    alt="SimonDev"
                     sx={{ width: { sm: 110, md: 150, lg: 200 }, height: 'auto', display: 'block' }}
                   />
                 </Box>
@@ -548,8 +548,8 @@ const HomePage = () => {
                 }}
               >
                 {isEn
-                  ? 'Founder of SimonDev Inc. I architect logistics ecosystems, ship mobile apps for field workers, and wire AI into things that actually save people time.'
-                  : "Fondateur de SimonDev Inc. J'architecture des écosystèmes logistiques, livre des apps mobiles sur le terrain et intègre l'IA dans des systèmes qui font vraiment gagner du temps."}
+                  ? 'Founder of SimonDev. I architect logistics ecosystems, ship mobile apps for field workers, and wire AI into things that actually save people time.'
+                  : "Fondateur de SimonDev. J'architecture des écosystèmes logistiques, livre des apps mobiles sur le terrain et intègre l'IA dans des systèmes qui font vraiment gagner du temps."}
               </Typography>
 
               <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
@@ -565,7 +565,7 @@ const HomePage = () => {
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  @SimonDevInc
+                  @SimonDev
                 </Box>
                 <Box
                   sx={{

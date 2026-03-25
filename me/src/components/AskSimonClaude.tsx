@@ -13,7 +13,7 @@ Be professional but personable — not a corporate chatbot.
 
 About Simon:
 - Full-stack & AI engineer, Québec, Canada
-- Founder of SimonDev Inc — builds production software for clients
+- Founder of SimonDev — builds production software for clients
 - 5+ years in production, 19 projects shipped
 - Main client: PA Super (Canadian automotive parts distributor) — built their entire logistics ecosystem from zero
 - Stack: Flutter/Dart, Python/FastAPI, Node.js/TypeScript, React, Angular, LangChain, Kubernetes, Redis, MySQL, Elasticsearch
@@ -24,25 +24,25 @@ About Simon:
 - GitHub: https://github.com/SimonPasuper (repos are private)
 - "Claude" is his Catholic name (a Québec tradition) — the AI coincidence is one he's accepted
 - Plays golf badly, thinks about software constantly
-- Open to client projects through SimonDev Inc
+- Open to client projects through SimonDev
 
 If asked something you don't know specifically about Simon, be honest and suggest they contact him directly.`;
 
 // ─── Fallback mock (used if no API key configured) ────────────────────────────
 const MOCK_EN: Record<string, string> = {
-  default: "I'm Simon Delisle — full-stack & AI engineer, founder of SimonDev Inc. I build production software for clients. Try one of the suggestions!",
-  who: "Simon Delisle. Founder of SimonDev Inc — I design and ship complete production software systems. Flutter apps, AI voice assistants, logistics backends. 'Claude' is my Catholic name — the AI coincidence is one I've accepted. 🤖",
+  default: "I'm Simon Delisle — full-stack & AI engineer, founder of SimonDev. I build production software for clients. Try one of the suggestions!",
+  who: "Simon Delisle. Founder of SimonDev — I design and ship complete production software systems. Flutter apps, AI voice assistants, logistics backends. 'Claude' is my Catholic name — the AI coincidence is one I've accepted. 🤖",
   built: "19 production projects:\n• Super API — enterprise logistics backend (300K+ lines)\n• SuperApp — Flutter dual-mode for drivers & warehouse\n• PaSUPER AI — omnichannel AI: real phone calls + streaming chat in 3 languages\n• APDQ Towing — Flutter + FastAPI + React (3 stacks)\n• Kubernetes infra, parsers, cron systems, and more.",
   stack: "Core: Flutter/Dart, Python/FastAPI, Node.js/TypeScript, React, Angular.\nAI: LangChain, GPT-4o, Gladia STT, AWS Polly, SSE streaming.\nInfra: Kubernetes, Docker, ArgoCD, Redis, MySQL, Elasticsearch.",
-  available: "I run SimonDev Inc and take on client projects. Reach me at info@simondelisle.dev or connect on LinkedIn.",
+  available: "I run SimonDev and take on client projects. Reach me at info@simondelisle.dev or connect on LinkedIn.",
   biggest: "PaSUPER AI — production omnichannel AI for a 5M-part automotive distributor. Real Twilio phone calls with voice recognition + web chat via SSE, in FR/EN/ES. Single LangChain agent, stateless, runs on Kubernetes.",
 };
 const MOCK_FR: Record<string, string> = {
-  default: "Je suis Simon Delisle — ingénieur full-stack & IA, fondateur de SimonDev Inc. Je construis des logiciels de production pour des clients. Essayez une suggestion!",
-  who: "Simon Delisle. Fondateur de SimonDev Inc. Je conçois et livre des systèmes de production complets. «Claude» est mon nom catholique — la coïncidence avec l'IA, j'ai arrêté de l'expliquer. 🤖",
+  default: "Je suis Simon Delisle — ingénieur full-stack & IA, fondateur de SimonDev. Je construis des logiciels de production pour des clients. Essayez une suggestion!",
+  who: "Simon Delisle. Fondateur de SimonDev. Je conçois et livre des systèmes de production complets. «Claude» est mon nom catholique — la coïncidence avec l'IA, j'ai arrêté de l'expliquer. 🤖",
   built: "19 projets en production:\n• Super API — backend logistique (300K+ lignes)\n• SuperApp — Flutter double mode (chauffeurs & entrepôt)\n• PaSUPER IA — omnicanal: vrais appels + chat SSE en 3 langues\n• APDQ Remorquage — Flutter + FastAPI + React\n• Infra Kubernetes, parseurs, systèmes cron, et plus.",
   stack: "Cœur: Flutter/Dart, Python/FastAPI, Node.js/TypeScript, React, Angular.\nIA: LangChain, GPT-4o, Gladia STT, AWS Polly, streaming SSE.\nInfra: Kubernetes, Docker, ArgoCD, Redis, MySQL, Elasticsearch.",
-  available: "Je gère SimonDev Inc et prends des projets clients. Écrivez-moi à info@simondelisle.dev ou sur LinkedIn.",
+  available: "Je gère SimonDev et prends des projets clients. Écrivez-moi à info@simondelisle.dev ou sur LinkedIn.",
   biggest: "PaSUPER IA — IA omnicanal pour un distributeur de 5M pièces. Vrais appels Twilio + chat SSE en FR/EN/ES. Agent LangChain unique, sans état, sur Kubernetes.",
 };
 

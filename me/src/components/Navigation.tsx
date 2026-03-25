@@ -114,7 +114,7 @@ const Navigation = () => {
               <Box
                 component="img"
                 src={logo}
-                alt="SimonDev Inc"
+                alt="SimonDev"
                 onClick={() => handleNavClick('home')}
                 sx={{
                   mr: 2,

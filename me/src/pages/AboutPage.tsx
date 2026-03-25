@@ -4,15 +4,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InnerPageLayout from '../components/InnerPageLayout';
 import mePhoto from '../assets/ProfessionalMe.png';
-import simondevLogo from '../assets/simondev_transparent.png';
+import simondevLogo from '../assets/simondevLogo.png';
 
 const MILESTONES_EN = [
   { year: '2021', event: 'First developer role — Shopify e-commerce at Blue Badger' },
   { year: '2021', event: 'Built cross-platform mobile apps at FetchVision with Flutter' },
   { year: '2024', event: 'Joined PA Super as the main software engineer — built everything from scratch' },
-  { year: '2024', event: 'Founded SimonDev Inc — taking on client projects outside work hours' },
+  { year: '2024', event: 'Founded SimonDev — taking on client projects outside work hours' },
   { year: '2025', event: 'Deployed PaSUPER AI in production — real phone calls handled by an LLM' },
-  { year: '2026', event: 'Opened SimonDev Inc to new clients — building production software' },
+  { year: '2026', event: 'Opened SimonDev to new clients — building production software' },
   { year: '2026', event: 'Still shipping. Still learning. Coffee intake: concerning.' },
 ];
 
@@ -20,9 +20,9 @@ const MILESTONES_FR = [
   { year: '2021', event: 'Premier poste dev — e-commerce Shopify chez Blue Badger' },
   { year: '2021', event: 'Apps mobiles multiplateformes chez FetchVision avec Flutter' },
   { year: '2024', event: 'Rejoint PA Super comme ingénieur principal — tout construit from scratch' },
-  { year: '2024', event: 'Fondation de SimonDev Inc — projets clients en dehors des heures de travail' },
+  { year: '2024', event: 'Fondation de SimonDev — projets clients en dehors des heures de travail' },
   { year: '2025', event: 'PaSUPER IA déployé en production — vrais appels téléphoniques gérés par un LLM' },
-  { year: '2026', event: 'Ouverture de SimonDev Inc aux nouveaux clients — développement logiciel de production à temps plein' },
+  { year: '2026', event: 'Ouverture de SimonDev aux nouveaux clients — développement logiciel de production à temps plein' },
   { year: '2026', event: 'Toujours en prod. Toujours en train d\'apprendre. Consommation de café : alarmante.' },
 ];
 
@@ -79,7 +79,7 @@ const AboutPage = () => {
               <Box
                 component="img"
                 src={simondevLogo}
-                alt="SimonDev Inc"
+                alt="SimonDev"
                 sx={{ width: { xs: 90, md: 200 }, height: 'auto', display: 'block', opacity: 0.92 }}
               />
             </Box>
@@ -163,7 +163,7 @@ const AboutPage = () => {
           </Box>
         </motion.div>
 
-        {/* SimonDev Inc — Company section */}
+        {/* SimonDev — Company section */}
         <motion.div {...fade(0.28)}>
           <Box
             sx={{
@@ -184,7 +184,7 @@ const AboutPage = () => {
                 <Box
                   component="img"
                   src={simondevLogo}
-                  alt="SimonDev Inc"
+                  alt="SimonDev"
                   sx={{ width: { xs: 110, md: 160 }, height: 'auto', display: 'block', opacity: 0.95 }}
                 />
                 <Box
@@ -207,8 +207,8 @@ const AboutPage = () => {
               {/* Description */}
               <Typography sx={{ fontSize: '1rem', color: '#c8bfaf', lineHeight: 1.8, mb: 3, maxWidth: '640px' }}>
                 {isEn
-                  ? 'SimonDev Inc is my software company. I founded it to build production-grade software for clients — the kind that actually ships, scales, and gets used by real people. Whether it\'s a mobile app, a backend API, or an AI integration, I take ownership from architecture to deployment.'
-                  : "SimonDev Inc est ma société de logiciels. Je l'ai fondée pour construire des logiciels de qualité production pour des clients — le genre qui se déploie vraiment, qui scale, et qui est utilisé par de vraies personnes. App mobile, API backend ou intégration IA, je prends en charge l'architecture jusqu'au déploiement."}
+                  ? 'SimonDev is my software company. I founded it to build production-grade software for clients — the kind that actually ships, scales, and gets used by real people. Whether it\'s a mobile app, a backend API, or an AI integration, I take ownership from architecture to deployment.'
+                  : "SimonDev est ma société de logiciels. Je l'ai fondée pour construire des logiciels de qualité production pour des clients — le genre qui se déploie vraiment, qui scale, et qui est utilisé par de vraies personnes. App mobile, API backend ou intégration IA, je prends en charge l'architecture jusqu'au déploiement."}
               </Typography>
 
               {/* Services grid */}
