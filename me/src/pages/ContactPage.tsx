@@ -29,20 +29,17 @@ const ContactPage = () => {
   return (
     <InnerPageLayout title="Contact">
       <Box sx={{ maxWidth: '720px', mx: 'auto', px: { xs: 2, md: 3 }, py: { xs: 4, md: 6 } }}>
-
-        {/* Header */}
         <motion.div {...fade(0.05)}>
           <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: { xs: '2.2rem', md: '3rem' }, fontWeight: 700, color: '#f0ece4', lineHeight: 1.05, letterSpacing: '-0.02em', mb: 0.5 }}>
             {isEn ? "Let's talk." : 'Parlons-en.'}
           </Typography>
           <Typography sx={{ fontSize: '0.9rem', color: '#8c8272', mb: 4 }}>
             {isEn
-              ? "Founder of SimonDev — I build production software for clients. Open to new projects."
-              : "Fondateur de SimonDev — je construis des logiciels de production pour des clients. Ouvert à de nouveaux projets."}
+              ? 'Open to new projects, collaborations, and thoughtful product work.'
+              : 'Ouvert aux nouveaux projets, aux collaborations et au travail produit serieux.'}
           </Typography>
         </motion.div>
 
-        {/* Email card */}
         <motion.div {...fade(0.1)}>
           <Box
             onClick={copyEmail}
@@ -62,7 +59,7 @@ const ContactPage = () => {
             }}
           >
             <Typography sx={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8c8272', mb: 1, fontFamily: "'DM Sans', sans-serif" }}>
-              {isEn ? 'Email — click to copy' : 'Email — cliquer pour copier'}
+              {isEn ? 'Email - click to copy' : 'Email - cliquer pour copier'}
             </Typography>
             <Typography sx={{ fontFamily: "'JetBrains Mono', monospace", fontSize: { xs: '0.85rem', md: '1rem' }, color: '#f5c842' }}>
               {EMAIL}
@@ -70,7 +67,6 @@ const ContactPage = () => {
           </Box>
         </motion.div>
 
-        {/* Social links */}
         <motion.div {...fade(0.15)}>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1.5, mb: 4 }}>
             <Box
@@ -110,12 +106,11 @@ const ContactPage = () => {
             >
               <Box sx={{ fontSize: '1.3rem', mb: 1 }}>⚙️</Box>
               <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '0.95rem', fontWeight: 600, color: '#f0ece4', mb: 0.3 }}>GitHub</Typography>
-              <Typography sx={{ fontSize: '0.72rem', color: '#8c8272' }}>SimonPasuper — repos are private</Typography>
+              <Typography sx={{ fontSize: '0.72rem', color: '#8c8272' }}>SimonPasuper - repos are private</Typography>
             </Box>
           </Box>
         </motion.div>
 
-        {/* Location */}
         <motion.div {...fade(0.2)}>
           <Box
             sx={{
@@ -132,16 +127,15 @@ const ContactPage = () => {
             <Box sx={{ fontSize: '1.4rem' }}>📍</Box>
             <Box>
               <Typography sx={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '1rem', fontWeight: 600, color: '#f0ece4', mb: 0.2 }}>
-                {isEn ? 'Québec, Canada' : 'Québec, Canada'}
+                {isEn ? 'Quebec, Canada' : 'Quebec, Canada'}
               </Typography>
               <Typography sx={{ fontSize: '0.75rem', color: '#8c8272' }}>
-                {isEn ? 'GMT-5 (Eastern Time)' : 'GMT-5 (Heure de l\'Est)'}
+                {isEn ? 'GMT-5 (Eastern Time)' : "GMT-5 (Heure de l'Est)"}
               </Typography>
             </Box>
           </Box>
         </motion.div>
 
-        {/* AskSimonClaude hint */}
         <motion.div {...fade(0.25)}>
           <Box
             sx={{
@@ -154,19 +148,18 @@ const ContactPage = () => {
             <Typography sx={{ fontSize: '0.82rem', color: '#8c8272', lineHeight: 1.7 }}>
               <Box component="span" sx={{ color: '#f5c842' }}>🤖 Ask SimonClaude</Box>
               {isEn
-                ? ' — The yellow button at the bottom right has pre-loaded answers about my work, stack, and availability. Faster than waiting for a reply.'
-                : ' — Le bouton jaune en bas à droite a des réponses préchargées sur mon travail, ma stack et ma disponibilité. Plus rapide qu\'attendre une réponse.'}
+                ? ' - The yellow button at the bottom right has pre-loaded answers about my work, stack, and availability. Faster than waiting for a reply.'
+                : " - Le bouton jaune en bas a droite a des reponses prechargees sur mon travail, ma stack et ma disponibilite. Plus rapide qu attendre une reponse."}
             </Typography>
           </Box>
         </motion.div>
-
       </Box>
 
       <Snackbar
         open={copied}
         autoHideDuration={2500}
         onClose={() => setCopied(false)}
-        message={isEn ? 'Email copied to clipboard' : 'Email copié dans le presse-papiers'}
+        message={isEn ? 'Email copied to clipboard' : 'Email copie dans le presse-papiers'}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         sx={{
           '& .MuiSnackbarContent-root': {

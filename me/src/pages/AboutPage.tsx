@@ -4,33 +4,30 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InnerPageLayout from '../components/InnerPageLayout';
 import mePhoto from '../assets/ProfessionalMe.png';
-import simondevLogo from '../assets/simondevLogo.png';
 
 const MILESTONES_EN = [
-  { year: '2021', event: 'First developer role — Shopify e-commerce at Blue Badger' },
+  { year: '2021', event: 'First developer role - Shopify e-commerce at Blue Badger' },
   { year: '2021', event: 'Built cross-platform mobile apps at FetchVision with Flutter' },
-  { year: '2024', event: 'Joined PA Super as the main software engineer — built everything from scratch' },
-  { year: '2024', event: 'Founded SimonDev — taking on client projects outside work hours' },
-  { year: '2025', event: 'Deployed PaSUPER AI in production — real phone calls handled by an LLM' },
-  { year: '2026', event: 'Opened SimonDev to new clients — building production software' },
+  { year: '2024', event: 'Joined PA Super as the main software engineer - built everything from scratch' },
+  { year: '2024', event: 'Started shipping a high volume of personal and production projects outside work hours' },
+  { year: '2025', event: 'Deployed PaSUPER AI in production - real phone calls handled by an LLM' },
   { year: '2026', event: 'Still shipping. Still learning. Coffee intake: concerning.' },
 ];
 
 const MILESTONES_FR = [
-  { year: '2021', event: 'Premier poste dev — e-commerce Shopify chez Blue Badger' },
+  { year: '2021', event: 'Premier poste dev - e-commerce Shopify chez Blue Badger' },
   { year: '2021', event: 'Apps mobiles multiplateformes chez FetchVision avec Flutter' },
-  { year: '2024', event: 'Rejoint PA Super comme ingénieur principal — tout construit from scratch' },
-  { year: '2024', event: 'Fondation de SimonDev — projets clients en dehors des heures de travail' },
-  { year: '2025', event: 'PaSUPER IA déployé en production — vrais appels téléphoniques gérés par un LLM' },
-  { year: '2026', event: 'Ouverture de SimonDev aux nouveaux clients — développement logiciel de production à temps plein' },
-  { year: '2026', event: 'Toujours en prod. Toujours en train d\'apprendre. Consommation de café : alarmante.' },
+  { year: '2024', event: 'Rejoint PA Super comme ingenieur principal - tout construit from scratch' },
+  { year: '2024', event: 'Debut d une grosse cadence de projets personnels et de systemes en production en dehors du travail' },
+  { year: '2025', event: 'PaSUPER IA deploye en production - vrais appels telephoniques geres par un LLM' },
+  { year: '2026', event: 'Toujours en prod. Toujours en train d apprendre. Consommation de cafe : alarmante.' },
 ];
 
 const STATS = [
   { value: '19', label: { en: 'Projects, last 2 years', fr: 'Projets en 2 ans' } },
   { value: '5+', label: { en: 'Years in production', fr: 'Ans en production' } },
   { value: '1M+', label: { en: 'Lines of code', fr: 'Lignes de code' } },
-  { value: '1', label: { en: 'Company founded', fr: 'Compagnie fondée' } },
+  { value: '2', label: { en: 'Languages spoken', fr: 'Langues parlees' } },
 ];
 
 const fade = (delay: number) => ({
@@ -45,9 +42,8 @@ const AboutPage = () => {
   const milestones = isEn ? MILESTONES_EN : MILESTONES_FR;
 
   return (
-    <InnerPageLayout title={isEn ? 'About' : 'À propos'}>
+    <InnerPageLayout title={isEn ? 'About' : 'A propos'}>
       <Box sx={{ maxWidth: '860px', mx: 'auto', px: { xs: 2, md: 3 }, py: { xs: 4, md: 5 } }}>
-        {/* Hero: photo + intro */}
         <Box
           sx={{
             display: 'flex',
@@ -57,7 +53,6 @@ const AboutPage = () => {
             mb: { xs: 5, md: 6 },
           }}
         >
-          {/* Photo + logo */}
           <motion.div {...fade(0.05)}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
               <Box
@@ -76,16 +71,9 @@ const AboutPage = () => {
                   sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </Box>
-              <Box
-                component="img"
-                src={simondevLogo}
-                alt="SimonDev"
-                sx={{ width: { xs: 90, md: 200 }, height: 'auto', display: 'block', opacity: 0.92 }}
-              />
             </Box>
           </motion.div>
 
-          {/* Intro text */}
           <Box>
             <motion.div {...fade(0.1)}>
               <Typography
@@ -104,30 +92,29 @@ const AboutPage = () => {
             </motion.div>
             <motion.div {...fade(0.15)}>
               <Typography sx={{ fontSize: '0.85rem', color: '#8c8272', mb: 2.5, fontFamily: "'JetBrains Mono', monospace" }}>
-                {isEn ? 'Full-Stack & AI Engineer — Québec, Canada' : 'Ingénieur Full-Stack & IA — Québec, Canada'}
+                {isEn ? 'Full-Stack & AI Engineer - Quebec, Canada' : 'Ingenieur Full-Stack & IA - Quebec, Canada'}
               </Typography>
             </motion.div>
             <motion.div {...fade(0.2)}>
               <Typography sx={{ fontSize: '1.05rem', color: '#c8bfaf', lineHeight: 1.8, mb: 2 }}>
                 {isEn
-                  ? "I build software that runs in the real world. Not demos, not prototypes — production systems used by real people, every day. I joined PA Super as their first software engineer and built a complete logistics ecosystem from zero: a delivery app for drivers, a warehouse app for workers, an AI phone assistant, and the backend that holds it all together."
-                  : "Je construis des logiciels qui tournent dans le vrai monde. Pas des démos, pas des prototypes — des systèmes en production utilisés par de vraies personnes, chaque jour. J'ai rejoint PA Super comme premier ingénieur logiciel et j'ai bâti tout l'écosystème logistique de zéro: app de livraison pour les chauffeurs, app d'entrepôt, assistant IA téléphonique, et le backend qui relie tout ça."}
+                  ? 'I build software that runs in the real world. Not demos, not prototypes - production systems used by real people, every day. I joined PA Super as their first software engineer and built a complete logistics ecosystem from zero: a delivery app for drivers, a warehouse app for workers, an AI phone assistant, and the backend that holds it all together.'
+                  : "Je construis des logiciels qui tournent dans le vrai monde. Pas des demos, pas des prototypes - des systemes en production utilises par de vraies personnes, chaque jour. J ai rejoint PA Super comme premier ingenieur logiciel et j ai bati tout l ecosysteme logistique de zero : app de livraison pour les chauffeurs, app d entrepot, assistant IA telephonique, et le backend qui relie tout ca."}
               </Typography>
               <Typography sx={{ fontSize: '1.05rem', color: '#c8bfaf', lineHeight: 1.8, mb: 2 }}>
                 {isEn
-                  ? "Before that, I spent three years building Shopify stores for major brands at Blue Badger — which taught me that good UI is harder than it looks, and that performance matters more than anyone admits until the metrics go red."
-                  : "Avant ça, j'ai passé trois ans à construire des boutiques Shopify pour de grandes marques chez Blue Badger — ce qui m'a appris que la bonne UI est plus difficile qu'elle en a l'air, et que la performance compte plus que quiconque ne l'admet jusqu'à ce que les métriques virent au rouge."}
+                  ? 'Before that, I spent three years building Shopify stores for major brands at Blue Badger - which taught me that good UI is harder than it looks, and that performance matters more than anyone admits until the metrics go red.'
+                  : "Avant ca, j ai passe trois ans a construire des boutiques Shopify pour de grandes marques chez Blue Badger - ce qui m a appris que la bonne UI est plus difficile qu elle en a l air, et que la performance compte plus que quiconque ne l admet jusqu a ce que les metriques virent au rouge."}
               </Typography>
               <Typography sx={{ fontSize: '1.05rem', color: '#c8bfaf', lineHeight: 1.8 }}>
                 {isEn
-                  ? "Outside work, I play golf badly and think about software constantly. \"Claude\" is my Catholic name — a Québec tradition. The fact that it's also the name of the AI I use every day is a coincidence I've stopped trying to explain at dinner."
-                  : "En dehors du travail, je joue mal au golf et je pense constamment à des logiciels. «Claude» est mon nom catholique — une tradition bien québécoise. Le fait que ce soit aussi le nom de l'IA que j'utilise tous les jours est une coïncidence que j'ai arrêté d'expliquer à table."}
+                  ? 'Outside work, I play golf badly and think about software constantly. "Claude" is my Catholic name - a Quebec tradition. The fact that it is also the name of the AI I use every day is a coincidence I have stopped trying to explain at dinner.'
+                  : 'En dehors du travail, je joue mal au golf et je pense constamment a des logiciels. "Claude" est mon nom catholique - une tradition bien quebecoise. Le fait que ce soit aussi le nom de l IA que j utilise tous les jours est une coincidence que j ai arrete d expliquer a table.'}
               </Typography>
             </motion.div>
           </Box>
         </Box>
 
-        {/* Stats row */}
         <motion.div {...fade(0.25)}>
           <Box
             sx={{
@@ -142,7 +129,7 @@ const AboutPage = () => {
             }}
           >
             {STATS.map((s) => (
-              <Box key={s.value} sx={{ textAlign: 'center', py: 1 }}>
+              <Box key={`${s.value}-${s.label.en}`} sx={{ textAlign: 'center', py: 1 }}>
                 <Typography
                   sx={{
                     fontFamily: "'Fraunces', Georgia, serif",
@@ -163,118 +150,6 @@ const AboutPage = () => {
           </Box>
         </motion.div>
 
-        {/* SimonDev — Company section */}
-        <motion.div {...fade(0.28)}>
-          <Box
-            sx={{
-              mb: 6,
-              borderRadius: '20px',
-              border: '1px solid rgba(245,200,66,0.18)',
-              background: 'linear-gradient(135deg, #161412 0%, #1a1710 100%)',
-              overflow: 'hidden',
-              position: 'relative',
-            }}
-          >
-            {/* Ambient glow */}
-            <Box sx={{ position: 'absolute', top: -60, right: -60, width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,200,66,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
-
-            <Box sx={{ p: { xs: 3, md: 4 } }}>
-              {/* Header row */}
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5, mb: 3, flexWrap: 'wrap' }}>
-                <Box
-                  component="img"
-                  src={simondevLogo}
-                  alt="SimonDev"
-                  sx={{ width: { xs: 110, md: 160 }, height: 'auto', display: 'block', opacity: 0.95 }}
-                />
-                <Box
-                  sx={{
-                    px: 1.2, py: 0.4, borderRadius: '6px',
-                    background: 'rgba(74,222,128,0.1)',
-                    border: '1px solid rgba(74,222,128,0.25)',
-                    fontSize: '0.7rem', fontWeight: 600,
-                    color: '#4ade80',
-                    fontFamily: "'DM Sans', sans-serif",
-                    letterSpacing: '0.05em',
-                    display: 'flex', alignItems: 'center', gap: 0.6,
-                  }}
-                >
-                  <Box component="span" sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#4ade80', display: 'inline-block', animation: 'pulse 2s ease-in-out infinite', '@keyframes pulse': { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.3 } } }} />
-                  {isEn ? 'Open to new projects' : 'Ouvert aux nouveaux projets'}
-                </Box>
-              </Box>
-
-              {/* Description */}
-              <Typography sx={{ fontSize: '1rem', color: '#c8bfaf', lineHeight: 1.8, mb: 3, maxWidth: '640px' }}>
-                {isEn
-                  ? 'SimonDev is my software company. I founded it to build production-grade software for clients — the kind that actually ships, scales, and gets used by real people. Whether it\'s a mobile app, a backend API, or an AI integration, I take ownership from architecture to deployment.'
-                  : "SimonDev est ma société de logiciels. Je l'ai fondée pour construire des logiciels de qualité production pour des clients — le genre qui se déploie vraiment, qui scale, et qui est utilisé par de vraies personnes. App mobile, API backend ou intégration IA, je prends en charge l'architecture jusqu'au déploiement."}
-              </Typography>
-
-              {/* Services grid */}
-              <Box
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
-                  gap: 1.5,
-                  mb: 3,
-                }}
-              >
-                {[
-                  { icon: '📱', label: isEn ? 'Mobile Apps' : 'Apps Mobiles', sub: 'Flutter / Dart' },
-                  { icon: '⚙️', label: isEn ? 'Web & API' : 'Web & API', sub: 'React · FastAPI · Node' },
-                  { icon: '🤖', label: isEn ? 'AI Integration' : 'Intégration IA', sub: 'LangChain · GPT-4o' },
-                  { icon: '☁️', label: isEn ? 'Infrastructure' : 'Infrastructure', sub: 'Kubernetes · Docker' },
-                ].map((s) => (
-                  <Box
-                    key={s.label}
-                    sx={{
-                      p: 1.8,
-                      borderRadius: '12px',
-                      border: '1px solid rgba(240,236,228,0.07)',
-                      background: 'rgba(240,236,228,0.03)',
-                      transition: 'border-color 0.2s, background 0.2s',
-                      '&:hover': { borderColor: 'rgba(245,200,66,0.2)', background: 'rgba(245,200,66,0.04)' },
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '1.2rem', mb: 0.8 }}>{s.icon}</Typography>
-                    <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: '#f0ece4', mb: 0.3, fontFamily: "'DM Sans', sans-serif" }}>
-                      {s.label}
-                    </Typography>
-                    <Typography sx={{ fontSize: '0.7rem', color: '#8c8272', fontFamily: "'JetBrains Mono', monospace" }}>
-                      {s.sub}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-
-              {/* CTA */}
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, pt: 1, borderTop: '1px solid rgba(240,236,228,0.06)' }}>
-                <Typography sx={{ fontSize: '0.82rem', color: '#8c8272', fontFamily: "'DM Sans', sans-serif" }}>
-                  {isEn ? 'Let\'s build something together →' : 'Construisons quelque chose ensemble →'}
-                </Typography>
-                <Typography
-                  component="a"
-                  href="mailto:info@simondelisle.dev"
-                  sx={{
-                    fontSize: '0.82rem',
-                    color: '#f5c842',
-                    fontFamily: "'JetBrains Mono', monospace",
-                    textDecoration: 'none',
-                    borderBottom: '1px solid rgba(245,200,66,0.3)',
-                    pb: '1px',
-                    transition: 'border-color 0.15s',
-                    '&:hover': { borderColor: '#f5c842' },
-                  }}
-                >
-                  info@simondelisle.dev
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </motion.div>
-
-        {/* Timeline */}
         <motion.div {...fade(0.3)}>
           <Typography
             sx={{
@@ -291,7 +166,6 @@ const AboutPage = () => {
           </Typography>
 
           <Box sx={{ position: 'relative', pl: 3 }}>
-            {/* Vertical line */}
             <Box
               sx={{
                 position: 'absolute',
@@ -305,13 +179,12 @@ const AboutPage = () => {
 
             {milestones.map((m, i) => (
               <motion.div
-                key={i}
+                key={`${m.year}-${m.event}`}
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.35, delay: 0.35 + i * 0.07 }}
               >
                 <Box sx={{ display: 'flex', gap: 2.5, mb: 2.5, position: 'relative' }}>
-                  {/* Dot */}
                   <Box
                     sx={{
                       position: 'absolute',

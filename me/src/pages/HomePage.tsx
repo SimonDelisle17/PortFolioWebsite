@@ -548,25 +548,11 @@ const HomePage = () => {
                 }}
               >
                 {isEn
-                  ? 'Founder of SimonDev. I architect logistics ecosystems, ship mobile apps for field workers, and wire AI into things that actually save people time.'
-                  : "Fondateur de SimonDev. J'architecture des écosystèmes logistiques, livre des apps mobiles sur le terrain et intègre l'IA dans des systèmes qui font vraiment gagner du temps."}
+                  ? 'I architect logistics ecosystems, ship mobile apps for field workers, and wire AI into things that actually save people time.'
+                  : "J'architecture des écosystèmes logistiques, livre des apps mobiles sur le terrain et intègre l'IA dans des systèmes qui font vraiment gagner du temps."}
               </Typography>
 
               <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
-                <Box
-                  sx={{
-                    px: 1.5,
-                    py: 0.4,
-                    borderRadius: '6px',
-                    background: 'rgba(245, 200, 66, 0.1)',
-                    border: '1px solid rgba(245, 200, 66, 0.2)',
-                    fontSize: '0.72rem',
-                    color: '#f5c842',
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  @SimonDev
-                </Box>
                 <Box
                   sx={{
                     px: 1.5,
