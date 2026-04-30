@@ -14,7 +14,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from '@mui/material';
 import {
   ArrowBack,
@@ -27,6 +26,7 @@ import {
 import { getProjectById } from '../data/projectsData';
 import { projectsDataFr } from '../data/projectsData.fr';
 import { useTranslation } from 'react-i18next';
+import InnerPageLayout from '../components/InnerPageLayout';
 
 const ProjectDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -43,24 +43,19 @@ const ProjectDetailPage = () => {
 
   if (!project) {
     return (
-      <Container sx={{ py: 10, textAlign: 'center' }}>
-        <Typography variant="h3" gutterBottom>
-          {t('projectDetail.backToPortfolio')}
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<ArrowBack />}
-          onClick={() => navigate('/')}
-          sx={{ mt: 3 }}
-        >
-          {t('projectDetail.backToPortfolio')}
-        </Button>
-      </Container>
+      <InnerPageLayout>
+        <Container sx={{ py: 10, textAlign: 'center' }}>
+          <Button variant="contained" startIcon={<ArrowBack />} onClick={() => navigate('/')}>
+            {t('projectDetail.backToPortfolio')}
+          </Button>
+        </Container>
+      </InnerPageLayout>
     );
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', py: 12, bgcolor: 'background.default' }}>
+    <InnerPageLayout title={project.title}>
+    <Box sx={{ minHeight: '100vh', py: 6, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         {/* Header */}
         <motion.div
@@ -115,6 +110,27 @@ const ProjectDetailPage = () => {
             )}
           </Box>
         </motion.div>
+
+        {/* The Problem — case study section */}
+        {project.problem && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+          >
+            <Card sx={{ mb: 4, borderLeft: '3px solid', borderLeftColor: 'primary.main', borderTop: 'none', borderRight: 'none', borderBottom: 'none' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box component="span" sx={{ fontSize: '1.4rem' }}>🔍</Box>
+                  {t('projectDetail.theProblem')}
+                </Typography>
+                <Typography variant="body1" sx={{ fontStyle: 'italic', color: 'text.secondary', lineHeight: 1.8 }}>
+                  {project.problem}
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
 
         {/* Description */}
         <motion.div
@@ -288,6 +304,27 @@ const ProjectDetailPage = () => {
           </Card>
         </motion.div>
 
+        {/* What I Learned — case study section */}
+        {project.lesson && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            <Card sx={{ mt: 4, borderLeft: '3px solid', borderLeftColor: 'secondary.main', borderTop: 'none', borderRight: 'none', borderBottom: 'none' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box component="span" sx={{ fontSize: '1.4rem' }}>💡</Box>
+                  {t('projectDetail.whatILearned')}
+                </Typography>
+                <Typography variant="body1" sx={{ lineHeight: 1.8, color: 'text.secondary' }}>
+                  {project.lesson}
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+
         {/* Back Button */}
         <Box sx={{ textAlign: 'center', mt: 6 }}>
           <Button
@@ -301,6 +338,7 @@ const ProjectDetailPage = () => {
         </Box>
       </Container>
     </Box>
+    </InnerPageLayout>
   );
 };
 
